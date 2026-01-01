@@ -1,0 +1,48 @@
+<nav class="navbar" *ngIf="isLoggedIn">
+
+  <!-- LEFT -->
+  <div class="navbar-left">
+    <span class="brand">Service Management System</span>
+
+    <!-- ADMIN -->
+    <ng-container *ngIf="role === 'Admin'">
+      <a routerLink="/admin/approvals" routerLinkActive="active">Pending Approvals</a>
+      <a routerLink="/admin/service-categories" routerLinkActive="active">Service Categories</a>
+      <a routerLink="/admin/services" routerLinkActive="active">Services</a>
+      <a routerLink="/admin/manage-users" routerLinkActive="active">Manage Users</a>
+      <a routerLink="/admin/reports" routerLinkActive="active">Reports</a>
+    </ng-container>
+
+    <!-- TECHNICIAN -->
+    <ng-container *ngIf="role === 'Technician'">
+      <a routerLink="/technician" routerLinkActive="active">Dashboard</a>
+    </ng-container>
+
+    <!-- SERVICE MANAGER -->
+    <ng-container *ngIf="role === 'ServiceManager'">
+      <a routerLink="/service-manager" routerLinkActive="active">Dashboard</a>
+    </ng-container>
+
+    <!-- CUSTOMER -->
+    <ng-container *ngIf="role === 'Customer'">
+      <a routerLink="/customer" routerLinkActive="active">Dashboard</a>
+    </ng-container>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="navbar-right">
+
+    <span
+      class="user-name"
+      *ngIf="role !== 'Admin' && userName">
+      👋 Hi, {{ userName }}
+    </span>
+
+    <span class="role-pill">{{ role }}</span>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+
+  </div>
+
+
+</nav>

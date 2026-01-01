@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>Service Categories</h2>
+
+  <form [formGroup]="categoryForm" (ngSubmit)="submit()" class="form-card">
+
+    <input
+      type="text"
+      placeholder="Category Name"
+      formControlName="categoryName"
+    />
+
+    <button type="submit">
+      {{ isEditMode ? 'Update Category' : 'Add Category' }}
+    </button>
+
+    <button
+      type="button"
+      class="cancel"
+      *ngIf="isEditMode"
+      (click)="resetForm()">
+      Cancel
+    </button>
+
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of categories">
+        <td>{{ c.categoryName }}</td>
+        <td>
+          <button class="edit" (click)="edit(c)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

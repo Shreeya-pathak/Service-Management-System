@@ -1,0 +1,474 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\controllers\\servicecategoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:controllers\\servicecategoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\repositories\\servicecategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:repositories\\servicecategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\repositories\\interfaces\\iservicecategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:repositories\\interfaces\\iservicecategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\repositories\\interfaces\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:repositories\\interfaces\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\dtos\\updateservicecategorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:dtos\\updateservicecategorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\dtos\\createservicecategorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:dtos\\createservicecategorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\dtos\\updateservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:dtos\\updateservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\dtos\\createservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:dtos\\createservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\dtos\\approveuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:dtos\\approveuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\servicecategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\servicecategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\servicerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\servicerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\servicemanagementapis.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:servicemanagementapis.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\technicianassignment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\technicianassignment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|d:\\notes\\chubb training\\capstone project\\servicemanagementsystem\\servicemanagementapis\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA56FDD8-2C98-7979-94CD-B4938C4C48AE}|ServiceManagementApis.csproj|solutionrelative:models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IServiceCategoryRepository.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\Interfaces\\IServiceCategoryRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Interfaces\\IServiceCategoryRepository.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\Interfaces\\IServiceCategoryRepository.cs",
+              "RelativeToolTip": "Repositories\\Interfaces\\IServiceCategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:30:25.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Invoice.cs",
+              "RelativeDocumentMoniker": "Models\\Invoice.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Invoice.cs",
+              "RelativeToolTip": "Models\\Invoice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:15:27.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:14:05.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Role.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Role.cs",
+              "RelativeDocumentMoniker": "Models\\Role.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Role.cs",
+              "RelativeToolTip": "Models\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:13:53.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAAJMAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:38:25.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAywFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T19:45:21.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ServiceCategoriesController.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\ServiceCategoriesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ServiceCategoriesController.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\ServiceCategoriesController.cs",
+              "RelativeToolTip": "Controllers\\ServiceCategoriesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T19:53:42.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T13:08:42.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ServiceRepository.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\ServiceRepository.cs",
+              "RelativeToolTip": "Repositories\\ServiceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:29:46.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ServiceCategoryRepository.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\ServiceCategoryRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ServiceCategoryRepository.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\ServiceCategoryRepository.cs",
+              "RelativeToolTip": "Repositories\\ServiceCategoryRepository.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAABAwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:30:11.096Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ServicesController.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\ServicesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ServicesController.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\ServicesController.cs",
+              "RelativeToolTip": "Controllers\\ServicesController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAA4wGsAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T19:54:56.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IServiceRepository.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\Interfaces\\IServiceRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Interfaces\\IServiceRepository.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Repositories\\Interfaces\\IServiceRepository.cs",
+              "RelativeToolTip": "Repositories\\Interfaces\\IServiceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:30:45.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UpdateServiceCategoryDto.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\UpdateServiceCategoryDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\UpdateServiceCategoryDto.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\UpdateServiceCategoryDto.cs",
+              "RelativeToolTip": "DTOs\\UpdateServiceCategoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:12:37.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CreateServiceCategoryDto.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\CreateServiceCategoryDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\CreateServiceCategoryDto.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\CreateServiceCategoryDto.cs",
+              "RelativeToolTip": "DTOs\\CreateServiceCategoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:12:17.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UpdateServiceDto.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\UpdateServiceDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\UpdateServiceDto.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\UpdateServiceDto.cs",
+              "RelativeToolTip": "DTOs\\UpdateServiceDto.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAABAwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:11:59.444Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CreateServiceDto.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\CreateServiceDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\CreateServiceDto.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\CreateServiceDto.cs",
+              "RelativeToolTip": "DTOs\\CreateServiceDto.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAABAwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T20:11:39.362Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ServiceRequest.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\ServiceRequest.cs",
+              "RelativeDocumentMoniker": "Models\\ServiceRequest.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\ServiceRequest.cs",
+              "RelativeToolTip": "Models\\ServiceRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:14:52.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Service.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Service.cs",
+              "RelativeDocumentMoniker": "Models\\Service.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Service.cs",
+              "RelativeToolTip": "Models\\Service.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:14:33.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ServiceCategory.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\ServiceCategory.cs",
+              "RelativeDocumentMoniker": "Models\\ServiceCategory.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\ServiceCategory.cs",
+              "RelativeToolTip": "Models\\ServiceCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:14:20.703Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ApproveUserDto.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\ApproveUserDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\ApproveUserDto.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\ApproveUserDto.cs",
+              "RelativeToolTip": "DTOs\\ApproveUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T19:44:01.879Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAYwHQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T19:30:03.809Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AppDbContextFactory.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Data\\AppDbContextFactory.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContextFactory.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Data\\AppDbContextFactory.cs",
+              "RelativeToolTip": "Data\\AppDbContextFactory.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAIwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T13:12:16.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "RegisterDto.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\RegisterDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\RegisterDto.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\RegisterDto.cs",
+              "RelativeToolTip": "DTOs\\RegisterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T18:29:41.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\LoginDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\LoginDto.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\DTOs\\LoginDto.cs",
+              "RelativeToolTip": "DTOs\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T18:29:27.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-29T13:07:03.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ServiceManagementApis.csproj",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\ServiceManagementApis.csproj",
+              "RelativeDocumentMoniker": "ServiceManagementApis.csproj",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\ServiceManagementApis.csproj",
+              "RelativeToolTip": "ServiceManagementApis.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-29T19:28:33.571Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "TechnicianAssignment.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\TechnicianAssignment.cs",
+              "RelativeDocumentMoniker": "Models\\TechnicianAssignment.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\TechnicianAssignment.cs",
+              "RelativeToolTip": "Models\\TechnicianAssignment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:15:11.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "Models\\Payment.cs",
+              "ToolTip": "D:\\Notes\\chubb training\\Capstone Project\\ServiceManagementSystem\\ServiceManagementApis\\Models\\Payment.cs",
+              "RelativeToolTip": "Models\\Payment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-29T12:15:53.464Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

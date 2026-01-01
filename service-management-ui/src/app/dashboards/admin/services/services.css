@@ -1,0 +1,43 @@
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+}
+
+.form-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+textarea, select, input {
+  padding: 8px;
+}
+
+button {
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+button.edit {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+}
+
+button.cancel {
+  background-color: #777;
+  color: rgb(16, 3, 3);
+  border: none;
+  grid-column: span 3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}

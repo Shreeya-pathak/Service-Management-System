@@ -1,0 +1,53 @@
+<h2>Pending User Approvals</h2>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Name -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let u">{{ u.fullName }}</td>
+  </ng-container>
+
+  <!-- Email -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let u">{{ u.email }}</td>
+  </ng-container>
+
+  <!-- Requested Role -->
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef>Requested Role</th>
+    <td mat-cell *matCellDef="let u">{{ u.requestedRole }}</td>
+  </ng-container>
+
+  <!-- Actions / Status -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let u">
+
+      <!-- Show buttons only if no status -->
+      <ng-container *ngIf="!u.status; else statusText">
+        <button mat-button color="primary" (click)="approve(u.userId)">
+          Approve
+        </button>
+        <button mat-button color="warn" (click)="reject(u.userId)">
+          Reject
+        </button>
+      </ng-container>
+
+      <!-- Status text -->
+      <ng-template #statusText>
+        <span
+          [style.color]="u.status === 'Approved' ? 'green' : 'red'"
+          style="font-weight: 600">
+          {{ u.status }}
+        </span>
+      </ng-template>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

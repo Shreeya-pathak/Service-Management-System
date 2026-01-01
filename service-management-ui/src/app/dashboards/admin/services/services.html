@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>Services</h2>
+
+  <form [formGroup]="serviceForm" (ngSubmit)="submit()" class="form-card">
+
+    <input type="text" placeholder="Service Name" formControlName="serviceName" />
+    <input type="number" placeholder="Price" formControlName="price" />
+    <input type="number" placeholder="SLA Hours" formControlName="slaHours" />
+
+    <select formControlName="serviceCategoryId">
+      <option value="">Select Category</option>
+      <option *ngFor="let c of categories" [value]="c.serviceCategoryId">
+        {{ c.categoryName }}
+      </option>
+    </select>
+
+    <textarea placeholder="Description" formControlName="description"></textarea>
+
+    <button type="submit">
+      {{ isEditMode ? 'Update Service' : 'Add Service' }}
+    </button>
+
+    <button
+      type="button"
+      class="cancel"
+      *ngIf="isEditMode"
+      (click)="resetForm()">
+      Cancel
+    </button>
+
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>SLA (hrs)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let s of services">
+        <td>{{ s.serviceName }}</td>
+        <td>{{ s.categoryName }}</td>
+        <td>{{s.description}}</td>
+        <td>{{ s.price }}</td>
+        <td>{{ s.slaHours }}</td>
+        <td>
+          <button class="edit" (click)="edit(s)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
