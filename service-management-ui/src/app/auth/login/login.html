@@ -1,58 +1,94 @@
-<h1 class="heading">Service Management System</h1>
-<mat-card class="login-card">
-  <h2>Login</h2>
+<div class="login-container">
 
-  <form [formGroup]="form">
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" />
+  <!-- LEFT : BRAND / GRADIENT -->
+  <div class="brand-section">
+    <div class="brand-overlay"></div>
 
-      <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')">
+    <div class="brand-content">
 
-        Email is required
-      </mat-error>
-
-      <mat-error
-        *ngIf="
-          form.get('email')?.hasError('email') &&
-          !form.get('email')?.hasError('required')
-        "
+      <!-- 🔷 SAME SVG FROM NAVBAR -->
+      <svg
+        class="brand-logo"
+        width="64"
+        height="64"
+        viewBox="0 0 64 64"
+        fill="none"
       >
-        Enter a valid email address
-      </mat-error>
+        <!-- Hexagon -->
+        <path
+          d="M32 4 L56 18 V46 L32 60 L8 46 V18 Z"
+          stroke="#ec407a"
+          stroke-width="3"
+          fill="rgba(255,255,255,0.08)"
+        />
 
-      <mat-error
-        *ngIf="
-          form.get('email')?.hasError('pattern') &&
-          !form.get('email')?.hasError('email') &&
-          !form.get('email')?.hasError('required')
-        "
-      >
-        Only Gmail addresses are allowed
-      </mat-error>
-    </mat-form-field>
+        <!-- Wrench -->
+        <path
+          d="M36 20a6 6 0 0 1-8 6l-8 8 4 4 8-8a6 6 0 0 1 6-10z"
+          stroke="#ffffff"
+          stroke-width="2"
+          fill="none"
+        />
 
+        <!-- Nodes -->
+        <circle cx="18" cy="18" r="2" fill="#ba68c8"/>
+        <circle cx="46" cy="18" r="2" fill="#ba68c8"/>
+        <circle cx="32" cy="46" r="2" fill="#ba68c8"/>
+      </svg>
 
+      <h1>ServiceSphere</h1>
 
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password">
-    </mat-form-field>
+      
 
-    <button
-      type="button"
-      mat-raised-button
-      color="primary"
-      class="full"
-      (click)="login()">
-      Login
-    </button>
-  </form>
+    </div>
+  </div>
 
-  <p class="new-user-text">
-    New User?
-    <button type="button" class="register-link-btn" (click)="goToRegister()">
-      Register
-    </button>
-  </p>
-</mat-card>
+  <!-- RIGHT : LOGIN FORM -->
+  <div class="form-section">
+    <mat-card class="login-card">
+
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to continue</p>
+
+      <form [formGroup]="form" (ngSubmit)="login()">
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error *ngIf="form.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+
+          <mat-error *ngIf="form.get('email')?.hasError('email')">
+            Enter a valid email address
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+            <mat-error *ngIf="form.get('password')?.hasError('required')">
+              Password is required
+            </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          type="submit"
+          class="login-btn full"
+          [disabled]="isLoading"
+        >
+          {{ isLoading ? 'Signing in...' : 'Login' }}
+        </button>
+
+      </form>
+
+      <p class="new-user">
+        New here?
+        <span (click)="goToRegister()">Create an account</span>
+      </p>
+
+    </mat-card>
+  </div>
+
+</div>

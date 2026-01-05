@@ -1,53 +1,106 @@
-<h2>Pending User Approvals</h2>
+<mat-card class="approval-card">
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Header -->
+  <div class="header">
+    <mat-icon class="header-icon">how_to_reg</mat-icon>
+    <h2>Pending User Approvals</h2>
+  </div>
 
-  <!-- Name -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let u">{{ u.fullName }}</td>
-  </ng-container>
+  <!-- Table -->
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" class="approval-table">
 
-  <!-- Email -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let u">{{ u.email }}</td>
-  </ng-container>
-
-  <!-- Requested Role -->
-  <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef>Requested Role</th>
-    <td mat-cell *matCellDef="let u">{{ u.requestedRole }}</td>
-  </ng-container>
-
-  <!-- Actions / Status -->
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>Action</th>
-    <td mat-cell *matCellDef="let u">
-
-      <!-- Show buttons only if no status -->
-      <ng-container *ngIf="!u.status; else statusText">
-        <button mat-button color="primary" (click)="approve(u.userId)">
-          Approve
-        </button>
-        <button mat-button color="warn" (click)="reject(u.userId)">
-          Reject
-        </button>
+      <!-- Name -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-icon>person</mat-icon>
+          Name
+        </th>
+        <td mat-cell *matCellDef="let u">
+          {{ u.fullName }}
+        </td>
       </ng-container>
 
-      <!-- Status text -->
-      <ng-template #statusText>
-        <span
-          [style.color]="u.status === 'Approved' ? 'green' : 'red'"
-          style="font-weight: 600">
-          {{ u.status }}
-        </span>
-      </ng-template>
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-icon>email</mat-icon>
+          Email
+        </th>
+        <td mat-cell *matCellDef="let u">
+          {{ u.email }}
+        </td>
+      </ng-container>
 
-    </td>
-  </ng-container>
+      <!-- Requested Role -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-icon>badge</mat-icon>
+          Requested Role
+        </th>
+        <td mat-cell *matCellDef="let u">
+          <span class="role-chip">
+            <mat-icon>engineering</mat-icon>
+            {{ u.requestedRole }}
+          </span>
+        </td>
+      </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <!-- Actions / Status -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-icon>settings</mat-icon>
+          Action
+        </th>
+        <td mat-cell *matCellDef="let u">
 
-</table>
+          <!-- Action buttons -->
+          <ng-container *ngIf="!u.status; else statusText">
+            <button
+              mat-icon-button
+              color="primary"
+              matTooltip="Approve"
+              (click)="approve(u.userId)">
+              <mat-icon>check_circle</mat-icon>
+            </button>
+
+            <button
+              mat-icon-button
+              color="warn"
+              matTooltip="Reject"
+              (click)="reject(u.userId)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </ng-container>
+
+          <!-- Status chip -->
+          <ng-template #statusText>
+            <span
+              class="status-chip"
+              [ngClass]="{
+                approved: u.status === 'Approved',
+                rejected: u.status === 'Rejected'
+              }">
+              <mat-icon>
+                {{ u.status === 'Approved' ? 'check' : 'close' }}
+              </mat-icon>
+              {{ u.status }}
+            </span>
+          </ng-template>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons>
+  </mat-paginator>
+
+</mat-card>

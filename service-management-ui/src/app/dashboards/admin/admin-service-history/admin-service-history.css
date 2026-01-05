@@ -1,0 +1,48 @@
+.page-title {
+  color: #4a148c;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.search {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1c4e9;
+  width: 320px;
+  margin-bottom: 20px;
+}
+
+.table-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(156, 39, 176, 0.18);
+  overflow: hidden;
+}
+
+.mat-header-row {
+  background: #f3e5f5;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  color: #4a148c;
+}
+
+.mat-row:hover {
+  background: #faf5ff;
+}
+
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 14px;
+  background: #ede7f6;
+  color: #6a1b9a;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.empty {
+  margin-top: 20px;
+  color: #777;
+  font-style: italic;
+}

@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import {  MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { Component, OnInit, ChangeDetectorRef ,ViewChild, AfterViewInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -7,19 +12,25 @@ import {
   Validators
 } from '@angular/forms';
 import { MatSlideToggleModule,MatSlideToggleChange } from '@angular/material/slide-toggle';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ServiceCategoryService } from '../../../core/services/admin/service-category.service';
 
 @Component({
   selector: 'app-service-categories',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,MatSlideToggleModule],
+  imports: [CommonModule, ReactiveFormsModule,MatSlideToggleModule,MatPaginator,MatIconModule,MatTableModule,MatInputModule,MatFormFieldModule,MatButtonModule,MatCardModule],
   templateUrl: './service-categories.html',
   styleUrls: ['./service-categories.css']
 })
-export class ServiceCategoriesComponent implements OnInit {
-
+export class ServiceCategoriesComponent implements OnInit,AfterViewInit {
+  pageSize = 5;
+  pageIndex = 0;
   categories: any[] = [];
+  displayedColumns = ['category', 'actions'];
+  dataSource = new MatTableDataSource<any>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   categoryForm!: FormGroup;    // ✅ MATCHES HTML
   editingId: number | null = null;
@@ -38,10 +49,14 @@ export class ServiceCategoriesComponent implements OnInit {
 
     this.loadCategories();
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   loadCategories() {
     this.categoryService.getAll().subscribe(res => {
       this.categories = [...res];
+      this.dataSource.data = this.categories;
       this.cdr.detectChanges();
     });
   }
@@ -109,6 +124,16 @@ export class ServiceCategoriesComponent implements OnInit {
         category._loading = false;
       }
     });
+  }
+
+  get pagedCategories() {
+    const start = this.pageIndex * this.pageSize;
+    return this.categories.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
 

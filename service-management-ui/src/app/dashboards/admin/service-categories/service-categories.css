@@ -1,71 +1,95 @@
-.container {
-  max-width: 800px;
-  margin: 30px auto;
+.page {
+  background: #faf5ff;
+  padding: 24px;
+  border-radius: 14px;
 }
 
-.form-card {
+/* Title */
+.title {
+  margin-bottom: 18px;
+  font-weight: 600;
+  color: #4a148c;
+}
+
+/* Form */
+.form-row {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-input {
-  flex: 1;
-  padding: 8px;
+.input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1c4e9;
+  width: 260px;
 }
 
-button {
-  padding: 8px 14px;
+/* Buttons */
+.btn {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
   cursor: pointer;
+  font-weight: 600;
 }
 
-button.edit {
-  background-color: #1976d2;
+.btn.primary {
+  background: #8e24aa;
   color: white;
-  border: none;
-  margin-left: 8px;
 }
 
-button.cancel {
-  background-color: #777;
-  color: rgb(14, 1, 9);
-  border: none;
+.btn.ghost {
+  background: transparent;
+  color: #6a1b9a;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Header */
+.list.header {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  padding: 12px 18px;
+  font-weight: 600;
+  background: #ede7f6;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: #4a148c;
 }
 
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+/* Rows */
+.list.row {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  padding: 14px 18px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  align-items: center;
 }
 
-.delete {
-  margin-left: 8px;
-  background-color: #e53935;
-  color: rgb(16, 0, 0);
-  border: none;
-}
+/* Actions */
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
-.edit-btn {
-  padding: 4px 10px;
+/* Edit button */
+.icon-btn {
+  background: none;
   border: none;
-  border-radius: 4px;
-  background-color: #1976d2;
-  color: white;
   cursor: pointer;
+  font-size: 18px;
 }
 
-.edit-btn:disabled {
-  background-color: #bdbdbd;
+.icon-btn:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-
+/* Paginator */
+mat-paginator {
+  margin-top: 12px;
+  background: transparent;
+}

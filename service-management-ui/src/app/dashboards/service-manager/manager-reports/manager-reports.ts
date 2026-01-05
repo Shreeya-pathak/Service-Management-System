@@ -37,7 +37,7 @@ revenueChartData: ChartData<'doughnut'> = {
   datasets: [
     {
       data: [],
-      backgroundColor: ['#66bb6a', '#e0e0e0']
+      backgroundColor: ['#771955ff', '#e0e0e0']
     }
   ]
 };
@@ -52,7 +52,7 @@ revenueChartData: ChartData<'doughnut'> = {
       {
         label: 'Active Requests',
         data: [],
-        backgroundColor: '#42a5f5'
+        backgroundColor: '#ad4eb0ff'
       }
     ]
   };
@@ -87,7 +87,7 @@ revenueChartData: ChartData<'doughnut'> = {
           {
             label: 'Active Requests',
             data: res.map(x => x.activeRequestCount),
-            backgroundColor: '#42a5f5'
+            backgroundColor: '#812276ff'
           }
         ]
       };

@@ -87,10 +87,10 @@ public class AuthController : ControllerBase
             .FirstOrDefaultAsync(u => u.Email == dto.Email && u.IsActive);
 
         if (user == null)
-            return Unauthorized("Invalid credentials");
+            return Unauthorized("User doesn't exist, please Sign-In");
 
         if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-            return Unauthorized("Invalid credentials");
+            return Unauthorized("Invalid Username or Password");
 
         var claims = new[]
         {

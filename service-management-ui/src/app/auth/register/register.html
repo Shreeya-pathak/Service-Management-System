@@ -1,65 +1,118 @@
-<h1 class="heading">Service Management System</h1>
-<mat-card class="register-card">
-  <h2>Register</h2>
+<div class="login-container">
 
-  <form [formGroup]="form" (ngSubmit)="register()">
+  <!-- LEFT : BRAND -->
+  <div class="brand-section">
+    <div class="brand-overlay"></div>
 
-    <!-- FULL NAME -->
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Full Name</mat-label>
-      <input matInput formControlName="fullName">
-      <mat-error *ngIf="form.get('fullName')?.touched && form.get('fullName')?.invalid">
-        Full name is required
-      </mat-error>
-    </mat-form-field>
+    <div class="brand-content">
 
-    <!-- EMAIL -->
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email">
-      <mat-error *ngIf="form.get('email')?.hasError('required')">
-        Email is required
-      </mat-error>
-      <mat-error *ngIf="form.get('email')?.hasError('pattern')">
-        Only Gmail addresses are allowed
-      </mat-error>
-    </mat-form-field>
+      <!-- SAME SVG -->
+      <svg
+        class="brand-logo"
+        width="64"
+        height="64"
+        viewBox="0 0 64 64"
+        fill="none"
+      >
+        <path
+          d="M32 4 L56 18 V46 L32 60 L8 46 V18 Z"
+          stroke="#ec407a"
+          stroke-width="3"
+          fill="rgba(255,255,255,0.08)"
+        />
+        <path
+          d="M36 20a6 6 0 0 1-8 6l-8 8 4 4 8-8a6 6 0 0 1 6-10z"
+          stroke="#ffffff"
+          stroke-width="2"
+          fill="none"
+        />
+        <circle cx="18" cy="18" r="2" fill="#ba68c8"/>
+        <circle cx="46" cy="18" r="2" fill="#ba68c8"/>
+        <circle cx="32" cy="46" r="2" fill="#ba68c8"/>
+      </svg>
 
-    <!-- PASSWORD -->
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password">
-      <mat-error *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
-        Password is required
-      </mat-error>
-    </mat-form-field>
+      <h1>ServiceSphere</h1>
 
-    <!-- ROLE -->
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Role</mat-label>
-      <mat-select formControlName="role">
-        <mat-option value="Customer">Customer</mat-option>
-        <mat-option value="Technician">Technician</mat-option>
-        <mat-option value="ServiceManager">Service Manager</mat-option>
-      </mat-select>
-      
-    </mat-form-field>
+    </div>
+  </div>
 
-    <!-- BUTTON -->
-    <button
-      mat-raised-button
-      color="primary"
-      class="full"
-      type="submit">
-      Register
-    </button>
+  <!-- RIGHT : REGISTER FORM -->
+  <div class="form-section">
+    <mat-card class="login-card">
 
-  </form>
+      <h2>Create Account</h2>
+      <p class="subtitle">Register to get started</p>
 
-  <p class="new-user-text">
-    Already have an account?
-    <button type="button" class="register-link-btn" (click)="goToLogin()">
-      Login
-    </button>
-  </p>
-</mat-card>
+      <form [formGroup]="form" (ngSubmit)="register()">
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Full Name</mat-label>
+    <input matInput formControlName="fullName" />
+    <mat-error *ngIf="form.get('fullName')?.hasError('required')">
+      Full name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-error *ngIf="form.get('email')?.hasError('required')">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('pattern')">
+      Only Gmail addresses are allowed
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+    <mat-error *ngIf="form.get('password')?.hasError('required')">
+      Password is required
+    </mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('minlength')">
+      Minimum 6 characters
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput type="password" formControlName="confirmPassword" />
+    <mat-error *ngIf="form.hasError('passwordMismatch')">
+      Passwords do not match
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Role</mat-label>
+    <mat-select formControlName="role">
+      <mat-option value="Customer">Customer</mat-option>
+      <mat-option value="Technician">Technician</mat-option>
+      <mat-option value="ServiceManager">Service Manager</mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('role')?.hasError('required')">
+      Role is required
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    type="submit"
+    class="login-btn full"
+    [disabled]="isLoading"
+  >
+    {{ isLoading ? 'Registering...' : 'Register' }}
+  </button>
+
+</form>
+
+
+      <p class="new-user">
+        Already have an account?
+        <span (click)="goToLogin()">Login</span>
+      </p>
+
+    </mat-card>
+  </div>
+
+</div>

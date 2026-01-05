@@ -1,0 +1,50 @@
+
+/* Header */
+.dialog-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dialog-header mat-icon {
+  color: #ec407a;
+  font-size: 26px;
+}
+
+/* Details */
+.details p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+/* Full width */
+.full {
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* Actions */
+
+.dialog-wrapper {
+  padding: 20px;
+  background: #fffafa;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+/* Prevent content overflow */
+.dialog-wrapper * {
+  box-sizing: border-box;
+}
+
+/* Ensure buttons never get cut */
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-bottom: 4px;
+}

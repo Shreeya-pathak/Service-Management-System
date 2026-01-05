@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminPaymentService } from '../../../core/services/admin/admin-payment.service';
-
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   standalone: true,
   selector: 'app-approve-payment-dialog',
@@ -15,7 +15,8 @@ import { AdminPaymentService } from '../../../core/services/admin/admin-payment.
     FormsModule,
     MatDialogModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
   templateUrl: './approve-payment-dialog.html'
 })
@@ -60,4 +61,5 @@ export class ApprovePaymentDialogComponent {
         }
       });
   }
+  
 }

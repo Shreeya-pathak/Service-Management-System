@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
+import { MatIconModule } from '@angular/material/icon';
 import { AdminPaymentService } from '../../../core/services/admin/admin-payment.service';
 import { ApprovePaymentDialogComponent } from '../approve-payment-dialog/approve-payment-dialog';
 
@@ -16,7 +16,8 @@ import { ApprovePaymentDialogComponent } from '../approve-payment-dialog/approve
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   templateUrl: './payment-approvals.html',
   styleUrls: ['./payment-approvals.css']
@@ -47,8 +48,10 @@ export class PaymentApprovalsComponent implements OnInit {
 
   openApproveDialog(invoice: any) {
     const ref = this.dialog.open(ApprovePaymentDialogComponent, {
-      width: '400px',
-      data: invoice
+      width: '420px',
+      data: invoice,
+      maxHeight: '80vh',
+      panelClass: 'approve-payment-dialog'
     });
 
     ref.afterClosed().subscribe(done => {
@@ -60,4 +63,27 @@ export class PaymentApprovalsComponent implements OnInit {
       }
     });
   }
+  get groupedInvoices() {
+    const map = new Map<string, any[]>();
+
+    for (const inv of this.invoices) {
+      if (!map.has(inv.customerName)) {
+        map.set(inv.customerName, []);
+      }
+      map.get(inv.customerName)!.push(inv);
+    }
+
+    return Array.from(map.entries()).map(([customerName, invoices]) => ({
+      customerName,
+      invoices
+    }));
+  }
+  expandedCustomer: string | null = null;
+
+  toggleCustomer(name: string) {
+    this.expandedCustomer =
+      this.expandedCustomer === name ? null : name;
+  }
+
+
 }

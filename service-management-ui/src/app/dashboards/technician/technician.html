@@ -1,15 +1,35 @@
 <div class="technician-layout">
+
+  <!-- SIDEBAR -->
   <aside class="sidebar">
-    <a routerLink="/technician/dashboard" routerLinkActive="active">
-      🛠 Dashboard
-    </a>
-    <a routerLink="/technician/requests" routerLinkActive="active">
-      📋 My Requests
-    </a>
-    
+    <h3 class="sidebar-title">
+      <span class="material-icons">handyman</span>
+      Technician
+    </h3>
+
+    <nav class="nav-links">
+
+      <a
+        routerLink="/technician/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <span class="material-icons">dashboard</span>
+        Dashboard
+      </a>
+
+      <a
+        routerLink="/technician/requests"
+        routerLinkActive="active">
+        <span class="material-icons">assignment</span>
+        My Requests
+      </a>
+
+    </nav>
   </aside>
 
+  <!-- MAIN CONTENT -->
   <main class="content">
     <router-outlet></router-outlet>
   </main>
+
 </div>

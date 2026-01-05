@@ -64,6 +64,7 @@ public class ServiceManagerRepository : IServiceManagerRepository
                 ServiceCategory = r.Service.ServiceCategory.CategoryName,
                 CustomerName = r.Customer.FullName,
                 IssueDescription=r.IssueDescription,
+                Priority=r.Priority,
                 RequestedDate = r.RequestedDate,
                 ScheduledDate = r.ScheduledDate,
                 Status = r.Status,

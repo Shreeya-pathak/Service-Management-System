@@ -39,6 +39,7 @@ export class MyRequestsComponent implements OnInit {
 
   loadRequests() {
     this.requestService.getMyRequests().subscribe(res => {
+      console.log('API RESPONSE:', res);
       this.requests = res;
       this.groupByCategory();
       this.cdr.detectChanges();

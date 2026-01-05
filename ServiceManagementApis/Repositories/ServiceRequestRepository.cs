@@ -25,7 +25,9 @@ namespace ServiceManagementApis.Repositories
             return await _context.ServiceRequests
                 .Include(sr => sr.Customer)                    
                 .Include(sr => sr.Service)
-                .ThenInclude(s => s.ServiceCategory)       
+                    .ThenInclude(s => s.ServiceCategory)
+                .Include(sr => sr.TechnicianAssignments)
+                    .ThenInclude(ta => ta.Technician)
                 .Where(sr => sr.CustomerId == customerId)
                 .OrderByDescending(sr => sr.CreatedAt)
                 .ToListAsync();

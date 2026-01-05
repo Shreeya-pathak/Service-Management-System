@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { CustomerRequestService } from '../../../core/services/customer/customer-request.service';
 
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, MatIconModule],
   templateUrl: './customer-dashboard.html',
   styleUrls: ['./customer-dashboard.css']
 })
@@ -17,7 +18,9 @@ export class CustomerDashboardComponent implements OnInit {
   completed = 0;
   cancelled = 0;
 
-  constructor(readonly requestService: CustomerRequestService) {}
+  constructor(readonly requestService: CustomerRequestService,
+    readonly cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadSummary();
@@ -26,15 +29,21 @@ export class CustomerDashboardComponent implements OnInit {
   loadSummary() {
     this.requestService.getMyRequests().subscribe(requests => {
       this.total = requests.length;
+
       this.active = requests.filter(r =>
-        r.status === 'Pending' ||
-        r.status === 'Assigned' ||
-        r.status === 'InProgress' ||
-        r.status === 'Rescheduled'
+        ['Pending', 'Assigned', 'InProgress', 'Rescheduled'].includes(r.status)
       ).length;
 
-      this.completed = requests.filter(r => r.status === 'Completed').length;
-      this.cancelled = requests.filter(r => r.status === 'Cancelled').length;
+      
+      this.completed = requests.filter(r =>
+        ['Completed', 'Closed'].includes(r.status)
+      ).length;
+
+      this.cancelled = requests.filter(r =>
+        r.status === 'Cancelled'
+      ).length;
+
+      this.cdr.detectChanges();
     });
   }
 }

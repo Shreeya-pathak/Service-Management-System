@@ -4,7 +4,7 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  Validators
+  Validators,FormsModule
 } from '@angular/forms';
 
 import { ServiceService } from '../../../core/services/admin/service.service';
@@ -14,7 +14,7 @@ import { CustomerRequestService } from '../../../core/services/customer/customer
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,MatSlideToggleModule],
+  imports: [CommonModule, ReactiveFormsModule,MatSlideToggleModule,FormsModule],
   templateUrl: './services.html',
   styleUrls: ['./services.css']
 })
@@ -22,6 +22,7 @@ export class ServicesComponent implements OnInit {
 
   services: any[] = [];
   categories: any[] = [];
+  searchCategory = '';
 
   serviceForm!: FormGroup;     // ✅ MATCHES HTML
   editingId: number | null = null;
@@ -59,6 +60,7 @@ export class ServicesComponent implements OnInit {
     this.requestService.getActiveCategories().subscribe({
       next: res => {
         this.categories = res;
+        this.cdr.detectChanges(); 
       }
     });
   }
@@ -73,6 +75,7 @@ export class ServicesComponent implements OnInit {
         next: () => {
           this.loadServices();   // ✅ AFTER API SUCCESS
           this.resetForm();
+          this.cdr.detectChanges(); 
         }
       });
     } else {
@@ -80,6 +83,7 @@ export class ServicesComponent implements OnInit {
         next: () => {
           this.loadServices();   // ✅ AFTER API SUCCESS
           this.resetForm();
+          this.cdr.detectChanges(); 
         }
       });
     }
@@ -123,9 +127,40 @@ export class ServicesComponent implements OnInit {
       error: () => {
         service.isActive = previousValue;
         service._loading = false;
+        this.cdr.detectChanges(); 
       }
     });
   }
+  get groupedServices() {
+  const map = new Map<string, any[]>();
+
+  for (const s of this.services) {
+
+    
+    if (
+      this.searchCategory &&
+      !s.serviceName
+        .toLowerCase()
+        .includes(this.searchCategory.toLowerCase())
+    ) {
+      continue;
+    }
+
+    if (!map.has(s.categoryName)) {
+      map.set(s.categoryName, []);
+    }
+
+    map.get(s.categoryName)!.push(s);
+  }
+
+  return Array.from(map.entries()).map(
+    ([categoryName, services]) => ({
+      categoryName,
+      services
+    })
+  );
+}
+
 
 
 }

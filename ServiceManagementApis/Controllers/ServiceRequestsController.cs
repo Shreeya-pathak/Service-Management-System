@@ -93,18 +93,33 @@ public class ServiceRequestsController : ControllerBase
 
         var requests = await _requestRepository.GetByCustomerIdAsync(customerId);
 
-        var result = requests.Select(sr => new ServiceRequestListDto
+
+
+        var result = requests.Select(sr =>
         {
-            ServiceRequestId = sr.ServiceRequestId,
-            ServiceName = sr.Service.ServiceName,
-            CategoryName = sr.Service.ServiceCategory.CategoryName,
-            IssueDescription = sr.IssueDescription,
-            RequestedDate = sr.RequestedDate,
-            ScheduledDate = sr.ScheduledDate,
-            Priority = sr.Priority,
-            Status = sr.Status,
-            CreatedAt = sr.CreatedAt
+            var technicianAssignment = sr.TechnicianAssignments
+                .FirstOrDefault(a =>
+                    a.Status == "Assigned" ||
+                    a.Status == "Completed"
+                );
+
+            return new ServiceRequestListDto
+            {
+                ServiceRequestId = sr.ServiceRequestId,
+                ServiceName = sr.Service.ServiceName,
+                CategoryName = sr.Service.ServiceCategory.CategoryName,
+                IssueDescription = sr.IssueDescription,
+                RequestedDate = sr.RequestedDate,
+                ScheduledDate = sr.ScheduledDate,
+                Priority = sr.Priority,
+                Status = sr.Status,
+                CreatedAt = sr.CreatedAt,
+
+          
+                TechnicianName = technicianAssignment?.Technician.FullName
+            };
         });
+
 
         return Ok(result);
     }

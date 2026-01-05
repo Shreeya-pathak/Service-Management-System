@@ -2,34 +2,43 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
+    <h3 class="sidebar-title">
+      <span class="material-icons">engineering</span>
+      Service Manager
+    </h3>
 
-    <h3 class="sidebar-title">Service Manager</h3>
+    <nav class="nav-links">
 
-    <a
-      routerLink="/service-manager/dashboard"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }">
-      📊 Dashboard
-    </a>
+      <a
+        routerLink="/service-manager/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <span class="material-icons">dashboard</span>
+        Dashboard
+      </a>
 
-    <a
-      routerLink="/service-manager/assignments"
-      routerLinkActive="active">
-      🧑‍🔧 Assign Technicians
-    </a>
+      <a
+        routerLink="/service-manager/assignments"
+        routerLinkActive="active">
+        <span class="material-icons">person_add_alt</span>
+        Assign Technicians
+      </a>
 
-    <a
-      routerLink="/service-manager/monitor"
-      routerLinkActive="active">
-      👀 Monitor Requests
-    </a>
+      <a
+        routerLink="/service-manager/monitor"
+        routerLinkActive="active">
+        <span class="material-icons">visibility</span>
+        Monitor Requests
+      </a>
 
-    <a
-      routerLink="/service-manager/reports"
-      routerLinkActive="active">
-      📊Reports
-    </a>
+      <a
+        routerLink="/service-manager/reports"
+        routerLinkActive="active">
+        <span class="material-icons">bar_chart</span>
+        Reports
+      </a>
 
+    </nav>
   </aside>
 
   <!-- MAIN CONTENT -->

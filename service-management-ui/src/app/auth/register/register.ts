@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
@@ -21,7 +27,6 @@ import { SnackbarService } from '../../shared/snackbar.service';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -40,30 +45,40 @@ export class RegisterComponent {
     readonly router: Router,
     readonly snack: SnackbarService
   ) {
-    this.form = this.fb.group({
-      fullName: ['', Validators.required],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)
-        ]
-      ],
-      password: ['', Validators.required],
-      role: ['']
-    });
+    this.form = this.fb.group(
+      {
+        fullName: ['', Validators.required],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+            Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)
+          ]
+        ],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+        role: ['', Validators.required]
+      },
+      { validators: this.passwordMatchValidator }
+    );
+  }
+
+  passwordMatchValidator(control: AbstractControl) {
+    const password = control.get('password')?.value;
+    const confirm = control.get('confirmPassword')?.value;
+    return password === confirm ? null : { passwordMismatch: true };
   }
 
   register() {
     if (this.form.invalid || this.isLoading) {
+      this.form.markAllAsTouched();
       this.snack.show('Please fill all fields correctly');
       return;
     }
 
     this.isLoading = true;
 
-    // 🔥 FIX: map role → roleName
     const payload = {
       fullName: this.form.value.fullName,
       email: this.form.value.email,
@@ -83,7 +98,6 @@ export class RegisterComponent {
       }
     });
   }
-
 
   goToLogin() {
     this.router.navigate(['/login']);

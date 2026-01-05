@@ -14,6 +14,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { ServiceManagerService } from '../../../core/services/servicemanager/service-manager.service';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   standalone: true,
@@ -31,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormField,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ],
   templateUrl: './service-manager-monitor.html',
   styleUrls: ['./service-manager-monitor.css']
@@ -41,6 +43,8 @@ export class ServiceManagerMonitorComponent implements OnInit {
   // DATA
   allRequests: any[] = [];
   requests: any[] = [];
+  pageSize = 5;
+  pageIndex = 0;
 
   // FILTERS
   statuses: string[] = ['Pending', 'Assigned', 'In-Progress', 'Completed'];
@@ -58,7 +62,8 @@ export class ServiceManagerMonitorComponent implements OnInit {
     pending: 0,
     assigned: 0,
     inProgress: 0,
-    completed: 0
+    completed: 0,
+    closed:0
   };
 
   constructor(
@@ -116,13 +121,14 @@ export class ServiceManagerMonitorComponent implements OnInit {
   }
 
   computeStats(data: any[]) {
-    this.stats = { pending: 0, assigned: 0, inProgress: 0, completed: 0 };
+    this.stats = { pending: 0, assigned: 0, inProgress: 0, completed: 0, closed:0};
 
     data.forEach(r => {
       if (r.status === 'Pending') this.stats.pending++;
       if (r.status === 'Assigned') this.stats.assigned++;
       if (r.status === 'In-Progress') this.stats.inProgress++;
       if (r.status === 'Completed') this.stats.completed++;
+      if (r.status === 'Closed') this.stats.closed++;
     });
   }
 
@@ -131,7 +137,26 @@ export class ServiceManagerMonitorComponent implements OnInit {
       'status-pending': status === 'Pending',
       'status-assigned': status === 'Assigned',
       'status-progress': status === 'In-Progress',
-      'status-completed': status === 'Completed'
+      'status-completed': status === 'Completed',
+      'status-closed': status === 'Closed'
     };
   }
+  get pagedRequests() {
+    const start = this.pageIndex * this.pageSize;
+    return this.requests.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+  }
+  statusRowClass(status: string) {
+  return {
+    pending: status === 'Pending',
+    assigned: status === 'Assigned',
+    inprogress: status === 'In-Progress',
+    completed: status === 'Completed',
+    closed: status === 'Closed'
+  };
+}
+
 }

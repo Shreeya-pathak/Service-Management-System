@@ -11,6 +11,7 @@
         public string CustomerName { get; set; } = null!;
 
         public string IssueDescription { get; set; } = null!;
+        public string Priority { get; set; } = null!;
         public DateOnly RequestedDate { get; set; }
         public DateOnly? ScheduledDate { get; set; }
 

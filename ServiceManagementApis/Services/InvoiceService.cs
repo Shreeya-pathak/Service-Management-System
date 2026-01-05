@@ -65,17 +65,22 @@ namespace ServiceManagementApis.Services
         {
             var invoice = await _invoiceRepo.GetByServiceRequestIdAsync(serviceRequestId)
                 ?? throw new Exception("Invoice not found");
+            
+
 
             return new InvoiceDetailsDto
             {
                 InvoiceId = invoice.InvoiceId,
 
                 CustomerName = invoice.ServiceRequest.Customer.FullName,
+                
                 CustomerEmail = invoice.ServiceRequest.Customer.Email,
                 CustomerPhone = invoice.ServiceRequest.Customer.PhoneNumber,
 
                 ServiceName = invoice.ServiceRequest.Service.ServiceName,
                 IssueDescription = invoice.ServiceRequest.IssueDescription,
+
+                
 
                 InvoiceDate = invoice.InvoiceDate,
                 TotalAmount = invoice.TotalAmount,

@@ -1,61 +1,74 @@
-<div class="container">
-  <h2>Service Categories</h2>
-  <h3>{{ isEditMode ? 'Edit Category' : 'Add Category' }}</h3>
+<div class="page">
 
-  <form [formGroup]="categoryForm" (ngSubmit)="submit()" class="form-card">
+  <h2 class="title">Service Categories</h2>
 
-    <input
-      type="text"
-      placeholder="Category Name"
-      formControlName="categoryName"
-    />
+  <!-- Add / Edit Form -->
+  <form
+    [formGroup]="categoryForm"
+    (ngSubmit)="submit()"
+    class="form-row">
 
-    <button type="submit">
-      {{ isEditMode ? 'Update Category' : 'Add Category' }}
+    <mat-form-field appearance="outline">
+      <mat-label>Category Name</mat-label>
+      <input matInput formControlName="categoryName">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">
+      {{ isEditMode ? 'Update' : 'Add' }}
     </button>
 
     <button
+      mat-button
       type="button"
-      class="cancel"
       *ngIf="isEditMode"
       (click)="resetForm()">
       Cancel
     </button>
-
   </form>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Category Name</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+  <!-- Header Row -->
+  <div class="list header">
+    <span>Category</span>
+    <span>Actions</span>
+  </div>
 
-    <tbody>
-      <tr *ngFor="let c of categories">
-  <td>{{ c.categoryName }}</td>
+  <!-- Rows -->
+  <div
+    class="list row"
+    *ngFor="let c of pagedCategories">
 
-  <td class="actions">
-  <!-- ENABLE / DISABLE -->
-  <mat-slide-toggle
-    [checked]="c.isActive"
-    [disabled]="c._loading"
-    (change)="onToggleCategory(c, $event)">
-  </mat-slide-toggle>
+    <span class="name">{{ c.categoryName }}</span>
 
-  <!-- EDIT -->
-  <button
-    type="button"
-    class="edit-btn"
-    [disabled]="!c.isActive"
-    (click)="edit(c)">
-    Edit
-  </button>
-</td>
+    <div class="actions">
 
-  </tr>
+      <!-- MAT SLIDE TOGGLE -->
+      <mat-slide-toggle
+        color="primary"
+        [checked]="c.isActive"
+        [disabled]="c._loading"
+        (change)="onToggleCategory(c, $event)">
+      </mat-slide-toggle>
 
-    </tbody>
-  </table>
+      <!-- Edit -->
+      <button
+        mat-icon-button
+        color="primary"
+        [disabled]="!c.isActive"
+        (click)="edit(c)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- MAT PAGINATOR -->
+  <mat-paginator
+    [length]="categories.length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    (page)="onPageChange($event)">
+  </mat-paginator>
+
 </div>

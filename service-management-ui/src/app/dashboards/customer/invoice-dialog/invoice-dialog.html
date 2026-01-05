@@ -1,36 +1,96 @@
-<h2>Invoice</h2>
+<div class="invoice-wrapper" *ngIf="!loading && invoice">
 
-<div *ngIf="loading">Loading invoice...</div>
+  <!-- HEADER -->
+  <div class="invoice-header">
+    <div>
+      <h2>INVOICE</h2>
+      <p class="invoice-id">Invoice #{{ invoice.invoiceId }}</p>
+    </div>
+    <div class="brand">
+      <mat-icon>receipt_long</mat-icon>
+      <span>Service Management System</span>
+    </div>
+  </div>
 
-<div *ngIf="!loading && invoice">
+  <hr />
 
-  <p><b>Customer Name:</b> {{ invoice.customerName }}</p>
-  <p><b>Email:</b> {{ invoice.customerEmail }}</p>
-  <p><b>Phone:</b> {{ invoice.customerPhone || 'N/A' }}</p>
+  <!-- CUSTOMER DETAILS -->
+  <div class="section">
+    <h3>Bill To</h3>
+    <p><b>{{ invoice.customerName }}</b></p>
+    <p>{{ invoice.customerEmail }}</p>
+    <p>{{ invoice.customerPhone || 'N/A' }}</p>
+  </div>
 
-  <hr>
+  <!-- SERVICE DETAILS -->
+  <div class="section two-col">
+    <div>
+      <h3>Service Details</h3>
+      <p><b>Service:</b> {{ invoice.serviceName }}</p>
+      <p><b>Issue:</b> {{ invoice.issueDescription }}</p>
+    </div>
 
-  <p><b>Service:</b> {{ invoice.serviceName }}</p>
-  <p><b>Issue:</b> {{ invoice.issueDescription }}</p>
+    <div class="right">
+      <p><b>Invoice Date:</b></p>
+      <p>{{ invoice.invoiceDate }}</p>
+    </div>
+  </div>
 
-  <hr>
+  <!-- AMOUNT TABLE -->
+  <table class="amount-table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ invoice.serviceName }}</td>
+        <td>₹{{ invoice.totalAmount }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <p><b>Invoice Date:</b> {{ invoice.invoiceDate }}</p>
-  <p><b>Total Amount:</b> ₹{{ invoice.totalAmount }}</p>
+  <!-- TOTAL -->
+  <div class="total-row">
+    <span>Total Amount</span>
+    <span>₹{{ invoice.totalAmount }}</span>
+  </div>
 
-  <p><b>Status:</b> {{ invoice.paymentStatus }}</p>
+  <!-- STATUS -->
+  <div class="status-row">
+    <mat-icon
+      [ngClass]="{
+        pending: invoice.paymentStatus === 'Pending',
+        waiting: invoice.paymentStatus === 'WaitingForAdminApproval',
+        paid: invoice.paymentStatus === 'Paid'
+      }"
+    >
+      {{ invoice.paymentStatus === 'Paid' ? 'check_circle' : 'hourglass_top' }}
+    </mat-icon>
 
-  <!-- MAKE PAYMENT BUTTON -->
-  <button
-    *ngIf="invoice.paymentStatus === 'Pending'"
-    mat-raised-button
-    color="primary"
-    (click)="makePayment()">
-    Make Payment
-  </button>
+    <span>{{ invoice.paymentStatus }}</span>
+  </div>
 
-  <p *ngIf="invoice.paymentStatus === 'WaitingForAdminApproval'" style="color: orange;">
-    Payment submitted. Waiting for admin approval.
-  </p>
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button
+      *ngIf="invoice.paymentStatus === 'Pending'"
+      mat-raised-button
+      color="primary"
+      (click)="makePayment()">
+      <mat-icon>payments</mat-icon>
+      Make Payment
+    </button>
 
+    <p *ngIf="invoice.paymentStatus === 'WaitingForAdminApproval'" class="waiting-text">
+      Payment submitted. Waiting for admin approval.
+    </p>
+  </div>
+
+</div>
+
+<div *ngIf="loading" class="loading">
+  Loading invoice...
 </div>

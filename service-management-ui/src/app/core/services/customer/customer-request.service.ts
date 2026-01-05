@@ -9,27 +9,19 @@ export class CustomerRequestService {
 
   constructor(readonly http: HttpClient) {}
 
-  // =====================================================
-  // 🔹 CATEGORIES
-  // =====================================================
-
-  // ❌ Admin / internal (keep, do not remove)
+ 
   getCategories(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/service-categories`);
   }
 
-  // ✅ Customer booking (ACTIVE ONLY)
+ 
   getActiveCategories(): Observable<any[]> {
     return this.http.get<any[]>(
       `${this.baseUrl}/service-categories/active`
     );
   }
 
-  // =====================================================
-  // 🔹 SERVICES
-  // =====================================================
-
-  // ❌ Admin / internal (keep)
+  
   getServicesByCategory(categoryId: number): Observable<any[]> {
     return this.http.get<any[]>(
       `${this.baseUrl}/services/by-category/${categoryId}`
@@ -81,10 +73,7 @@ export class CustomerRequestService {
     );
   }
 
-  // =====================================================
-  // 🔹 INVOICES
-  // =====================================================
-
+  
   getInvoiceByServiceRequest(serviceRequestId: number): Observable<any> {
     return this.http.get<any>(
       `${this.baseUrl}/invoices/by-service-request/${serviceRequestId}`

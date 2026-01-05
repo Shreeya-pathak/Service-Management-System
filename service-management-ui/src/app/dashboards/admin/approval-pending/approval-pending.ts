@@ -1,11 +1,13 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef,AfterViewInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatPaginator,MatPaginatorModule } from '@angular/material/paginator';
 import { AdminService } from '../../../core/services/admin/admin.service';
 import { SnackbarService } from '../../../shared/snackbar.service';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-approval-pending',
@@ -15,22 +17,32 @@ import { SnackbarService } from '../../../shared/snackbar.service';
   imports: [
     CommonModule,
     MatTableModule,
-    MatButtonModule
+    MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatCardModule
+
   ]
 })
-export class ApprovalPendingComponent implements OnInit {
+export class ApprovalPendingComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['name', 'email', 'role', 'actions'];
   dataSource = new MatTableDataSource<any>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     readonly adminService: AdminService,
     readonly snack: SnackbarService,
     readonly cdr: ChangeDetectorRef
   ) {}
-
+  
   ngOnInit(): void {
     this.loadPendingUsers();
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   loadPendingUsers() {

@@ -1,54 +1,152 @@
 .page-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6a1b9a;
   margin-bottom: 16px;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 16px;
+/* LIST */
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.assign-card {
-  padding: 16px;
-  border-radius: 14px;
+/* ROW CARD */
+.request-row {
+  background: #ffffff;
+  border-radius: 10px;
+  border-left: 4px solid #ab47bc;
+  box-shadow: 0 4px 14px rgba(123, 31, 162, 0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.header {
+.request-row:hover {
+  box-shadow: 0 8px 22px rgba(123, 31, 162, 0.15);
+  transform: translateY(-1px);
+}
+
+/* HEADER ROW */
+.row-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 14px 16px;
 }
 
-.badge {
+.service-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.category {
+  font-size: 13px;
+  color: #777;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* STATUS */
+.status-badge {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
   background: #fff3cd;
   color: #856404;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
+  font-weight: 500;
 }
 
+/* EXPAND ICON */
+.expand-icon {
+  transition: transform 0.2s ease;
+}
+
+.request-row.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+/* EXPANDED CONTENT */
+.row-details {
+  padding: 16px;
+  border-top: 1px solid #eee;
+  background: #faf7fd;
+}
+
+/* META */
+.meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+/* ISSUE */
 .issue-box {
-  background: #fafafa;
-  border-left: 4px solid #e91e63;
-  padding: 8px 12px;
+  background: #ffffff;
+  border-left: 4px solid #ec407a;
+  padding: 10px 12px;
   border-radius: 6px;
-  margin: 10px 0;
-  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+/* FORM */
+.assign-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .full {
-  width: 100%;
-  margin-top: 8px;
+  grid-column: span 2;
 }
 
 .assign-btn {
-  margin-top: 12px;
-  width: 100%;
+  grid-column: span 2;
+  border-radius: 20px;
 }
 
+/* EMPTY */
 .empty {
-  margin-top: 40px;
+  margin-top: 32px;
   text-align: center;
-  font-size: 16px;
+  color: #777;
+}
+.empty-state {
+  margin-top: 48px;
+  text-align: center;
+  padding: 32px;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #f6f0fb,
+    #ffffff
+  );
+
+  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.08);
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: #7b1fa2;
+  margin-bottom: 8px;
+}
+
+.empty-state h3 {
+  margin: 8px 0 4px;
+  font-weight: 600;
+  color: #6a1b9a;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
   color: #777;
 }

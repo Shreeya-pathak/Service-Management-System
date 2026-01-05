@@ -1,69 +1,101 @@
-<h2 class="page-title">🧑‍🔧 Assign Technicians</h2>
+<h2 class="page-title">
+  <span class="material-icons">engineering</span>
+  Assign Technicians
+</h2>
 
-<div class="card-grid">
+<div class="request-list">
 
-  <mat-card
+  <div
+    class="request-row"
     *ngFor="let r of requests"
-    class="assign-card">
+    (click)="toggleExpand(r.serviceRequestId)"
+    [class.expanded]="expandedId === r.serviceRequestId">
 
-    <div class="header">
-      <h3>{{ r.serviceName }}</h3>
-      <span class="badge">Pending</span>
+    <!-- ROW HEADER -->
+    <div class="row-main">
+      <div class="left">
+        <div class="service-name">
+          {{ r.serviceName }}
+        </div>
+        <div class="category">
+          {{ r.serviceCategory }}
+        </div>
+      </div>
+
+      <div class="right">
+        <span class="status-badge">
+          Pending
+        </span>
+        <span class="material-icons expand-icon">
+          expand_more
+        </span>
+      </div>
     </div>
 
-    <p><b>Category:</b> {{ r.serviceCategory }}</p>
-    <p><b>Customer:</b> {{ r.customerName }}</p>
-    <p><b>Requested On:</b> {{ r.requestedDate }}</p>
+    <!-- EXPANDED CONTENT -->
+    <div
+      class="row-details"
+      *ngIf="expandedId === r.serviceRequestId"
+      (click)="$event.stopPropagation()">
 
-    <!-- ISSUE DESCRIPTION -->
-    <div class="issue-box">
-      <b>Issue</b>
-      <p>{{ r.issueDescription }}</p>
+      <div class="meta">
+        <div><b>Customer:</b> {{ r.customerName }}</div>
+        <div><b>Requested On:</b> {{ r.requestedDate }}</div>
+        <div><b>Priority:</b> {{ r.priority }}</div>
+      </div>
+
+      <!-- ISSUE -->
+      <div class="issue-box">
+        <b>Issue</b>
+        <p>{{ r.issueDescription }}</p>
+      </div>
+
+      <!-- ASSIGN FORM -->
+      <form
+        *ngIf="forms.has(r.serviceRequestId)"
+        [formGroup]="forms.get(r.serviceRequestId)!"
+        class="assign-form">
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Schedule Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="scheduledDate">
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Technician</mat-label>
+          <mat-select formControlName="technicianId">
+            <mat-option
+              *ngFor="let t of technicians"
+              [value]="t.technicianId">
+              {{ t.technicianName }} ({{ t.activeTasks }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="assign-btn"
+          (click)="assign(r.serviceRequestId)">
+          Assign
+        </button>
+
+      </form>
+
     </div>
-
-    <!-- SAFE FORM -->
-    <form
-      *ngIf="forms.has(r.serviceRequestId)"
-      [formGroup]="forms.get(r.serviceRequestId)!">
-
-      <mat-form-field appearance="outline" class="full">
-        <mat-label>Schedule Date</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker"
-          formControlName="scheduledDate">
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full">
-        <mat-label>Technician</mat-label>
-        <mat-select formControlName="technicianId">
-          <mat-option
-            *ngFor="let t of technicians"
-            [value]="t.technicianId">
-            {{ t.technicianName }} ({{ t.activeTasks }})
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <button
-        mat-raised-button
-        color="primary"
-        class="assign-btn"
-        (click)="assign(r.serviceRequestId)">
-        Assign
-      </button>
-
-    </form>
-
-  </mat-card>
+  </div>
 
 </div>
+<div *ngIf="!requests.length" class="empty-state">
+  <span class="material-icons empty-icon">task_alt</span>
+  <h3>All Caught Up!</h3>
+  <p>No pending service requests at the moment.</p>
+</div>
 
-<!-- EMPTY STATE -->
-<p *ngIf="!requests.length" class="empty">
-  🎉 No pending requests to assign
-</p>

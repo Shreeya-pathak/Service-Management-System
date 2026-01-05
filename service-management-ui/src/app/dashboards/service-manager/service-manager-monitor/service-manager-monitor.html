@@ -1,101 +1,141 @@
 <h2 class="page-title">
-  📊 Monitor Service Requests
+  <span class="material-icons">monitoring</span>
+  Monitor Service Requests
 </h2>
 
-<!-- FILTER PANEL -->
-<mat-card class="filter-card">
-  <div class="filters">
-    
-    <mat-form-field appearance="outline" *ngIf="statuses.length">
+<!-- STICKY FILTER + STATS -->
+<div class="monitor-toolbar">
+
+  <!-- FILTER PANEL -->
+  <mat-card class="filter-card">
+    <div class="filters">
+
+      <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
         <mat-select [(ngModel)]="selectedStatus">
-            <mat-option value="">All</mat-option>
-            <mat-option *ngFor="let s of statuses" [value]="s">
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let s of statuses" [value]="s">
             {{ s }}
-            </mat-option>
+          </mat-option>
         </mat-select>
-    </mat-form-field>
+      </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="selectedCategory">
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let c of categories" [value]="c">
+            {{ c }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="categories.length">
-  <mat-label>Category</mat-label>
-  <mat-select [(ngModel)]="selectedCategory">
-    <mat-option value="">All</mat-option>
-    <mat-option *ngFor="let c of categories" [value]="c">
-      {{ c }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Technician</mat-label>
+        <mat-select [(ngModel)]="selectedTechnician">
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let t of technicians" [value]="t">
+            {{ t }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>From</mat-label>
+        <input matInput [matDatepicker]="fromPicker" [(ngModel)]="fromDate">
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="technicians.length">
-  <mat-label>Technician</mat-label>
-  <mat-select [(ngModel)]="selectedTechnician">
-    <mat-option value="">All</mat-option>
-    <mat-option *ngFor="let t of technicians" [value]="t">
-      {{ t }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>To</mat-label>
+        <input matInput [matDatepicker]="toPicker" [(ngModel)]="toDate">
+        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+      </mat-form-field>
 
+      <button mat-raised-button color="primary" (click)="applyFilters()">Apply</button>
+      <button mat-button color="warn" (click)="resetFilters()">Reset</button>
 
-    <mat-form-field appearance="outline">
-  <mat-label>From</mat-label>
-  <input matInput [matDatepicker]="fromPicker" [(ngModel)]="fromDate">
-  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-  <mat-datepicker #fromPicker></mat-datepicker>
-</mat-form-field>
-
-<mat-form-field appearance="outline">
-  <mat-label>To</mat-label>
-  <input matInput [matDatepicker]="toPicker" [(ngModel)]="toDate">
-  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-  <mat-datepicker #toPicker></mat-datepicker>
-</mat-form-field>
-
-
-    <button mat-raised-button color="primary" (click)="applyFilters()">Apply</button>
-    <button mat-button color="warn" (click)="resetFilters()">Reset</button>
-  </div>
-</mat-card>
-
-<!-- STATS -->
-<mat-card class="stats-card">
-  Pending: {{ stats.pending }} |
-  Assigned: {{ stats.assigned }} |
-  In-Progress: {{ stats.inProgress }} |
-  Completed: {{ stats.completed }}
-</mat-card>
-
-<!-- REQUEST CARDS -->
-<div class="request-grid">
-
-  <mat-card *ngFor="let r of requests" class="request-card">
-
-    <div class="card-header">
-      <div>
-        <h3>{{ r.customerName }}</h3>
-        <small>{{ r.serviceName }}</small>
-      </div>
-
-      <mat-chip [ngClass]="statusClass(r.status)">
-        {{ r.status }}
-      </mat-chip>
     </div>
+  </mat-card>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>View Details</mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <p><b>Description:</b> {{ r.issueDescription }}</p>
-      <p><b>Technician:</b> {{ r.technicianName || 'Not Assigned' }}</p>
-      <p><b>Requested:</b> {{ r.requestedDate }}</p>
-      <p><b>Scheduled:</b> {{ r.scheduledDate || '-' }}</p>
-      <p><b>Completed:</b> {{ r.completedDate || '-' }}</p>
-
-    </mat-expansion-panel>
-
+  <!-- STATS -->
+  <mat-card class="stats-card">
+    Pending: {{ stats.pending }} |
+    Assigned: {{ stats.assigned }} |
+    In-Progress: {{ stats.inProgress }} |
+    Completed: {{ stats.completed }} |
+    Closed: {{stats.closed}}
   </mat-card>
 
 </div>
+
+<!-- TABLE -->
+<mat-card class="table-card">
+
+  <table class="request-table">
+
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Service</th>
+        <th>Category</th>
+        <th>Technician</th>
+        <th>Status</th>
+        <th>Requested</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <ng-container *ngFor="let r of pagedRequests">
+
+        <!-- MAIN ROW -->
+        <tr
+          class="main-row"
+          [ngClass]="statusRowClass(r.status)"
+          (click)="r.expanded = !r.expanded">
+
+          <td class="customer">{{ r.customerName }}</td>
+          <td>{{ r.serviceName }}</td>
+          <td>{{ r.category }}</td>
+          <td>{{ r.technicianName || '—' }}</td>
+          <td>
+            <span class="status-pill" [ngClass]="statusClass(r.status)">
+              {{ r.status }}
+            </span>
+          </td>
+          <td>{{ r.requestedDate }}</td>
+          <td class="expand-icon">
+            <span class="material-icons">
+              {{ r.expanded ? 'expand_less' : 'expand_more' }}
+            </span>
+          </td>
+        </tr>
+
+        <!-- EXPANDED -->
+        <tr *ngIf="r.expanded" class="detail-row">
+          <td colspan="7">
+            <div class="details-box">
+              <p><b>Description:</b> {{ r.issueDescription }}</p>
+              <p><b>Scheduled:</b> {{ r.scheduledDate || '-' }}</p>
+              <p><b>Completed:</b> {{ r.completedDate || '-' }}</p>
+            </div>
+          </td>
+        </tr>
+
+      </ng-container>
+    </tbody>
+
+  </table>
+
+</mat-card>
+
+<!-- PAGINATOR -->
+<mat-paginator
+  [length]="requests.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5,10,20]"
+  (page)="onPageChange($event)">
+</mat-paginator>

@@ -4,13 +4,16 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerRequestService } from '../../../core/services/customer/customer-request.service';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   standalone: true,
   selector: 'app-invoice-dialog',
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './invoice-dialog.html',
   styleUrls: ['./invoice-dialog.css']

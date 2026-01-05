@@ -1,4 +1,30 @@
-<table mat-table [dataSource]="data" class="full-table">
+<h2 class="page-title">
+  <span class="material-icons">assignment</span>
+  My Assigned Requests
+</h2>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+
+  <select [(ngModel)]="statusFilter" (change)="applyFilters()">
+    <option value="">All Statuses</option>
+    <option value="Assigned">Assigned</option>
+    <option value="In-Progress">In-Progress</option>
+    <option value="Completed">Completed</option>
+    <option value="Closed">Closed</option>
+  </select>
+
+  <input
+    type="text"
+    placeholder="Search by customer or service"
+    [(ngModel)]="searchText"
+    (input)="applyFilters()"
+  />
+
+</div>
+
+<!-- TABLE -->
+<table mat-table [dataSource]="pagedData" class="modern-table">
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -21,22 +47,25 @@
   </ng-container>
 
   <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <th mat-header-cell *matHeaderCellDef>Scheduled</th>
     <td mat-cell *matCellDef="let r">{{ r.scheduledDate }}</td>
   </ng-container>
 
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>Status</th>
-    <td mat-cell *matCellDef="let r">{{ r.status }}</td>
+    <td mat-cell *matCellDef="let r">
+      <span class="status-pill {{ r.status | lowercase }}">
+        {{ r.status }}
+      </span>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="updateStatus">
-    <th mat-header-cell *matHeaderCellDef>Update Status</th>
+    <th mat-header-cell *matHeaderCellDef>Update</th>
     <td mat-cell *matCellDef="let r">
 
       <mat-radio-group [value]="r.status">
 
-        <!-- Assigned → In-Progress -->
         <mat-radio-button
           value="In-Progress"
           [disabled]="r.status !== 'Assigned'"
@@ -44,7 +73,6 @@
           In-Progress
         </mat-radio-button>
 
-        <!-- In-Progress → Completed -->
         <mat-radio-button
           value="Completed"
           [disabled]="r.status !== 'In-Progress'"
@@ -57,16 +85,30 @@
     </td>
   </ng-container>
 
-
   <ng-container matColumnDef="completedDate">
     <th mat-header-cell *matHeaderCellDef>Completed On</th>
     <td mat-cell *matCellDef="let r">
-      {{ r.status === 'Completed' || r.status === 'Closed' ? r.completedDate : '-' }}
+      {{ r.status === 'Completed' || r.status === 'Closed'
+        ? r.completedDate
+        : '-' }}
     </td>
   </ng-container>
-
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
 </table>
+
+<!-- PAGINATOR -->
+<mat-paginator
+  [length]="filteredData.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5,10,20]"
+  (page)="onPageChange($event)">
+</mat-paginator>
+
+<!-- EMPTY -->
+<div *ngIf="!filteredData.length" class="empty-state">
+  <span class="material-icons">task_alt</span>
+  <p>No assigned requests found</p>
+</div>

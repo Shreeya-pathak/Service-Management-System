@@ -1,11 +1,21 @@
-<div class="container">
-  <h2>Services</h2>
+<div class="page">
 
-  <form [formGroup]="serviceForm" (ngSubmit)="submit()" class="form-card">
+  <!-- Page Header -->
+  <h2 class="page-title">Services</h2>
 
-    <input type="text" placeholder="Service Name" formControlName="serviceName" />
+  <!-- Search by Category -->
+  <input
+    type="text"
+    placeholder="Search by service name..."
+    class="search"
+    [(ngModel)]="searchCategory" />
+
+  <!-- Add / Edit Form -->
+  <form [formGroup]="serviceForm" (ngSubmit)="submit()" class="form-row">
+
+    <input placeholder="Service Name" formControlName="serviceName" />
     <input type="number" placeholder="Price" formControlName="price" />
-    <input type="number" placeholder="SLA Hours" formControlName="slaHours" />
+    <input type="number" placeholder="SLA (hrs)" formControlName="slaHours" />
 
     <select formControlName="serviceCategoryId">
       <option value="">Select Category</option>
@@ -16,13 +26,13 @@
 
     <textarea placeholder="Description" formControlName="description"></textarea>
 
-    <button type="submit">
+    <button type="submit" class="primary">
       {{ isEditMode ? 'Update Service' : 'Add Service' }}
     </button>
 
     <button
       type="button"
-      class="cancel"
+      class="ghost"
       *ngIf="isEditMode"
       (click)="resetForm()">
       Cancel
@@ -30,35 +40,40 @@
 
   </form>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Service</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>SLA (hrs)</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+  <!-- GROUPED SERVICES -->
+  <div
+    class="category-group"
+    *ngFor="let group of groupedServices">
 
-    <tbody>
-      <tr *ngFor="let s of services">
-        <td>{{ s.serviceName }}</td>
-        <td>{{ s.categoryName }}</td>
-        <td>{{s.description}}</td>
-        <td>{{ s.price }}</td>
-        <td>{{ s.slaHours }}</td>
-        <td>
-          <button class="edit" (click)="edit(s)">Edit</button>
-          <mat-slide-toggle
-            [checked]="s.isActive"
-            [disabled]="s._loading"
-            (change)="onToggleService(s, $event)">
-          </mat-slide-toggle>
+    <!-- Category Header -->
+    <div class="category-header">
+      {{ group.categoryName }}
+    </div>
 
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Services under category -->
+    <div
+      class="service-card"
+      *ngFor="let s of group.services">
+
+      <div class="info">
+        <strong>{{ s.serviceName }}</strong>
+        <p>{{ s.description || 'No description' }}</p>
+        <span>₹{{ s.price }} • SLA {{ s.slaHours }} hrs</span>
+      </div>
+
+      <div class="actions">
+        <button class="edit" (click)="edit(s)">Edit</button>
+
+        <mat-slide-toggle
+          color="primary"
+          [checked]="s.isActive"
+          [disabled]="s._loading"
+          (change)="onToggleService(s, $event)">
+        </mat-slide-toggle>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

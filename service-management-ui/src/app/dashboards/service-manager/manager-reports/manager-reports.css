@@ -1,38 +1,52 @@
 .page-title {
   margin-bottom: 16px;
   font-weight: 600;
+  color: #6a1b9a; /* primary purple */
 }
 
+/* GRID LAYOUT */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
+/* CARD */
 .card {
   padding: 20px;
   border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.08);
 }
 
+/* HIGHLIGHT CARD */
 .highlight {
-  background: linear-gradient(135deg, #e3f2fd, #ffffff);
+  background: linear-gradient(
+    135deg,
+    #f3e5f5,
+    #ffffff
+  );
+  border-left: 4px solid #ab47bc;
 }
 
+/* FILTER BAR */
 .filters {
   display: flex;
   gap: 12px;
   margin: 16px 0;
 }
 
+/* STATS */
 .stats h3 {
   font-size: 28px;
   margin: 0;
-  color: #1976d2;
+  color: #7b1fa2; /* strong purple */
 }
 
+/* CHART NOTE */
 .chart-note {
   text-align: center;
   margin-top: 10px;
   font-size: 13px;
-  color: gray;
+  color: #777;
 }

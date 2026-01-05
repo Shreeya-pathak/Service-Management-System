@@ -20,6 +20,7 @@ namespace ServiceManagementApis.Repositories.InvoiceRepositories
                     .ThenInclude(sr => sr.Customer)
                 .Include(i => i.ServiceRequest)
                     .ThenInclude(sr => sr.Service)
+                
                 .FirstOrDefaultAsync(i => i.ServiceRequestId == serviceRequestId);
         }
 

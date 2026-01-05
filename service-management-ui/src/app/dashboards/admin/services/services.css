@@ -1,51 +1,114 @@
-.container {
-  max-width: 1000px;
-  margin: 30px auto;
+/* Page */
+.page {
+  background: #faf5ff;
+  padding: 24px;
+  border-radius: 14px;
 }
 
-.form-card {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+/* Title */
+.page-title {
+  color: #4a148c;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* Search */
+.search {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1c4e9;
+  width: 260px;
   margin-bottom: 20px;
 }
 
-textarea, select, input {
-  padding: 8px;
+/* Form */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
 }
 
-button {
-  padding: 8px 14px;
-  cursor: pointer;
+.form-row textarea,
+.form-row select,
+.form-row input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1c4e9;
 }
 
-button.edit {
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  margin-left: 8px;
-}
-
-button.delete {
-  margin-left: 8px;
-  background-color: #e53935;
-  color: rgb(25, 1, 1);
-  border: none;
-}
-
-button.cancel {
-  background-color: #777;
-  color: rgb(16, 3, 3);
-  border: none;
+.form-row textarea {
   grid-column: span 3;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Buttons */
+button.primary {
+  background: #8e24aa;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 18px;
+  border: none;
 }
 
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+button.ghost {
+  background: transparent;
+  color: #6a1b9a;
+  border: none;
+}
+
+/* Category Group */
+.category-group {
+  margin-bottom: 24px;
+}
+
+/* Category Header */
+.category-header {
+  background: #ede7f6;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #4a148c;
+  margin-bottom: 10px;
+}
+
+/* Service Card */
+.service-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.service-card:hover {
+  background: #f7f2fb;
+}
+
+/* Info */
+.info p {
+  margin: 4px 0;
+  color: #555;
+}
+
+.info span {
+  font-size: 13px;
+  color: #777;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+button.edit {
+  background: none;
+  border: none;
+  color: #6a1b9a;
+  font-weight: 600;
+  cursor: pointer;
 }

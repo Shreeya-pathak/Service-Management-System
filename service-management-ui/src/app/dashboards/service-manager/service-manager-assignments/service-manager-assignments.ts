@@ -41,8 +41,8 @@ export class ServiceManagerAssignmentsComponent implements OnInit {
 
   requests: any[] = [];
   technicians: any[] = [];
-
-  // 🔥 Dynamic forms per request
+  expandedId: number | null = null;
+  
   forms = new Map<number, FormGroup>();
 
   constructor(
@@ -139,5 +139,9 @@ export class ServiceManagerAssignmentsComponent implements OnInit {
     const m = String(date.getMonth() + 1).padStart(2, '0');
     const d = String(date.getDate()).padStart(2, '0');
     return `${y}-${m}-${d}`;
+  }
+
+  toggleExpand(id: number) {
+    this.expandedId = this.expandedId === id ? null : id;
   }
 }

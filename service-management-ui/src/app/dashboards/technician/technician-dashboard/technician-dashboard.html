@@ -1,39 +1,87 @@
-<div class="dashboard-grid" *ngIf="!loading">
+<div class="tech-dashboard" *ngIf="!loading">
 
-  <!-- COUNTS -->
-  <mat-card class="stat pending">
-    <h3>Pending</h3>
-    <p>{{ dashboard.pendingCount }}</p>
-  </mat-card>
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    <div>
+      <h2>Technician Dashboard</h2>
+      <p class="subtitle">Here’s a quick overview of your work status</p>
+    </div>
 
-  <mat-card class="stat progress">
-    <h3>In Progress</h3>
-    <p>{{ dashboard.inProgressCount }}</p>
-  </mat-card>
+    <div
+      class="availability-chip"
+      [class.available]="dashboard.availabilityStatus === 'Available'"
+      [class.unavailable]="dashboard.availabilityStatus === 'Unavailable'">
+      <span class="material-icons">
+        {{ dashboard.availabilityStatus === 'Available'
+          ? 'check_circle'
+          : 'cancel' }}
+      </span>
+      {{ dashboard.availabilityStatus }}
+    </div>
+  </div>
 
-  <mat-card class="stat done">
-    <h3>Completed</h3>
-    <p>{{ dashboard.completedCount }}</p>
-  </mat-card>
+  <!-- KPI CARDS -->
+  <div class="stats-grid">
+
+    <mat-card class="stat-card pending">
+      <span class="material-icons">hourglass_empty</span>
+      <div>
+        <p class="label">Pending</p>
+        <h3>{{ dashboard.pendingCount }}</h3>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card progress">
+      <span class="material-icons">autorenew</span>
+      <div>
+        <p class="label">In Progress</p>
+        <h3>{{ dashboard.inProgressCount }}</h3>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card completed">
+      <span class="material-icons">task_alt</span>
+      <div>
+        <p class="label">Completed</p>
+        <h3>{{ dashboard.completedCount }}</h3>
+      </div>
+    </mat-card>
+
+  </div>
 
   <!-- AVAILABILITY -->
-  <mat-card class="availability-card">
-    <h3>Availability</h3>
+  <!-- AVAILABILITY -->
+<mat-card class="availability-card">
+  <h3>Availability Status</h3>
 
-    <mat-radio-group
-      [value]="dashboard.availabilityStatus"
-      (change)="updateAvailability($event.value)">
+  <div class="availability-toggle">
 
-      <mat-radio-button value="Available" color="primary">
-        🟢 Available
-      </mat-radio-button>
+    <div
+      class="availability-option available"
+      [class.active]="dashboard.availabilityStatus === 'Available'"
+      (click)="updateAvailability('Available')">
 
-      <mat-radio-button value="Unavailable" color="warn">
-        🔴 Unavailable
-      </mat-radio-button>
+      <span class="material-icons">check_circle</span>
+      <div>
+        <h4>Available</h4>
+        <p>Ready to take new assignments</p>
+      </div>
+    </div>
 
-    </mat-radio-group>
+    <div
+      class="availability-option unavailable"
+      [class.active]="dashboard.availabilityStatus === 'Unavailable'"
+      (click)="updateAvailability('Unavailable')">
 
-  </mat-card>
+      <span class="material-icons">cancel</span>
+      <div>
+        <h4>Unavailable</h4>
+        <p>Not accepting tasks right now</p>
+      </div>
+    </div>
+
+  </div>
+</mat-card>
+
 
 </div>

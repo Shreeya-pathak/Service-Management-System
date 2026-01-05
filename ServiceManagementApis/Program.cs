@@ -22,6 +22,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+
+
+
+
+
 builder.Services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -82,6 +87,12 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    DbInitializer.Seed(context);
+}
 
 if (app.Environment.IsDevelopment())
 {

@@ -1,31 +1,125 @@
-.invoice-box {
-  padding: 16px;
+.invoice-wrapper {
+  max-width: 720px;
+  margin: 24px auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  font-family: 'Inter', sans-serif;
 }
 
-.top {
+/* HEADER */
+.invoice-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.badge {
-  padding: 4px 10px;
-  border-radius: 12px;
+.invoice-header h2 {
+  margin: 0;
+  color: #6a1b9a;
+  letter-spacing: 1px;
+}
+
+.invoice-id {
+  color: #777;
+  font-size: 13px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8e24aa;
+  font-weight: 600;
+}
+
+/* SECTIONS */
+.section {
+  margin-top: 20px;
+}
+
+.section h3 {
+  margin-bottom: 8px;
+  color: #6a1b9a;
+}
+
+.two-col {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.right {
+  text-align: right;
+}
+
+/* TABLE */
+.amount-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.amount-table th {
+  text-align: left;
+  padding: 10px;
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.amount-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* TOTAL */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #6a1b9a;
+}
+
+/* STATUS */
+.status-row {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 500;
 }
 
-.badge.pending {
-  background: #fff3cd;
-  color: #856404;
+.status-row mat-icon.pending {
+  color: #ff9800;
 }
 
-.badge.paid {
-  background: #d4edda;
-  color: #155724;
+.status-row mat-icon.waiting {
+  color: #fb8c00;
 }
 
-.info {
-  margin: 12px 0;
-  padding: 8px;
-  background: #e3f2fd;
-  border-left: 4px solid #2196f3;
+.status-row mat-icon.paid {
+  color: #2e7d32;
+}
+
+/* ACTIONS */
+.actions {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.waiting-text {
+  color: #fb8c00;
+  font-weight: 500;
+}
+
+/* LOADING */
+.loading {
+  text-align: center;
+  margin-top: 40px;
+  font-weight: 500;
 }

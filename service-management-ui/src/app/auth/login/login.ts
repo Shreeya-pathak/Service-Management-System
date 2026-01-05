@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectorRef,NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
+import { finalize } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { TokenService } from '../../core/services/auth/token.service';
 import { SnackbarService } from '../../shared/snackbar.service';
@@ -37,7 +37,9 @@ export class LoginComponent {
     readonly auth: AuthService,
     readonly token: TokenService,
     readonly router: Router,
-    readonly snack: SnackbarService
+    readonly snack: SnackbarService,
+    readonly cdr: ChangeDetectorRef,
+    readonly zone: NgZone
   ) {
     this.form = this.fb.group({
       email: [
@@ -54,13 +56,22 @@ export class LoginComponent {
   }
 
   login() {
-    if (this.form.invalid || this.isLoading) return;
+    if (this.form.invalid || this.isLoading){
+      this.form.markAllAsTouched();
+      return;
+    }
 
     this.isLoading = true;
-
-    this.auth.login(this.form.value).subscribe({
-      next: res => {
+    this.cdr.detectChanges();
+    this.auth.login(this.form.value).pipe(
+      finalize(() => {
+        
         this.isLoading = false;
+        this.cdr.detectChanges();
+      })
+    ).subscribe({
+      next: res => {
+        
 
         this.token.set(
           res.token,
@@ -109,6 +120,8 @@ export class LoginComponent {
 
   
   goToRegister() {
-    this.router.navigate(['/register']);
+    this.zone.run(() => {
+      this.router.navigate(['/register']);
+    });
   }
 }

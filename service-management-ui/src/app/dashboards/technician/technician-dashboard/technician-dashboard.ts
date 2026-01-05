@@ -35,18 +35,35 @@ export class TechnicianDashboardComponent implements OnInit {
 
   loadDashboard() {
     this.techService.getDashboard().subscribe(res => {
-      this.dashboard = res;
+      this.dashboard = {
+        pendingCount: res.pendingCount ?? 0,
+        inProgressCount: res.inProgressCount ?? 0,
+        completedCount: res.completedCount ?? 0,
+        availabilityStatus: res.availabilityStatus ?? 'Unavailable'
+      };
+
       this.loading = false;
-      this.cdr.detectChanges();
+
+      
+      Promise.resolve().then(() => this.cdr.detectChanges());
     });
   }
+
 
   updateAvailability(status: 'Available' | 'Unavailable') {
     if (this.dashboard.availabilityStatus === status) return;
 
     this.techService.updateAvailability(status).subscribe({
       next: () => {
-        this.dashboard.availabilityStatus = status;
+        this.dashboard = {
+          ...this.dashboard,
+          availabilityStatus: status
+        };
+
+        // ✅ force UI refresh
+        Promise.resolve().then(() => {
+          this.cdr.detectChanges();
+        });
 
         this.snack.open(
           `Status set to ${status}`,
@@ -63,4 +80,5 @@ export class TechnicianDashboardComponent implements OnInit {
       }
     });
   }
+
 }

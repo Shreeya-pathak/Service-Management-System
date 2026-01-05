@@ -1,0 +1,102 @@
+/* Card */
+.approval-card {
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(236, 64, 122, 0.15);
+  background: #fff;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.header-icon {
+  color: #ec407a;
+  font-size: 28px;
+}
+
+.header h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Table wrapper */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table */
+.approval-table {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Header row */
+.mat-header-row {
+  background: #fde7ef;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  color: #444;
+  gap: 6px;
+}
+
+/* Rows */
+.mat-row {
+  background: #fffafa;
+  transition: background 0.2s ease;
+}
+
+.mat-row:hover {
+  background: #fde7ef;
+}
+
+/* Role chip */
+.role-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #fce4ec;
+  color: #c2185b;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* Status chip */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.status-chip.approved {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-chip.rejected {
+  background: #fdecea;
+  color: #c62828;
+}
+
+/* Action buttons */
+button[mat-icon-button] mat-icon {
+  font-size: 22px;
+}
+
+/* Paginator */
+mat-paginator {
+  margin-top: 12px;
+}

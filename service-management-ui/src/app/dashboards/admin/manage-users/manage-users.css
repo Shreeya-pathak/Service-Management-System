@@ -1,24 +1,137 @@
+/* Page Title */
 .page-title {
-  margin-bottom: 16px;
-}
-
-.form-card {
-  margin-bottom: 24px;
-}
-
-.form-actions {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #4a148c;
 }
 
-.full-width {
-  width: 100%;
+/* Search */
+.search-field {
+  width: 320px;
+  margin-bottom: 20px;
 }
 
+/* Loader */
+.loader {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* Table Card */
+.table-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(156, 39, 176, 0.18);
+  overflow: hidden;
+}
+
+/* Table */
 table {
   width: 100%;
 }
 
-.status-chip {
-  font-weight: 500;
+
+
+
+
+/* Rows */
+.mat-row:hover {
+  background: #faf5ff;
+}
+
+
+
+
+
+.status-pill {
+  padding: 5px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.status-pill.active {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-pill.inactive {
+  background: #fdecea;
+  color: #c62828;
+}
+
+/* Buttons */
+
+
+/* Paginator */
+mat-paginator {
+  background: #faf5ff;
+}
+/* =========================
+   TABLE HEADERS
+========================= */
+
+.mat-header-row {
+  background: linear-gradient(135deg, #f3e5f5, #d574b0);
+}
+
+.mat-header-cell {
+  font-weight: 700;
+  color: #4a148c;
+  font-size: 13.5px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* Align action header nicely */
+.th-action {
+  text-align: center;
+}
+
+/* =========================
+   ROLE PILLS
+========================= */
+
+.role-pill {
+  padding: 5px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Admin */
+.role-admin {
+  background: #ede7f6;
+  color: #5e35b1;
+}
+
+/* Customer */
+.role-customer {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* Technician */
+.role-technician {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* Service Manager */
+.role-manager {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+
+
+
+/* Action button */
+button[mat-stroked-button] {
+  border-radius: 20px;
+  font-weight: 600;
 }
