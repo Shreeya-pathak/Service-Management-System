@@ -1,0 +1,87 @@
+/* HERO */
+.hero-section {
+  background: linear-gradient(135deg, #9c27b0, #6a1b9a);
+  color: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.hero-section h1 {
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* Carousel */
+.carousel {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+}
+
+.carousel-item {
+  min-width: 180px;
+  background: rgba(255,255,255,0.15);
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* OFFER */
+.offer-section {
+  margin-bottom: 40px;
+}
+
+.offer-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.offer-card {
+  padding: 16px;
+  border-left: 4px solid #9c27b0;
+}
+
+/* SUMMARY */
+.summary-section {
+  margin-bottom: 20px;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.summary-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.summary-card p {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.summary-card.total {
+  border-top: 4px solid #673ab7;
+}
+
+.summary-card.active {
+  border-top: 4px solid #1976d2;
+}
+
+.summary-card.completed {
+  border-top: 4px solid #2e7d32;
+}
+
+.summary-card.cancelled {
+  border-top: 4px solid #c62828;
+}

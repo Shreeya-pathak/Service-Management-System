@@ -51,6 +51,12 @@
         <td>{{ s.slaHours }}</td>
         <td>
           <button class="edit" (click)="edit(s)">Edit</button>
+          <mat-slide-toggle
+            [checked]="s.isActive"
+            [disabled]="s._loading"
+            (change)="onToggleService(s, $event)">
+          </mat-slide-toggle>
+
         </td>
       </tr>
     </tbody>

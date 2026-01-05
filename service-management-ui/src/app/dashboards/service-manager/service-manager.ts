@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-@Component({selector: 'app-service-manager-dashboard',
+@Component({
   standalone: true,
-  template: `<h2>Welcome Service Manager</h2>`
+  selector: 'app-service-manager',
+  imports: [CommonModule, RouterModule],
+  templateUrl: './service-manager.html',
+  styleUrls: ['./service-manager.css']
 })
 export class ServiceManagerComponent {}
-

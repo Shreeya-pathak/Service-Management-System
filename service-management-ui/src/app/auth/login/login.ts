@@ -8,8 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-import { AuthService } from '../../core/services/auth.service';
-import { TokenService } from '../../core/services/token.service';
+import { AuthService } from '../../core/services/auth/auth.service';
+import { TokenService } from '../../core/services/auth/token.service';
 import { SnackbarService } from '../../shared/snackbar.service';
 
 @Component({
@@ -23,12 +23,14 @@ import { SnackbarService } from '../../shared/snackbar.service';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,RouterModule
+    MatButtonModule,
+    RouterModule
   ]
 })
 export class LoginComponent {
 
   form: FormGroup;
+  isLoading = false;
 
   constructor(
     readonly fb: FormBuilder,
@@ -37,33 +39,49 @@ export class LoginComponent {
     readonly router: Router,
     readonly snack: SnackbarService
   ) {
-    // ✅ Form initialized AFTER FormBuilder injection
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+          //Validators.pattern(/^[a-zA-Z0-9._%+-]+@\.com$/)
+        ]
+      ],
       password: ['', Validators.required]
     });
+
   }
 
   login() {
-    if (this.form.invalid) return;
+    if (this.form.invalid || this.isLoading) return;
+
+    this.isLoading = true;
 
     this.auth.login(this.form.value).subscribe({
       next: res => {
-        this.token.set(res.token, res.role, res.approvalStatus,res.fullName);
+        this.isLoading = false;
 
-        // ✅ ADMIN
+        this.token.set(
+          res.token,
+          res.role,
+          res.approvalStatus,
+          res.fullName
+        );
+
+        
         if (res.role === 'Admin') {
-          this.router.navigate(['/admin/approvals']);
+          this.router.navigate(['/admin']);
           return;
         }
 
-        // ✅ PENDING USERS (TECH / MANAGER)
+        
         if (res.approvalStatus === 'Pending') {
           this.router.navigate(['/user-approval-pending']);
           return;
         }
 
-        // ✅ APPROVED USERS
+        
         switch (res.role) {
           case 'Customer':
             this.router.navigate(['/customer']);
@@ -75,20 +93,22 @@ export class LoginComponent {
             this.router.navigate(['/service-manager']);
             break;
         }
+      },
+      error: err => {
+        this.isLoading = false;
+
+        const message =
+          err?.error?.message ||
+          err?.error ||
+          'Invalid email or password';
+
+        this.snack.show(message);
       }
     });
-
   }
 
-
-
-
-
-
-
-
+  
   goToRegister() {
     this.router.navigate(['/register']);
   }
 }
-

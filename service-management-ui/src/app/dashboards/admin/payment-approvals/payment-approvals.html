@@ -1,0 +1,16 @@
+<h2>Pending Payment Approvals</h2>
+
+<mat-card *ngFor="let i of invoices" class="approval-card">
+
+  <h3>{{ i.customerName }}</h3>
+  <p><strong>Service:</strong> {{ i.serviceName }}</p>
+  <p><strong>Amount:</strong> ₹{{ i.totalAmount }}</p>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openApproveDialog(i)">
+    Add Payment Method & Approve
+  </button>
+
+</mat-card>

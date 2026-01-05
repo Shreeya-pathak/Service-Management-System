@@ -6,7 +6,11 @@ public interface IServiceRepository
 {
     Task<List<Service>> GetAllAsync();
     Task<List<Service>> GetByCategoryAsync(int categoryId);
+    Task<List<Service>> GetActiveByCategoryAsync(int categoryId);
+    Task<Service?> GetActiveByIdAsync(int id);
     Task<Service?> GetByIdAsync(int id);
     Task AddAsync(Service service);
     Task UpdateAsync(Service service);
+    Task DeleteAsync(Service service);
+    Task<bool> IsServiceInUseAsync(int serviceId);
 }

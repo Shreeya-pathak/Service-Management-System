@@ -1,1 +1,40 @@
-<p>service-manager works!</p>
+<div class="manager-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <h3 class="sidebar-title">Service Manager</h3>
+
+    <a
+      routerLink="/service-manager/dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      📊 Dashboard
+    </a>
+
+    <a
+      routerLink="/service-manager/assignments"
+      routerLinkActive="active">
+      🧑‍🔧 Assign Technicians
+    </a>
+
+    <a
+      routerLink="/service-manager/monitor"
+      routerLinkActive="active">
+      👀 Monitor Requests
+    </a>
+
+    <a
+      routerLink="/service-manager/reports"
+      routerLinkActive="active">
+      📊Reports
+    </a>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

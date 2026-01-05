@@ -1,5 +1,6 @@
 <div class="container">
   <h2>Service Categories</h2>
+  <h3>{{ isEditMode ? 'Edit Category' : 'Add Category' }}</h3>
 
   <form [formGroup]="categoryForm" (ngSubmit)="submit()" class="form-card">
 
@@ -33,11 +34,28 @@
 
     <tbody>
       <tr *ngFor="let c of categories">
-        <td>{{ c.categoryName }}</td>
-        <td>
-          <button class="edit" (click)="edit(c)">Edit</button>
-        </td>
-      </tr>
+  <td>{{ c.categoryName }}</td>
+
+  <td class="actions">
+  <!-- ENABLE / DISABLE -->
+  <mat-slide-toggle
+    [checked]="c.isActive"
+    [disabled]="c._loading"
+    (change)="onToggleCategory(c, $event)">
+  </mat-slide-toggle>
+
+  <!-- EDIT -->
+  <button
+    type="button"
+    class="edit-btn"
+    [disabled]="!c.isActive"
+    (click)="edit(c)">
+    Edit
+  </button>
+</td>
+
+  </tr>
+
     </tbody>
   </table>
 </div>

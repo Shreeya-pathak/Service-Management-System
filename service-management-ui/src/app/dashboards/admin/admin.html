@@ -1,3 +1,58 @@
+<div class="admin-layout">
 
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3 class="sidebar-title">Admin Portal</h3>
 
-<router-outlet></router-outlet>
+    <nav class="nav-links">
+
+      <!-- DASHBOARD -->
+      <a routerLink="/admin/dashboard" routerLinkActive="active">
+        Dashboard
+      </a>
+
+      <!-- USER APPROVALS -->
+      <a routerLink="user-approvals" routerLinkActive="active">
+        Pending User Approvals
+      </a>
+
+      <!-- PAYMENT APPROVALS -->
+      <a routerLink="/admin/payment-approvals" routerLinkActive="active">
+        Payment Approvals
+      </a>
+
+      <!-- REPORTS -->
+      <a routerLink="/admin/reports" routerLinkActive="active">
+        Reports
+      </a>
+
+      <hr />
+
+      <!-- MASTER DATA -->
+      <a routerLink="/admin/service-categories" routerLinkActive="active">
+        Service Categories
+      </a>
+
+      <a routerLink="/admin/services" routerLinkActive="active">
+        Services
+      </a>
+
+      <a routerLink="/admin/manage-users" routerLinkActive="active">
+        Manage Users
+      </a>
+      <a routerLink="/admin/service-history" routerLinkActive="active">
+        Service Requests History
+      </a>
+      <a routerLink="/admin/payment-history" routerLinkActive="active">
+        Payments History
+      </a>
+
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

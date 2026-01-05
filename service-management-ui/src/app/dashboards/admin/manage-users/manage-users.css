@@ -1,0 +1,24 @@
+.page-title {
+  margin-bottom: 16px;
+}
+
+.form-card {
+  margin-bottom: 24px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.status-chip {
+  font-weight: 500;
+}

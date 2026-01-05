@@ -1,0 +1,74 @@
+<!-- ===============================
+  SECTION 1: WELCOME / ABOUT
+================================ -->
+<div class="hero-section">
+  <h1>Welcome to Service Management System</h1>
+  <p class="subtitle">
+    One platform to raise, track and manage all your service needs effortlessly.
+  </p>
+
+  <div class="carousel">
+    <div class="carousel-item">Electrical Services</div>
+    <div class="carousel-item">Plumbing Solutions</div>
+    <div class="carousel-item">Home Maintenance</div>
+    <div class="carousel-item">Urgent Repairs</div>
+  </div>
+</div>
+
+<!-- ===============================
+  SECTION 2: WHAT WE OFFER
+================================ -->
+<div class="offer-section">
+  <h2>What We Offer</h2>
+
+  <div class="offer-cards">
+    <mat-card class="offer-card">
+      <h3>Quick Issue Reporting</h3>
+      <p>Raise service requests in just a few clicks.</p>
+    </mat-card>
+
+    <mat-card class="offer-card">
+      <h3>Priority Handling</h3>
+      <p>Mark requests as urgent for faster resolution.</p>
+    </mat-card>
+
+    <mat-card class="offer-card">
+      <h3>Live Status Tracking</h3>
+      <p>Track progress from pending to completion.</p>
+    </mat-card>
+
+    <mat-card class="offer-card">
+      <h3>Expert Technicians</h3>
+      <p>Skilled professionals assigned to your service.</p>
+    </mat-card>
+  </div>
+</div>
+
+<!-- ===============================
+  SECTION 3: MY SERVICE SUMMARY
+================================ -->
+<div class="summary-section">
+  <h2>My Service Summary</h2>
+
+  <div class="summary-cards">
+    <mat-card class="summary-card total">
+      <h3>Total Requests</h3>
+      <p>{{ total }}</p>
+    </mat-card>
+
+    <mat-card class="summary-card active">
+      <h3>Active</h3>
+      <p>{{ active }}</p>
+    </mat-card>
+
+    <mat-card class="summary-card completed">
+      <h3>Completed</h3>
+      <p>{{ completed }}</p>
+    </mat-card>
+
+    <mat-card class="summary-card cancelled">
+      <h3>Cancelled</h3>
+      <p>{{ cancelled }}</p>
+    </mat-card>
+  </div>
+</div>

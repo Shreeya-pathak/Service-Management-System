@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ServiceManagementApis.Data;
-using ServiceManagementApis.DTOs;
+using ServiceManagementApis.DTOs.Admin;
+using ServiceManagementApis.Repositories.Interfaces;
 
 namespace ServiceManagementApis.Controllers;
 
@@ -12,15 +13,38 @@ namespace ServiceManagementApis.Controllers;
 public class AdminController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly IUserRepository _userRepository;
 
-    public AdminController(AppDbContext context)
+    public AdminController(AppDbContext context, IUserRepository userRepository)
     {
         _context = context;
+        _userRepository = userRepository;
+        //_userRepository = userRepository;
     }
+
 
     // --------------------------------------------------
     // 1️⃣ VIEW ALL PENDING USERS
     // --------------------------------------------------
+    [HttpGet("users")]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = await _userRepository.GetAllNonPendingUsersAsync();
+        return Ok(users);
+    }
+
+    [HttpPatch("users/{id}/toggle-status")]
+    public async Task<IActionResult> ToggleUserStatus(int id)
+    {
+        var result = await _userRepository.ToggleUserStatusAsync(id);
+
+        if (!result)
+            return NotFound("User not found");
+
+        return Ok("User status updated successfully");
+    }
+
+
     [HttpGet("pending-users")]
     public async Task<IActionResult> GetPendingUsers()
     {

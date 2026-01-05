@@ -1,0 +1,94 @@
+<div class="page-container">
+
+  <!-- PAGE TITLE -->
+  <h2 class="page-title">My Service Requests</h2>
+
+  <!-- CATEGORY GROUPS -->
+  <div
+    class="category-section"
+    *ngFor="let group of groupedRequests">
+
+    <!-- CATEGORY HEADER -->
+    <div
+      class="category-header"
+      (click)="toggle(group)">
+
+      <div class="left">
+        <span class="category-name">
+          {{ group.categoryName }}
+        </span>
+        <span class="count">
+          ({{ group.requests.length }})
+        </span>
+      </div>
+
+      <span class="arrow">
+        {{ group.expanded ? '▾' : '▸' }}
+      </span>
+    </div>
+
+    <!-- REQUEST LIST -->
+    <div
+      class="request-list"
+      *ngIf="group.expanded">
+
+      <!-- SINGLE REQUEST CARD -->
+      <div
+        class="request-card"
+        *ngFor="let r of group.requests">
+
+        <!-- TOP CONTENT -->
+        <div class="card-top">
+          <div class="content">
+            <h4 class="service-name">
+              {{ r.serviceName }}
+            </h4>
+
+            <p class="issue">
+              {{ r.issueDescription }}
+            </p>
+          </div>
+
+          <span
+            class="status-pill"
+            [ngClass]="r.status.toLowerCase()">
+            {{ r.status }}
+          </span>
+        </div>
+
+        <!-- BOTTOM ROW -->
+        <div class="card-bottom">
+
+          <div class="meta">
+            Requested on {{ r.createdAt }}
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div class="actions vertical">
+
+            <button
+              mat-raised-button
+              class="details-btn"
+              (click)="openDetails(r)">
+              View Details
+            </button>
+
+            <button
+              mat-raised-button
+              class="invoice-btn"
+              [disabled]="!(r.status === 'Completed' || r.status === 'Closed')"
+              (click)="openInvoice(r)">
+              View Invoice
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ServiceManagementApis.DTOs;
+using ServiceManagementApis.DTOs.Admin;
 using ServiceManagementApis.Models;
 using ServiceManagementApis.Repositories.Interfaces;
 
@@ -8,7 +8,7 @@ namespace ServiceManagementApis.Controllers;
 
 [ApiController]
 [Route("api/services")]
-[Authorize(Roles = "Admin")]
+[Authorize]
 public class ServicesController : ControllerBase
 {
     private readonly IServiceRepository _serviceRepository;
@@ -22,9 +22,7 @@ public class ServicesController : ControllerBase
         _categoryRepository = categoryRepository;
     }
 
-    // --------------------------------------------------
-    // GET: All Services
-    // --------------------------------------------------
+    
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -38,15 +36,14 @@ public class ServicesController : ControllerBase
             s.SLAHours,
             s.Description,
             s.ServiceCategoryId,
+            s.IsActive,
             CategoryName = s.ServiceCategory.CategoryName
         });
 
         return Ok(result);
     }
 
-    // --------------------------------------------------
-    // GET: Services by Category
-    // --------------------------------------------------
+    
     [HttpGet("by-category/{categoryId}")]
     public async Task<IActionResult> GetByCategory(int categoryId)
     {
@@ -64,9 +61,7 @@ public class ServicesController : ControllerBase
         return Ok(result);
     }
 
-    // --------------------------------------------------
-    // POST: Create Service
-    // --------------------------------------------------
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateServiceDto dto)
     {
@@ -88,9 +83,7 @@ public class ServicesController : ControllerBase
 
     }
 
-    // --------------------------------------------------
-    // PUT: Update Service
-    // --------------------------------------------------
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UpdateServiceDto dto)
     {
@@ -108,4 +101,51 @@ public class ServicesController : ControllerBase
         return Ok(new { message = "Service updated successfully" });
 
     }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id}/disable")]
+    public async Task<IActionResult> Disable(int id)
+    {
+        var service = await _serviceRepository.GetByIdAsync(id);
+        if (service == null)
+            return NotFound("Service not found");
+
+        service.IsActive = false;
+        await _serviceRepository.UpdateAsync(service);
+
+        return Ok(new { message = "Service disabled successfully" });
+    }
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id}/enable")]
+    public async Task<IActionResult> Enable(int id)
+    {
+        var service = await _serviceRepository.GetByIdAsync(id);
+        if (service == null)
+            return NotFound("Service not found");
+
+        service.IsActive = true;
+        await _serviceRepository.UpdateAsync(service);
+
+        return Ok(new { message = "Service enabled successfully" });
+    }
+    [HttpGet("by-category/{categoryId}/active")]
+    [Authorize(Roles = "Customer")]
+    public async Task<IActionResult> GetActiveByCategory(int categoryId)
+    {
+        var services = await _serviceRepository.GetActiveByCategoryAsync(categoryId);
+
+        var result = services.Select(s => new
+        {
+            s.ServiceId,
+            s.ServiceName,
+            s.Price,
+            s.SLAHours,
+            s.Description
+        });
+
+        return Ok(result);
+    }
+
+
+
 }

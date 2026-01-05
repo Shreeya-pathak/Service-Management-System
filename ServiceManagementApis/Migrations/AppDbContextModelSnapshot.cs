@@ -66,6 +66,50 @@ namespace ServiceManagementApis.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ServiceManagementApis.Models.Address", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Line1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Line2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pincode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AddressId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("ServiceManagementApis.Models.Invoice", b =>
                 {
                     b.Property<int>("InvoiceId")
@@ -94,6 +138,38 @@ namespace ServiceManagementApis.Migrations
                         .IsUnique();
 
                     b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("ServiceManagementApis.Models.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NotificationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("ServiceManagementApis.Models.Payment", b =>
@@ -137,6 +213,9 @@ namespace ServiceManagementApis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
@@ -170,6 +249,9 @@ namespace ServiceManagementApis.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("ServiceCategoryId");
 
                     b.ToTable("ServiceCategories");
@@ -182,6 +264,9 @@ namespace ServiceManagementApis.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceRequestId"));
+
+                    b.Property<DateOnly?>("CompletedDate")
+                        .HasColumnType("date");
 
                     b.Property<DateOnly>("CreatedAt")
                         .HasColumnType("date");
@@ -257,6 +342,9 @@ namespace ServiceManagementApis.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
+                    b.Property<string>("AvailabilityStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateOnly>("CreatedAt")
                         .HasColumnType("date");
 
@@ -309,6 +397,17 @@ namespace ServiceManagementApis.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ServiceManagementApis.Models.Address", b =>
+                {
+                    b.HasOne("ServiceManagementApis.Models.User", "User")
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ServiceManagementApis.Models.Invoice", b =>
                 {
                     b.HasOne("ServiceManagementApis.Models.ServiceRequest", "ServiceRequest")
@@ -318,6 +417,17 @@ namespace ServiceManagementApis.Migrations
                         .IsRequired();
 
                     b.Navigation("ServiceRequest");
+                });
+
+            modelBuilder.Entity("ServiceManagementApis.Models.Notification", b =>
+                {
+                    b.HasOne("ServiceManagementApis.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ServiceManagementApis.Models.Payment", b =>
@@ -364,7 +474,7 @@ namespace ServiceManagementApis.Migrations
             modelBuilder.Entity("ServiceManagementApis.Models.TechnicianAssignment", b =>
                 {
                     b.HasOne("ServiceManagementApis.Models.ServiceRequest", "ServiceRequest")
-                        .WithMany()
+                        .WithMany("TechnicianAssignments")
                         .HasForeignKey("ServiceRequestId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -406,6 +516,16 @@ namespace ServiceManagementApis.Migrations
             modelBuilder.Entity("ServiceManagementApis.Models.ServiceCategory", b =>
                 {
                     b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("ServiceManagementApis.Models.ServiceRequest", b =>
+                {
+                    b.Navigation("TechnicianAssignments");
+                });
+
+            modelBuilder.Entity("ServiceManagementApis.Models.User", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618
         }

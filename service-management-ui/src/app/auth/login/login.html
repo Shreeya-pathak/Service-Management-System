@@ -1,11 +1,38 @@
+<h1 class="heading">Service Management System</h1>
 <mat-card class="login-card">
   <h2>Login</h2>
 
   <form [formGroup]="form">
     <mat-form-field appearance="outline" class="full">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email">
+      <input matInput formControlName="email" />
+
+      <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')">
+
+        Email is required
+      </mat-error>
+
+      <mat-error
+        *ngIf="
+          form.get('email')?.hasError('email') &&
+          !form.get('email')?.hasError('required')
+        "
+      >
+        Enter a valid email address
+      </mat-error>
+
+      <mat-error
+        *ngIf="
+          form.get('email')?.hasError('pattern') &&
+          !form.get('email')?.hasError('email') &&
+          !form.get('email')?.hasError('required')
+        "
+      >
+        Only Gmail addresses are allowed
+      </mat-error>
     </mat-form-field>
+
+
 
     <mat-form-field appearance="outline" class="full">
       <mat-label>Password</mat-label>

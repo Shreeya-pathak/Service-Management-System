@@ -1,1 +1,21 @@
-<p>customer works!</p>
+<div class="customer-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3 class="sidebar-title">Customer Portal</h3>
+
+    <nav class="nav-links">
+      <a routerLink="/customer/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/customer/catalog" routerLinkActive="active">Service Catalog</a>
+      <a routerLink="/customer/raise-request" routerLinkActive="active">Raise Request</a>
+      <a routerLink="/customer/my-requests" routerLinkActive="active">My Requests</a>
+      <a routerLink="/customer/profile" routerLinkActive="active">My Profile</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

@@ -1,0 +1,72 @@
+<table mat-table [dataSource]="data" class="full-table">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let r">{{ r.serviceRequestId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="service">
+    <th mat-header-cell *matHeaderCellDef>Service</th>
+    <td mat-cell *matCellDef="let r">{{ r.serviceName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef>Category</th>
+    <td mat-cell *matCellDef="let r">{{ r.serviceCategory }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="customer">
+    <th mat-header-cell *matHeaderCellDef>Customer</th>
+    <td mat-cell *matCellDef="let r">{{ r.customerName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let r">{{ r.scheduledDate }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let r">{{ r.status }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="updateStatus">
+    <th mat-header-cell *matHeaderCellDef>Update Status</th>
+    <td mat-cell *matCellDef="let r">
+
+      <mat-radio-group [value]="r.status">
+
+        <!-- Assigned → In-Progress -->
+        <mat-radio-button
+          value="In-Progress"
+          [disabled]="r.status !== 'Assigned'"
+          (change)="updateStatus(r, 'In-Progress')">
+          In-Progress
+        </mat-radio-button>
+
+        <!-- In-Progress → Completed -->
+        <mat-radio-button
+          value="Completed"
+          [disabled]="r.status !== 'In-Progress'"
+          (change)="updateStatus(r, 'Completed')">
+          Completed
+        </mat-radio-button>
+
+      </mat-radio-group>
+
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="completedDate">
+    <th mat-header-cell *matHeaderCellDef>Completed On</th>
+    <td mat-cell *matCellDef="let r">
+      {{ r.status === 'Completed' || r.status === 'Closed' ? r.completedDate : '-' }}
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+</table>

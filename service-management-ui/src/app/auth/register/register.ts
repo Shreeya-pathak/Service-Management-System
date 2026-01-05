@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router,  RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
-
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 import { SnackbarService } from '../../shared/snackbar.service';
 
 @Component({
@@ -21,18 +20,19 @@ import { SnackbarService } from '../../shared/snackbar.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
+
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
     MatButtonModule,
-    RouterModule
-    
+    MatSelectModule
   ]
 })
 export class RegisterComponent {
 
   form: FormGroup;
+  isLoading = false;
 
   constructor(
     readonly fb: FormBuilder,
@@ -40,39 +40,52 @@ export class RegisterComponent {
     readonly router: Router,
     readonly snack: SnackbarService
   ) {
-    // ✅ Form initialized AFTER FormBuilder injection
     this.form = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)
+        ]
+      ],
       password: ['', Validators.required],
-      roleName: ['', Validators.required]
+      role: ['']
     });
   }
 
   register() {
-    console.log('REGISTER CLICKED');
+    if (this.form.invalid || this.isLoading) {
+      this.snack.show('Please fill all fields correctly');
+      return;
+    }
 
-    if (this.form.invalid) return;
+    this.isLoading = true;
 
-    this.auth.register(this.form.value).subscribe({
-      next: (message: string) => {   // 🔥 CAPTURE BACKEND MESSAGE
-        console.log('REGISTER SUCCESS');
+    // 🔥 FIX: map role → roleName
+    const payload = {
+      fullName: this.form.value.fullName,
+      email: this.form.value.email,
+      password: this.form.value.password,
+      roleName: this.form.value.role
+    };
 
-        this.snack.show(message);    // ✅ shows correct text
-
-        // clear auth state just in case
-        localStorage.clear();
-
-        this.router.navigateByUrl('/login'); // ✅ redirect works
+    this.auth.register(payload).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.snack.show('Registration successful. Please login.');
+        this.router.navigate(['/login']);
       },
-      error: (err) => {
-        console.error('REGISTER ERROR:', err);
-
-        this.snack.show(
-          err.error || err.message || 'Registration failed'
-        );
+      error: err => {
+        this.isLoading = false;
+        this.snack.show(err?.error || 'Registration failed');
       }
     });
   }
 
+
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
 }

@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { TokenService } from '../services/token.service';
+import { TokenService } from '../services/auth/token.service';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);

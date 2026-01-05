@@ -1,0 +1,48 @@
+.admin-layout {
+  display: flex;
+  min-height: calc(100vh - 60px); /* adjust if navbar height differs */
+}
+
+.sidebar {
+  width: 240px;
+  background: #f8f9fa;
+  padding: 16px;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar-title {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-links a.active {
+  background: #1976d2;
+  color: #fff;
+}
+
+.nav-links hr {
+  margin: 12px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #fff;
+}

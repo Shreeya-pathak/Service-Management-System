@@ -1,0 +1,8 @@
+.full-table {
+  width: 100%;
+}
+
+mat-radio-group {
+  display: flex;
+  gap: 8px;
+}

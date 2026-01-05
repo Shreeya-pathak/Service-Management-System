@@ -1,0 +1,74 @@
+<mat-card class="profile-card">
+
+  <!-- HEADER -->
+  <div class="profile-header">
+    <div class="avatar">
+      <mat-icon>person</mat-icon>
+    </div>
+    <div>
+      <h2>My Profile</h2>
+      <p class="subtitle">Manage your account information</p>
+    </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Full Name</mat-label>
+      <mat-icon matPrefix>person</mat-icon>
+      <input matInput formControlName="fullName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Email</mat-label>
+      <mat-icon matPrefix>email</mat-icon>
+      <input matInput formControlName="email" false>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Phone Number</mat-label>
+      <mat-icon matPrefix>phone</mat-icon>
+      <input matInput formControlName="phoneNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Role</mat-label>
+      <mat-icon matPrefix>badge</mat-icon>
+      <input matInput formControlName="role" false>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Account Created On</mat-label>
+      <mat-icon matPrefix>calendar_today</mat-icon>
+      <input matInput formControlName="createdAt" false>
+    </mat-form-field>
+
+    <!-- SAVE -->
+    <button
+      mat-raised-button
+      class="primary-btn full"
+      type="submit"
+      [disabled]="form.invalid || isSaving">
+      <mat-icon>save</mat-icon>
+      {{ isSaving ? 'Saving...' : 'Save Changes' }}
+    </button>
+
+  </form>
+
+  <!-- DANGER ZONE -->
+  <div class="danger-zone">
+    <p class="danger-title">
+      <mat-icon>warning</mat-icon>
+      Danger Zone
+    </p>
+
+    <button
+      mat-stroked-button
+      class="danger-btn full"
+      (click)="deleteAccount()">
+      <mat-icon>delete</mat-icon>
+      Delete My Account
+    </button>
+  </div>
+
+</mat-card>

@@ -8,6 +8,8 @@ public class Invoice
     public ServiceRequest ServiceRequest { get; set; } = null!;
 
     public DateOnly InvoiceDate { get; set; }
+
+    
     public decimal TotalAmount { get; set; }
-    public string PaymentStatus { get; set; } = null!;
+    public string PaymentStatus { get; set; } = "null"!;
 }

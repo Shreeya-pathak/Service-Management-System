@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
-import { AdminService } from '../../../core/services/admin.service';
+import { AdminService } from '../../../core/services/admin/admin.service';
 import { SnackbarService } from '../../../shared/snackbar.service';
 
 

@@ -1,0 +1,100 @@
+<h1 class="dashboard-title">
+  <mat-icon class="title-icon">manage_accounts</mat-icon>
+  Service Manager Dashboard
+</h1>
+
+<!-- ================= KPI CARDS ================= -->
+<div class="kpi-grid" *ngIf="!loading">
+
+  <mat-card class="kpi-card violet">
+    <div class="kpi-icon"><mat-icon>fiber_new</mat-icon></div>
+    <div class="kpi-content">
+      <span class="kpi-label">New Requests</span>
+      <span class="kpi-value">{{ data.newRequests }}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="kpi-card pink">
+    <div class="kpi-icon"><mat-icon>event</mat-icon></div>
+    <div class="kpi-content">
+      <span class="kpi-label">Scheduled</span>
+      <span class="kpi-value">{{ data.scheduled }}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="kpi-card orange">
+    <div class="kpi-icon"><mat-icon>build_circle</mat-icon></div>
+    <div class="kpi-content">
+      <span class="kpi-label">In Progress</span>
+      <span class="kpi-value">{{ data.inProgress }}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="kpi-card green">
+    <div class="kpi-icon"><mat-icon>check_circle</mat-icon></div>
+    <div class="kpi-content">
+      <span class="kpi-label">Completed Today</span>
+      <span class="kpi-value">{{ data.completedToday }}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="kpi-card violet">
+    <div class="kpi-icon"><mat-icon>engineering</mat-icon></div>
+    <div class="kpi-content">
+      <span class="kpi-label">Available Technicians</span>
+      <span class="kpi-value">{{ data.availableTechnicians }}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="kpi-card green">
+    <div class="kpi-icon"><mat-icon>timer</mat-icon></div>
+    <div class="kpi-content">
+      <span class="kpi-label">Avg Resolution</span>
+      <span class="kpi-value">{{ avgResolutionDays }} days</span>
+    </div>
+  </mat-card>
+
+</div>
+
+<!-- ================= CHARTS ================= -->
+<div class="chart-grid">
+
+  <mat-card>
+    <h3>Requests by Status</h3>
+    <canvas *ngIf="statusChartData"
+      baseChart
+      [data]="statusChartData"
+      [type]="statusChartType"
+      [options]="chartOptions">
+    </canvas>
+  </mat-card>
+
+  <mat-card>
+    <h3>Requests by Category</h3>
+    <canvas *ngIf="categoryChartData"
+      baseChart
+      [data]="categoryChartData"
+      [type]="categoryChartType"
+      [options]="chartOptions">
+    </canvas>
+  </mat-card>
+
+  <mat-card>
+  <h3>Technician Workload</h3>
+
+  <canvas
+    *ngIf="workloadChartData"
+    baseChart
+    [data]="workloadChartData"
+    [type]="workloadChartType"
+    [options]="workloadChartOptions">
+  </canvas>
+
+  <p class="chart-note">
+    Active service requests per technician
+  </p>
+</mat-card>
+
+
+
+</div>

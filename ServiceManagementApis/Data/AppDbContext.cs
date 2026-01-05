@@ -22,6 +22,9 @@ public class AppDbContext : DbContext
 
     public DbSet<Invoice> Invoices { get; set; }
     public DbSet<Payment> Payments { get; set; }
+    public DbSet<Address> Addresses { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+
 
     // =====================
     // Fluent API + Seeding
@@ -89,11 +92,17 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(ta => ta.ServiceRequestId)
             .OnDelete(DeleteBehavior.Restrict);
-
-        // -------------------------------------------------
-        // TECHNICIAN ↔ TECHNICIAN ASSIGNMENT
-        // -------------------------------------------------
         modelBuilder.Entity<TechnicianAssignment>()
+        .HasOne(t => t.ServiceRequest)
+        .WithMany(r => r.TechnicianAssignments)
+        .HasForeignKey(t => t.ServiceRequestId)
+        .OnDelete(DeleteBehavior.Restrict);
+    
+
+    // -------------------------------------------------
+    // TECHNICIAN ↔ TECHNICIAN ASSIGNMENT
+    // -------------------------------------------------
+    modelBuilder.Entity<TechnicianAssignment>()
             .HasOne(ta => ta.Technician)
             .WithMany()
             .HasForeignKey(ta => ta.TechnicianId)
@@ -107,6 +116,15 @@ public class AppDbContext : DbContext
             .WithOne()
             .HasForeignKey<Invoice>(i => i.ServiceRequestId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        
+        modelBuilder.Entity<Address>()
+            .HasOne(a => a.User)
+            .WithMany(u => u.Addresses)
+            .HasForeignKey(a => a.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
 
         // -------------------------------------------------
         // INVOICE ↔ PAYMENT

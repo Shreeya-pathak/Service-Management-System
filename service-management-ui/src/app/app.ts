@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 
 import { NavbarComponent } from './shared/navbar/navbar';
 import { fadeAnimation } from './shared/animations';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './core/services/auth/auth.service';
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,101 @@
+<h2 class="page-title">
+  📊 Monitor Service Requests
+</h2>
+
+<!-- FILTER PANEL -->
+<mat-card class="filter-card">
+  <div class="filters">
+    
+    <mat-form-field appearance="outline" *ngIf="statuses.length">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="selectedStatus">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let s of statuses" [value]="s">
+            {{ s }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" *ngIf="categories.length">
+  <mat-label>Category</mat-label>
+  <mat-select [(ngModel)]="selectedCategory">
+    <mat-option value="">All</mat-option>
+    <mat-option *ngFor="let c of categories" [value]="c">
+      {{ c }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+    <mat-form-field appearance="outline" *ngIf="technicians.length">
+  <mat-label>Technician</mat-label>
+  <mat-select [(ngModel)]="selectedTechnician">
+    <mat-option value="">All</mat-option>
+    <mat-option *ngFor="let t of technicians" [value]="t">
+      {{ t }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+  <mat-label>From</mat-label>
+  <input matInput [matDatepicker]="fromPicker" [(ngModel)]="fromDate">
+  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+  <mat-datepicker #fromPicker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <mat-label>To</mat-label>
+  <input matInput [matDatepicker]="toPicker" [(ngModel)]="toDate">
+  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+  <mat-datepicker #toPicker></mat-datepicker>
+</mat-form-field>
+
+
+    <button mat-raised-button color="primary" (click)="applyFilters()">Apply</button>
+    <button mat-button color="warn" (click)="resetFilters()">Reset</button>
+  </div>
+</mat-card>
+
+<!-- STATS -->
+<mat-card class="stats-card">
+  Pending: {{ stats.pending }} |
+  Assigned: {{ stats.assigned }} |
+  In-Progress: {{ stats.inProgress }} |
+  Completed: {{ stats.completed }}
+</mat-card>
+
+<!-- REQUEST CARDS -->
+<div class="request-grid">
+
+  <mat-card *ngFor="let r of requests" class="request-card">
+
+    <div class="card-header">
+      <div>
+        <h3>{{ r.customerName }}</h3>
+        <small>{{ r.serviceName }}</small>
+      </div>
+
+      <mat-chip [ngClass]="statusClass(r.status)">
+        {{ r.status }}
+      </mat-chip>
+    </div>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>View Details</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p><b>Description:</b> {{ r.issueDescription }}</p>
+      <p><b>Technician:</b> {{ r.technicianName || 'Not Assigned' }}</p>
+      <p><b>Requested:</b> {{ r.requestedDate }}</p>
+      <p><b>Scheduled:</b> {{ r.scheduledDate || '-' }}</p>
+      <p><b>Completed:</b> {{ r.completedDate || '-' }}</p>
+
+    </mat-expansion-panel>
+
+  </mat-card>
+
+</div>

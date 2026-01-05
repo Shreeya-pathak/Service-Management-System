@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ServiceManagementApis.Data;
-using ServiceManagementApis.DTOs;
+using ServiceManagementApis.DTOs.Auth;
 using ServiceManagementApis.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -24,6 +24,9 @@ public class AuthController : ControllerBase
     }
 
     // ---------------- REGISTER ----------------
+    
+    
+
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
     {
@@ -50,7 +53,6 @@ public class AuthController : ControllerBase
             IsActive = true,
             CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow),
 
-            // 🔥 CORE FIX
             RoleId = isCustomer
                 ? selectedRole.RoleId     // Customer → immediate access
                 : pendingRole.RoleId,     // Others → Pending
@@ -72,6 +74,14 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
+        var existingUser = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == dto.Email);
+
+                if (existingUser != null && !existingUser.IsActive)
+                {
+                    return Unauthorized("Account disabled. Contact administrator.");
+                }
+
         var user = await _context.Users
             .Include(u => u.Role)
             .FirstOrDefaultAsync(u => u.Email == dto.Email && u.IsActive);
@@ -110,7 +120,8 @@ public class AuthController : ControllerBase
             role = user.Role.RoleName,
             approvalStatus = user.Role.RoleName == "Pending"
                 ? "Pending"
-                : "Approved"
+                : "Approved",
+            fullName = user.FullName
         });
     }
 }

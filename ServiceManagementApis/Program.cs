@@ -3,7 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ServiceManagementApis.Data;
 using ServiceManagementApis.Repositories;
+using ServiceManagementApis.Repositories.Implementations;
 using ServiceManagementApis.Repositories.Interfaces;
+using ServiceManagementApis.Repositories.InvoiceRepositories;
+using ServiceManagementApis.Repositories.PaymentRepositories;
+using ServiceManagementApis.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -21,6 +24,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
+builder.Services.AddScoped<ITechnicianRepository, TechnicianRepository>();
+builder.Services.AddScoped<ITechnicianRepository, TechnicianRepository>();
+builder.Services.AddScoped<IServiceManagerRepository, ServiceManagerRepository>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+
+
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -47,6 +64,9 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddCors(options =>
 {
@@ -71,7 +91,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAngular");
 
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 

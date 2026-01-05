@@ -1,0 +1,54 @@
+.page-title {
+  margin-bottom: 16px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+.assign-card {
+  padding: 16px;
+  border-radius: 14px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  background: #fff3cd;
+  color: #856404;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.issue-box {
+  background: #fafafa;
+  border-left: 4px solid #e91e63;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.full {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.assign-btn {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.empty {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+}

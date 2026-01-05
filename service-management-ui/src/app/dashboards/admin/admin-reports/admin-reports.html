@@ -1,0 +1,46 @@
+<h1 class="page-title">📊 Reports Dashboard</h1>
+
+<div class="grid">
+
+  <!-- MONTHLY REVENUE -->
+  <mat-card class="card highlight">
+    <h2>Monthly Revenue</h2>
+
+    <div class="filters">
+      <input type="number" [(ngModel)]="year" placeholder="Year">
+      <input type="number" [(ngModel)]="month" placeholder="Month">
+
+      <button mat-raised-button color="primary" (click)="loadRevenue()">
+        Generate
+      </button>
+    </div>
+
+    <div *ngIf="report" class="stats">
+      <h3>₹ {{ report.totalRevenue }}</h3>
+      <p>Total Payments: {{ report.totalPayments }}</p>
+    </div>
+
+    <canvas
+  baseChart
+    [data]="revenueChartData"
+    [type]="revenueChartType">
+  </canvas>
+  </mat-card>
+
+  <!-- TECHNICIAN WORKLOAD -->
+  <mat-card class="card">
+    <h2>Technician Workload</h2>
+
+    <canvas
+      *ngIf="workloadChartData"
+      baseChart
+      [data]="workloadChartData"
+      [type]="workloadChartType">
+    </canvas>
+
+    <p class="chart-note">
+      Active service requests assigned per technician
+    </p>
+  </mat-card>
+
+</div>

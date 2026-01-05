@@ -20,6 +20,10 @@ public class User
     public Role? RequestedRole { get; set; }
 
     public bool IsActive { get; set; } = true;
+    public string? AvailabilityStatus { get; set; }
 
     public DateOnly CreatedAt { get; set; }
+
+    public ICollection<Address> Addresses { get; set; } = new List<Address>();
+
 }

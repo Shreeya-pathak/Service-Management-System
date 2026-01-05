@@ -1,0 +1,99 @@
+<div class="page-container">
+
+  <mat-card class="request-card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+      <h2>Raise Service Request</h2>
+      <p class="subtitle">
+        Select a service and describe your issue. Our team will take care of it.
+      </p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- STEP 1 -->
+      <div class="section">
+        <h3>1. Choose Category</h3>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Service Category</mat-label>
+          <mat-select
+            formControlName="serviceCategoryId"
+            (selectionChange)="onCategoryChange($event.value)">
+            <mat-option *ngFor="let c of categories" [value]="c.serviceCategoryId">
+              {{ c.categoryName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="section">
+        <h3>2. Choose Service</h3>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Service</mat-label>
+          <mat-select
+            formControlName="serviceId"
+            [disabled]="!services.length">
+            <mat-option *ngFor="let s of services" [value]="s.serviceId">
+              {{ s.serviceName }}
+            </mat-option>
+          </mat-select>
+
+          <mat-hint *ngIf="!services.length">
+            Select a category to view available services
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="section">
+        <h3>3. Describe the Issue</h3>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Issue Description</mat-label>
+          <textarea
+            matInput
+            rows="4"
+            placeholder="Describe the problem in detail..."
+            formControlName="issueDescription">
+          </textarea>
+
+          <mat-error *ngIf="form.get('issueDescription')?.invalid">
+            Please enter at least 10 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="section">
+        <h3>4. Priority</h3>
+
+        <mat-radio-group formControlName="priority" class="priority-group">
+          <mat-radio-button value="General">
+            General
+          </mat-radio-button>
+          <mat-radio-button value="Urgent">
+            Urgent
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- ACTION -->
+      <div class="action-area">
+        <button
+          mat-raised-button
+          color="primary"
+          class="submit-btn"
+          [disabled]="form.invalid || isSubmitting">
+          {{ isSubmitting ? 'Submitting...' : 'Submit Request' }}
+        </button>
+      </div>
+
+    </form>
+
+  </mat-card>
+
+</div>

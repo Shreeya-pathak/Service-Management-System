@@ -15,7 +15,11 @@ public class ServiceRequest
 
     public DateOnly RequestedDate { get; set; }
     public DateOnly? ScheduledDate { get; set; } // nullable until scheduled
+    public DateOnly? CompletedDate { get; set; }
 
     public string Status { get; set; } = null!;
     public DateOnly CreatedAt { get; set; }
+
+    public ICollection<TechnicianAssignment> TechnicianAssignments { get; set; }
+        = new List<TechnicianAssignment>();
 }

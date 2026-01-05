@@ -4,12 +4,9 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
-  standalone: true,
   templateUrl: './admin.html',
   styleUrls: ['./admin.css'],
-  imports: [
-    CommonModule,
-    RouterModule
-  ]
+  imports:[RouterModule,CommonModule]
 })
 export class AdminComponent {}
+

@@ -1,0 +1,73 @@
+.profile-card {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(123, 31, 162, 0.25);
+  background: #ffffff;
+}
+
+/* HEADER */
+.profile-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7b1fa2, #ec407a);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subtitle {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+/* SECTIONS */
+.section-title {
+  margin: 22px 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7b1fa2;
+  text-transform: uppercase;
+}
+
+/* FORM */
+.full {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+/* BUTTONS */
+.save-btn {
+  margin-top: 16px;
+}
+
+/* DANGER ZONE */
+.danger-zone {
+  margin-top: 32px;
+  padding-top: 18px;
+  border-top: 1px dashed #f3c1d9;
+}
+
+.danger-zone h3 {
+  color: #ef5350;
+  margin-bottom: 6px;
+}
+
+.danger-zone p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 14px;
+}

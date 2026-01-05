@@ -44,4 +44,39 @@ public class ServiceRepository : IServiceRepository
         _context.Services.Update(service);
         await _context.SaveChangesAsync();
     }
+
+    public async Task DeleteAsync(Service service)
+    {
+        _context.Services.Remove(service);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> IsServiceInUseAsync(int serviceId)
+    {
+        return await _context.ServiceRequests
+            .AnyAsync(sr => sr.ServiceId == serviceId);
+    }
+    public async Task<List<Service>> GetActiveByCategoryAsync(int categoryId)
+    {
+        return await _context.Services
+            .Include(s => s.ServiceCategory)
+            .Where(s =>
+                s.ServiceCategoryId == categoryId &&
+                s.IsActive &&
+                s.ServiceCategory.IsActive)
+            .ToListAsync();
+    }
+
+    public async Task<Service?> GetActiveByIdAsync(int id)
+    {
+        return await _context.Services
+            .Include(s => s.ServiceCategory)
+            .Where(s =>
+                s.ServiceId == id &&
+                s.IsActive &&
+                s.ServiceCategory.IsActive)
+            .FirstOrDefaultAsync();
+    }
+
+
 }

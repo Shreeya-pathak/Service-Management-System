@@ -1,0 +1,36 @@
+<h2>Invoice</h2>
+
+<div *ngIf="loading">Loading invoice...</div>
+
+<div *ngIf="!loading && invoice">
+
+  <p><b>Customer Name:</b> {{ invoice.customerName }}</p>
+  <p><b>Email:</b> {{ invoice.customerEmail }}</p>
+  <p><b>Phone:</b> {{ invoice.customerPhone || 'N/A' }}</p>
+
+  <hr>
+
+  <p><b>Service:</b> {{ invoice.serviceName }}</p>
+  <p><b>Issue:</b> {{ invoice.issueDescription }}</p>
+
+  <hr>
+
+  <p><b>Invoice Date:</b> {{ invoice.invoiceDate }}</p>
+  <p><b>Total Amount:</b> ₹{{ invoice.totalAmount }}</p>
+
+  <p><b>Status:</b> {{ invoice.paymentStatus }}</p>
+
+  <!-- MAKE PAYMENT BUTTON -->
+  <button
+    *ngIf="invoice.paymentStatus === 'Pending'"
+    mat-raised-button
+    color="primary"
+    (click)="makePayment()">
+    Make Payment
+  </button>
+
+  <p *ngIf="invoice.paymentStatus === 'WaitingForAdminApproval'" style="color: orange;">
+    Payment submitted. Waiting for admin approval.
+  </p>
+
+</div>

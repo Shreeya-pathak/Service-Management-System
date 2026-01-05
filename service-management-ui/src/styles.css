@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+/* ========================================= */
+/* ANGULAR MATERIAL MDC SELECT THEME FIX */
+/* ========================================= */
+
+/* Dropdown panel */
+.mat-mdc-select-panel {
+  background-color: #ffffff !important;
+  border-radius: 14px !important;
+  box-shadow: 0 14px 36px rgba(123, 31, 162, 0.22) !important;
+  padding: 6px 0 !important;
+}
+
+/* Options */
+.mat-mdc-option {
+  font-size: 14px !important;
+  color: #333 !important;
+}
+
+/* Hover */
+.mat-mdc-option:hover {
+  background-color: rgba(236, 64, 122, 0.08) !important;
+}
+
+/* Selected option */
+.mat-mdc-option.mdc-list-item--selected {
+  background-color: rgba(123, 31, 162, 0.18) !important;
+  color: #7b1fa2 !important;
+  font-weight: 500 !important;
+}
+
+/* Keyboard / active */
+.mat-mdc-option.mdc-list-item--activated {
+  background-color: rgba(186, 104, 200, 0.2) !important;
+}
+
+/* Checkmark */
+.mat-mdc-option.mdc-list-item--selected
+  .mdc-list-item__graphic {
+  color: #7b1fa2 !important;
+}
+
+/* Select arrow */
+.mat-mdc-select-arrow {
+  color: #7b1fa2 !important;
+}
+.mat-mdc-form-field.mat-focused
+  .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-focused
+  .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-focused
+  .mdc-notched-outline__trailing {
+  border-color: #7b1fa2 !important;
+}

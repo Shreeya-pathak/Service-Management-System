@@ -1,0 +1,55 @@
+<div class="catalog-container">
+
+  <h2 class="title">SERVICE CATALOG</h2>
+
+  <mat-accordion>
+
+    <mat-expansion-panel
+      *ngFor="let cat of categories"
+      (opened)="loadServices(cat.serviceCategoryId)">
+
+      <mat-expansion-panel-header>
+        <mat-icon class="category-icon">
+          {{ getIcon(cat.categoryName) }}
+        </mat-icon>
+        <span class="category-title">{{ cat.categoryName }}</span>
+      </mat-expansion-panel-header>
+
+      <!-- SERVICES -->
+      <div class="services-grid">
+
+        <mat-card
+          class="service-card"
+          *ngFor="let srv of servicesMap[cat.serviceCategoryId]">
+
+          <h3>{{ srv.serviceName }}</h3>
+
+          <p class="desc">{{ srv.description }}</p>
+
+          <div class="meta">
+            <span>₹{{ srv.price }}</span>
+            <span>SLA: {{ srv.slaHours }} hrs</span>
+          </div>
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="bookService(srv)">
+            Book Service
+          </button>
+          
+          <hr class="divider" />
+
+        </mat-card>
+
+        <p class="loading" *ngIf="loadingCategoryId === cat.serviceCategoryId">
+          Loading services...
+        </p>
+
+      </div>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+</div>

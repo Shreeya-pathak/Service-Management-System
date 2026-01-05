@@ -24,6 +24,24 @@ public class ServiceCategoryRepository : IServiceCategoryRepository
         return await _context.ServiceCategories.FindAsync(id);
     }
 
+    public async Task DeleteAsync(ServiceCategory category)
+    {
+        _context.ServiceCategories.Remove(category);
+        await _context.SaveChangesAsync();
+    }
+    public async Task<bool> IsCategoryInUseAsync(int categoryId)
+    {
+        return await _context.Services
+            .AnyAsync(s => s.ServiceCategoryId == categoryId);
+    }
+    public async Task<List<ServiceCategory>> GetActiveAsync()
+    {
+        return await _context.ServiceCategories
+            .Where(c => c.IsActive)
+            .ToListAsync();
+    }
+
+
     public async Task AddAsync(ServiceCategory category)
     {
         _context.ServiceCategories.Add(category);

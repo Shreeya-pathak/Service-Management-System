@@ -1,4 +1,15 @@
-<div *ngIf="isPending" class="pending-banner">
-  Your account is pending admin approval.
-</div>
+<div class="technician-layout">
+  <aside class="sidebar">
+    <a routerLink="/technician/dashboard" routerLinkActive="active">
+      🛠 Dashboard
+    </a>
+    <a routerLink="/technician/requests" routerLinkActive="active">
+      📋 My Requests
+    </a>
+    
+  </aside>
 
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

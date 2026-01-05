@@ -7,13 +7,14 @@ import {
   Validators
 } from '@angular/forms';
 
-import { ServiceService } from '../../../core/services/service.service';
-import { ServiceCategoryService } from '../../../core/services/service-category.service';
-
+import { ServiceService } from '../../../core/services/admin/service.service';
+import { ServiceCategoryService } from '../../../core/services/admin/service-category.service';
+import { MatSlideToggleModule,MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { CustomerRequestService } from '../../../core/services/customer/customer-request.service';
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,MatSlideToggleModule],
   templateUrl: './services.html',
   styleUrls: ['./services.css']
 })
@@ -30,7 +31,8 @@ export class ServicesComponent implements OnInit {
     readonly fb: FormBuilder,
     readonly serviceService: ServiceService,
     readonly categoryService: ServiceCategoryService,
-    readonly cdr: ChangeDetectorRef
+    readonly cdr: ChangeDetectorRef,
+    readonly requestService: CustomerRequestService
   ) {}
 
   ngOnInit(): void {
@@ -54,8 +56,10 @@ export class ServicesComponent implements OnInit {
   }
 
   loadCategories() {
-    this.categoryService.getAll().subscribe(res => {
-      this.categories = [...res];
+    this.requestService.getActiveCategories().subscribe({
+      next: res => {
+        this.categories = res;
+      }
     });
   }
 
@@ -100,4 +104,28 @@ export class ServicesComponent implements OnInit {
     this.editingId = null;
     this.isEditMode = false;
   }
+
+  onToggleService(service: any, event: MatSlideToggleChange) {
+    const previousValue = service.isActive;
+
+    service._loading = true;
+
+    const request$ = event.checked
+      ? this.serviceService.enable(service.serviceId)
+      : this.serviceService.disable(service.serviceId);
+
+    request$.subscribe({
+      next: () => {
+        service.isActive = event.checked;
+        service._loading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        service.isActive = previousValue;
+        service._loading = false;
+      }
+    });
+  }
+
+
 }
