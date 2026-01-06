@@ -45,6 +45,11 @@
     <th mat-header-cell *matHeaderCellDef>Customer</th>
     <td mat-cell *matCellDef="let r">{{ r.customerName }}</td>
   </ng-container>
+  
+  <ng-container matColumnDef="issueDescription">
+    <th mat-header-cell *matHeaderCellDef>Issue Description</th>
+    <td mat-cell *matCellDef="let r">{{ r.issueDescription }}</td>
+  </ng-container>
 
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef>Scheduled</th>
@@ -60,30 +65,31 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="updateStatus">
-    <th mat-header-cell *matHeaderCellDef>Update</th>
-    <td mat-cell *matCellDef="let r">
+<ng-container matColumnDef="update">
+  <th mat-header-cell *matHeaderCellDef>Action</th>
+  <td mat-cell *matCellDef="let r">
 
-      <mat-radio-group [value]="r.status">
+    <button
+      class="action-btn"
+      (click)="openUpdateDialog(r)"
+      [disabled]="r.status === 'Completed' || r.status === 'Closed'">
 
-        <mat-radio-button
-          value="In-Progress"
-          [disabled]="r.status !== 'Assigned'"
-          (change)="updateStatus(r, 'In-Progress')">
-          In-Progress
-        </mat-radio-button>
+      <span class="material-icons">
+        {{ (r.status === 'Completed' || r.status === 'Closed')
+            ? 'check_circle'
+            : 'edit'
+        }}
+      </span>
 
-        <mat-radio-button
-          value="Completed"
-          [disabled]="r.status !== 'In-Progress'"
-          (change)="updateStatus(r, 'Completed')">
-          Completed
-        </mat-radio-button>
+      Update Status
+    </button>
 
-      </mat-radio-group>
+  </td>
+</ng-container>
 
-    </td>
-  </ng-container>
+
+
+
 
   <ng-container matColumnDef="completedDate">
     <th mat-header-cell *matHeaderCellDef>Completed On</th>

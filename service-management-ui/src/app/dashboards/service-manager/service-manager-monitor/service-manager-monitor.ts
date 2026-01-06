@@ -79,7 +79,7 @@ export class ServiceManagerMonitorComponent implements OnInit {
     this.service.getMonitorRequests().subscribe(res => {
       this.allRequests = res;
       this.requests = [...res];
-
+      
       this.buildFilters(res);
       this.computeStats(this.requests);
       this.cdr.detectChanges();

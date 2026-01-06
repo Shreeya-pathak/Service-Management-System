@@ -1,0 +1,43 @@
+<h2 class="page-title">Payment History</h2>
+
+<!-- SEARCH -->
+<mat-form-field appearance="outline" class="search-box">
+  <mat-label>Search by Customer or Invoice ID</mat-label>
+  <input
+    matInput
+    [(ngModel)]="searchText"
+    (input)="applyFilter()"
+  />
+</mat-form-field>
+
+<!-- SCROLLABLE LIST -->
+<div class="payment-log">
+
+  <div *ngFor="let method of groupedPayments | keyvalue" class="method-section">
+
+    <div class="method-title">
+      {{ method.key }}
+    </div>
+
+    <div
+      class="payment-row"
+      *ngFor="let p of method.value"
+    >
+      <div class="left">
+        <div class="primary">
+          Invoice #{{ p.invoiceId }} · {{ p.customerName }}
+        </div>
+        <div class="secondary">
+          Payment ID {{ p.paymentId }} ·
+          {{ p.paymentDate | date:'dd MMM yyyy, hh:mm a' }}
+        </div>
+      </div>
+
+      <div class="right">
+        ₹{{ p.amountPaid }}
+      </div>
+    </div>
+
+  </div>
+
+</div>

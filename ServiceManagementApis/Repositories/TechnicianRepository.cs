@@ -23,7 +23,7 @@ public class TechnicianRepository : ITechnicianRepository
 
     }
 
-    // ---------------- DASHBOARD ----------------
+    
     public async Task<TechnicianDashboardDto> GetDashboardAsync(int technicianId)
     {
         var assignments = _context.TechnicianAssignments
@@ -42,7 +42,7 @@ public class TechnicianRepository : ITechnicianRepository
         };
     }
 
-    // ---------------- ASSIGNED REQUESTS ----------------
+    
     public async Task<List<TechnicianRequestDto>> GetAssignedRequestsAsync(int technicianId)
     {
         return await _context.TechnicianAssignments
@@ -57,36 +57,60 @@ public class TechnicianRepository : ITechnicianRepository
                 ServiceName = a.ServiceRequest.Service.ServiceName,
                 ServiceCategory = a.ServiceRequest.Service.ServiceCategory.CategoryName,
                 CustomerName = a.ServiceRequest.Customer.FullName,
+                IssueDescription=a.ServiceRequest.IssueDescription,
                 ScheduledDate = a.ServiceRequest.ScheduledDate,
-                Status = a.ServiceRequest.Status,
+                Status = a.Status,
                 CompletedDate = a.ServiceRequest.CompletedDate
             })
-            .OrderByDescending(r => r.Status == "Completed") // optional
+            .OrderByDescending(r => r.Status == "ServiceRequestId") 
             .ToListAsync();
     }
 
 
-    // ---------------- UPDATE STATUS ----------------
-    public async Task<bool> UpdateRequestStatusAsync(int serviceRequestId, string status, DateOnly? completedDate)
+    
+    public async Task<bool> UpdateRequestStatusAsync(
+        
+        int serviceRequestId,
+        string status,
+        DateOnly? completedDate,
+        string? remarks
+    )
     {
-        var request = await _context.ServiceRequests.FindAsync(serviceRequestId);
-        if (request == null) return false;
+        
+        var assignment = await _context.TechnicianAssignments
+            .FirstOrDefaultAsync(a => a.ServiceRequestId == serviceRequestId );
 
-        request.Status = status;
-        request.CompletedDate = completedDate;
-
-        if (status == "Completed")
-            request.CompletedDate = DateOnly.FromDateTime(DateTime.UtcNow);
-
-        await _context.SaveChangesAsync();
-        await _invoiceService.GenerateInvoiceAsync(request.ServiceRequestId);
-        return true;
+        if (assignment == null)
+            return false;
 
         
+        assignment.Status = status;
 
+        if (!string.IsNullOrWhiteSpace(remarks))
+        {
+            assignment.Remarks = remarks;
+        }
+
+        
+        var request = await _context.ServiceRequests.FindAsync(serviceRequestId);
+        if (request == null)
+            return false;
+
+        request.Status = status;
+
+        if (status == "Completed" && request.CompletedDate == null)
+        {
+            request.CompletedDate = DateOnly.FromDateTime(DateTime.UtcNow);
+            await _invoiceService.GenerateInvoiceAsync(serviceRequestId);
+        }
+
+        await _context.SaveChangesAsync();
+        return true;
     }
 
-    // ---------------- AVAILABILITY ----------------
+
+
+    
     public async Task<bool> UpdateAvailabilityAsync(int technicianId, string availabilityStatus)
     {
         var tech = await _context.Users.FindAsync(technicianId);

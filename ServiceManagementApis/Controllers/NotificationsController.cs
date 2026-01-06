@@ -20,10 +20,7 @@ public class NotificationsController : ControllerBase
         _context = context;
     }
 
-    // =====================================================
-    // GET: api/notifications
-    // Get all notifications for logged-in user
-    // =====================================================
+    
     [HttpGet]
     public async Task<ActionResult<List<NotificationResponseDto>>> GetMyNotifications()
     {
@@ -48,10 +45,7 @@ public class NotificationsController : ControllerBase
         return Ok(notifications);
     }
 
-    // =====================================================
-    // GET: api/notifications/unread-count
-    // Get unread notifications count
-    // =====================================================
+    
     [HttpGet("unread-count")]
     public async Task<ActionResult<UnreadCountDto>> GetUnreadCount()
     {
@@ -69,10 +63,7 @@ public class NotificationsController : ControllerBase
         });
     }
 
-    // =====================================================
-    // PUT: api/notifications/{id}/read
-    // Mark a notification as read
-    // =====================================================
+    
     [HttpPut("{id}/read")]
     public async Task<IActionResult> MarkAsRead(int id)
     {
@@ -95,10 +86,7 @@ public class NotificationsController : ControllerBase
         return NoContent();
     }
 
-    // =====================================================
-    // PUT: api/notifications/mark-all-read
-    // Mark all notifications as read
-    // =====================================================
+   
     [HttpPut("mark-all-read")]
     public async Task<IActionResult> MarkAllAsRead()
     {

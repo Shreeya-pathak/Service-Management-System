@@ -15,7 +15,7 @@ public class ServiceRequestHistoryController : ControllerBase
         _repo = repo;
     }
 
-    // ✅ CUSTOMER HISTORY
+    
     [HttpGet("my-history")]
     [Authorize(Roles = "Customer")]
     public async Task<IActionResult> MyHistory()
@@ -41,7 +41,7 @@ public class ServiceRequestHistoryController : ControllerBase
         return Ok(result);
     }
 
-    // ✅ ADMIN HISTORY
+    
     [HttpGet("all")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AllHistory()

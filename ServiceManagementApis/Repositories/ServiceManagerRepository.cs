@@ -176,6 +176,7 @@ public class ServiceManagerRepository : IServiceManagerRepository
             .Include(r => r.Customer)
             .Include(r => r.TechnicianAssignments)
                 .ThenInclude(a => a.Technician)
+            
             .Select(r => new MonitorServiceRequestDto
             {
                 ServiceRequestId = r.ServiceRequestId,
@@ -192,7 +193,10 @@ public class ServiceManagerRepository : IServiceManagerRepository
                 Status = r.Status,
                 RequestedDate = r.RequestedDate,
                 ScheduledDate = r.ScheduledDate,
-                CompletedDate = r.CompletedDate
+                CompletedDate = r.CompletedDate,
+                Remarks=r.TechnicianAssignments
+                    .Select(a=>a.Remarks)
+                    .FirstOrDefault()
             })
             .OrderByDescending(r => r.RequestedDate)
             .ToListAsync();

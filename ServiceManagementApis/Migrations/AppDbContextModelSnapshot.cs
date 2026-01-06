@@ -315,6 +315,9 @@ namespace ServiceManagementApis.Migrations
                     b.Property<DateOnly>("AssignedDate")
                         .HasColumnType("date");
 
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ServiceRequestId")
                         .HasColumnType("int");
 

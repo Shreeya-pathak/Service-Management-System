@@ -1,0 +1,37 @@
+<h2 class="dialog-title center">
+  <span class="material-icons">build</span>
+  Update Status
+</h2>
+
+<!-- STATUS ACTIONS -->
+<div class="status-actions center">
+
+  <!-- Assigned → In-Progress -->
+  <button
+    *ngIf="status === 'Assigned'"
+    class="status-btn inprogress"
+    (click)="updateStatus('In-Progress')">
+    <span class="material-icons">play_arrow</span>
+    Mark In-Progress
+  </button>
+
+  <!-- In-Progress → Completed -->
+  <button
+    *ngIf="status === 'In-Progress'"
+    class="status-btn completed"
+    (click)="updateStatus('Completed')">
+    <span class="material-icons">check_circle</span>
+    Mark Completed
+  </button>
+
+  <!-- Completed / Closed -->
+  <p *ngIf="isFinalStatus" class="final-text">
+    This request is already {{ status }}.
+  </p>
+
+</div>
+
+<!-- ACTIONS -->
+<div class="dialog-actions center">
+  <button class="btn ghost" (click)="close()">Close</button>
+</div>

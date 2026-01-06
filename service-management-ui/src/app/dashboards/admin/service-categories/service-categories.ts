@@ -32,7 +32,7 @@ export class ServiceCategoriesComponent implements OnInit,AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  categoryForm!: FormGroup;    // ✅ MATCHES HTML
+  categoryForm!: FormGroup;    
   editingId: number | null = null;
   isEditMode = false;
 
@@ -69,14 +69,14 @@ export class ServiceCategoriesComponent implements OnInit,AfterViewInit {
     if (this.editingId) {
       this.categoryService.update(this.editingId, data).subscribe({
         next: () => {
-          this.loadCategories(); // ✅ AFTER API SUCCESS
+          this.loadCategories(); 
           this.resetForm();
         }
       });
     } else {
       this.categoryService.create(data).subscribe({
         next: () => {
-          this.loadCategories(); // ✅ AFTER API SUCCESS
+          this.loadCategories(); 
           this.resetForm();
         }
       });
@@ -104,7 +104,7 @@ export class ServiceCategoriesComponent implements OnInit,AfterViewInit {
   onToggleCategory(category: any, event: MatSlideToggleChange) {
     const previousValue = category.isActive;
 
-    // UI lock
+    
     category._loading = true;
 
     const request$ = event.checked
@@ -113,13 +113,13 @@ export class ServiceCategoriesComponent implements OnInit,AfterViewInit {
 
     request$.subscribe({
       next: () => {
-        // ✅ Sync with backend
+        
         category.isActive = event.checked;
         category._loading = false;
         this.cdr.detectChanges();
       },
       error: () => {
-        // ❌ Revert UI on failure
+        
         category.isActive = previousValue;
         category._loading = false;
       }

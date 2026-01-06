@@ -9,12 +9,12 @@ export class ServiceRequestHistoryService {
 
   constructor(readonly http: HttpClient) {}
 
-  // CUSTOMER
+  
   getMyHistory(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/my-history`);
   }
 
-  // ADMIN
+  
   getAllHistory(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/all`);
   }

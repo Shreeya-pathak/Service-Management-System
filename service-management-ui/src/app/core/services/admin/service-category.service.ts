@@ -33,12 +33,12 @@ export class ServiceCategoryService {
     });
   }
 
-  // 🔴 DISABLE
+  
   disable(id: number): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}/disable`, {});
   }
 
-  // 🟢 ENABLE
+  
   enable(id: number): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}/enable`, {});
   }

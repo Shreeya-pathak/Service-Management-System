@@ -55,7 +55,7 @@ export class ServiceManagerDashboardComponent implements OnInit {
     }
   };
   workloadChartOptions: ChartOptions<'bar'> = {
-    indexAxis: 'y', // 👈 THIS makes it horizontal
+    indexAxis: 'y', 
     responsive: true,
     scales: {
       x: {
@@ -152,9 +152,9 @@ export class ServiceManagerDashboardComponent implements OnInit {
           label: 'Active Requests',
           data: sorted.map(x => x.activeRequestCount),
           backgroundColor: sorted.map(x =>
-            x.activeRequestCount >= 6 ? '#ef5350' :   // overloaded
-            x.activeRequestCount >= 3 ? '#ffa726' :   // moderate
-                                      '#66bb6a'     // free
+            x.activeRequestCount >= 6 ? '#ef5350' :   
+            x.activeRequestCount >= 3 ? '#ffa726' :   
+                                      '#66bb6a'    
           ),
           borderRadius: 8,
           barThickness: 18

@@ -4,5 +4,6 @@
     {
         public string Status { get; set; } = null!;
         public DateOnly? CompletedDate { get; set; }
+        public string? Remarks { get; set; }
     }
 }

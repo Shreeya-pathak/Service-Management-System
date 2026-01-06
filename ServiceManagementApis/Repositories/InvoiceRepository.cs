@@ -20,22 +20,12 @@ namespace ServiceManagementApis.Repositories.InvoiceRepositories
                     .ThenInclude(sr => sr.Customer)
                 .Include(i => i.ServiceRequest)
                     .ThenInclude(sr => sr.Service)
-                
                 .FirstOrDefaultAsync(i => i.ServiceRequestId == serviceRequestId);
         }
 
         public async Task<Invoice?> GetByIdAsync(int invoiceId)
             => await _context.Invoices.FindAsync(invoiceId);
-        public async Task<List<Invoice>> GetPendingPaymentApprovalsAsync()
-        {
-            return await _context.Invoices
-                .Include(i => i.ServiceRequest)
-                    .ThenInclude(sr => sr.Customer)
-                .Include(i => i.ServiceRequest)
-                    .ThenInclude(sr => sr.Service)
-                .Where(i => i.PaymentStatus == "WaitingForAdminApproval")
-                .ToListAsync();
-        }
+
         public async Task AddAsync(Invoice invoice)
         {
             _context.Invoices.Add(invoice);
@@ -48,5 +38,4 @@ namespace ServiceManagementApis.Repositories.InvoiceRepositories
             await _context.SaveChangesAsync();
         }
     }
-
 }

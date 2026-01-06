@@ -2,6 +2,6 @@
 {
     public class CustomerMakePaymentDto
     {
-        public int InvoiceId { get; set; }
+        public string PaymentMethod { get; set; } = null!;
     }
 }

@@ -15,7 +15,7 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    // 🔹 Manage Users list (NON-pending only)
+    
     public async Task<List<UserListDto>> GetAllNonPendingUsersAsync()
     {
         return await _context.Users
@@ -33,7 +33,7 @@ public class UserRepository : IUserRepository
             .ToListAsync();
     }
 
-    // 🔹 Enable / Disable
+    
     public async Task<bool> ToggleUserStatusAsync(int userId)
     {
         var user = await _context.Users.FindAsync(userId);

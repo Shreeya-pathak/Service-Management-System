@@ -80,11 +80,12 @@
       <tr>
         <th>Customer</th>
         <th>Service</th>
-        <th>Category</th>
         <th>Technician</th>
+        
         <th>Status</th>
         <th>Requested</th>
-        <th></th>
+        <th class="icon-col"></th>
+        
       </tr>
     </thead>
 
@@ -99,7 +100,7 @@
 
           <td class="customer">{{ r.customerName }}</td>
           <td>{{ r.serviceName }}</td>
-          <td>{{ r.category }}</td>
+          
           <td>{{ r.technicianName || '—' }}</td>
           <td>
             <span class="status-pill" [ngClass]="statusClass(r.status)">

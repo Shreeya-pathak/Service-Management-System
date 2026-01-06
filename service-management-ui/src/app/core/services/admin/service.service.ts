@@ -49,12 +49,12 @@ export class ServiceService {
     return this.http.put(`${this.baseUrl}/${id}`, payload);
   }
 
-  // 🔴 DISABLE (Soft delete)
+  
   disable(id: number): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}/disable`, {});
   }
 
-  // 🟢 ENABLE
+  
   enable(id: number): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}/enable`, {});
   }

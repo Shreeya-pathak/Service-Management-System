@@ -72,23 +72,33 @@
 
 .stat-card.progress {
   background: linear-gradient(135deg, #ede7f6, #ffffff);
+
 }
 
 .stat-card.completed {
   background: linear-gradient(135deg, #e8f5e9, #ffffff);
 }
-
 .stat-card .label {
   font-size: 14px;
   color: #555;
-  margin: 0;
+  margin-bottom: 4px;
 }
 
+.stat-card > div {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* 🔑 horizontal centering */
+  justify-content: center;   /* 🔑 vertical centering */
+  text-align: center;
+}
 .stat-card h3 {
   margin: 0;
   font-size: 32px;
   color: #6a1b9a;
 }
+.stat-card progress .label{text-align: center;}
 
 /* AVAILABILITY CARD */
 .availability-card {

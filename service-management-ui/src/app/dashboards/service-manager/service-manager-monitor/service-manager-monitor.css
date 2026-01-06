@@ -39,103 +39,53 @@
   background: #fff7fb;
 }
 
-/* TABLE */
 .request-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  table-layout: fixed;
 }
 
-/* HEADER */
-.request-table thead th {
-  padding: 14px;
-  background: #f3e5f5;
-  color: #6a1b9a;
-  font-weight: 600;
-  border-bottom: 1px solid #e1bee7;
-}
-
-/* ROWS */
+/* Base cells */
+.request-table th,
 .request-table td {
   padding: 14px;
-  border-bottom: 1px solid #f0e4f3;
+  text-align: left;
+  vertical-align: middle;
 }
 
-.main-row {
-  cursor: pointer;
-  transition: background 0.2s ease;
-  background: #fff;
-}
+/* Column widths (MATCH header + body count) */
+.request-table th:nth-child(1),
+.request-table td:nth-child(1) { width: 22%; }
 
-.main-row:hover {
-  background: #faf5fb;
-}
+.request-table th:nth-child(2),
+.request-table td:nth-child(2) { width: 28%; }
 
-/* CUSTOMER */
-.customer {
-  font-weight: 500;
-}
+.request-table th:nth-child(3),
+.request-table td:nth-child(3) { width: 18%; }
 
-/* STATUS PILL */
-.status-pill {
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* STATUS COLORS */
-.status-pending {
-  background: #fff3cd;
-  color: #856404;
-}
-
-.status-assigned {
-  background: #e3f2fd;
-  color: #1565c0;
-}
-
-.status-inprogress {
-  background: #ede7f6;
-  color: #512da8;
-}
-
-.status-completed {
-  background: #e8f5e9;
-  color: #2e7d32;
-}
-
-/* ROW LEFT ACCENT */
-.main-row.pending {
-  border-left: 4px solid #ffb300;
-}
-
-.main-row.assigned {
-  border-left: 4px solid #1e88e5;
-}
-
-.main-row.inprogress {
-  border-left: 4px solid #7e57c2;
-}
-
-.main-row.completed {
-  border-left: 4px solid #43a047;
-}
-
-/* EXPAND ICON */
-.expand-icon {
+.request-table th:nth-child(4),
+.request-table td:nth-child(4) {
+  width: 14%;
   text-align: center;
-  color: #777;
 }
 
-/* DETAILS */
-.detail-row td {
-  background: #fafafa;
+.request-table th:nth-child(5),
+.request-table td:nth-child(5) {
+  width: 14%;
+  text-align: center;
+  white-space: nowrap;
 }
 
-.details-box {
-  padding: 14px;
-  background: #ffffff;
-  border-left: 4px solid #ab47bc;
-  border-radius: 8px;
+/* Expand icon column */
+.request-table th:nth-child(6),
+.request-table td:nth-child(6) {
+  width: 4%;
+  text-align: center;
+}
+
+.icon-col {
+  background: #f3e5f5;
+}
+thead{
+  background-color: #a46cc6;
 }

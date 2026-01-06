@@ -15,5 +15,7 @@
         public DateOnly RequestedDate { get; set; }
         public DateOnly? ScheduledDate { get; set; }
         public DateOnly? CompletedDate { get; set; }
+
+        public string? Remarks { get; set; }
     }
 }

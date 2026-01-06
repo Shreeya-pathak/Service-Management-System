@@ -1,16 +1,23 @@
+/* =========================
+   PAGE TITLE
+========================= */
 .page-title {
   display: flex;
   align-items: center;
   gap: 8px;
   color: #6a1b9a;
   margin-bottom: 16px;
+  font-weight: 600;
 }
 
-/* FILTER BAR */
+/* =========================
+   FILTER BAR
+========================= */
 .filter-bar {
   display: flex;
   gap: 12px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .filter-bar select,
@@ -21,34 +28,110 @@
   font-size: 14px;
 }
 
-/* TABLE */
+/* =========================
+   TABLE CONTAINER
+   (NO HORIZONTAL SCROLL)
+========================= */
 .modern-table {
   width: 100%;
+  table-layout: fixed;        /* 🔑 keeps table inside viewport */
+  border-collapse: collapse;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
-  background: #ffffff;
 }
 
+/* =========================
+   TABLE HEADER & CELLS
+========================= */
+.modern-table th,
+.modern-table td {
+  padding: 12px;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 13px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* HEADER */
 .modern-table th {
   background: #f3e5f5;
   color: #6a1b9a;
   font-weight: 600;
 }
 
-.modern-table td,
-.modern-table th {
-  padding: 14px;
-}
-
+/* ROW HOVER */
 .modern-table tr:hover {
   background: #faf5fb;
 }
 
-/* STATUS */
+/* =========================
+   COLUMN WIDTH BALANCE
+   (SUM ≈ 100%)
+========================= */
+.modern-table th:nth-child(1),
+.modern-table td:nth-child(1) { /* ID */
+  width: 5%;
+  text-align: center;
+}
+
+.modern-table th:nth-child(2),
+.modern-table td:nth-child(2) { /* Service */
+  width: 14%;
+}
+
+.modern-table th:nth-child(3),
+.modern-table td:nth-child(3) { /* Category */
+  width: 10%;
+}
+
+.modern-table th:nth-child(4),
+.modern-table td:nth-child(4) { /* Customer */
+  width: 12%;
+}
+
+.modern-table th:nth-child(5),
+.modern-table td:nth-child(5) { /* Issue Description */
+  width: 25%;
+  line-height: 1.4;
+}
+
+.modern-table th:nth-child(6),
+.modern-table td:nth-child(6) { /* Scheduled */
+  width: 8%;
+  white-space: nowrap;
+}
+
+.modern-table th:nth-child(7),
+.modern-table td:nth-child(7) { /* Status */
+  width: 8%;
+  text-align: center;
+}
+
+.modern-table th:nth-child(8),
+.modern-table td:nth-child(8) { /* Action */
+  width: 12%;
+  text-align: center;
+}
+
+.modern-table th:nth-child(9),
+.modern-table td:nth-child(9) { /* Completed On */
+  width: 6%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* =========================
+   STATUS PILL
+========================= */
 .status-pill {
+  display: inline-block;
   padding: 4px 10px;
-  border-radius: 20px;
+  border-radius: 16px;
   font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .status-pill.assigned {
@@ -66,9 +149,49 @@
   color: #2e7d32;
 }
 
-/* EMPTY */
+/* =========================
+   ACTION BUTTON
+========================= */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #6a1b9a;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  background: #ede7f6;
+  color: #6a1b9a;
+
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background: #e1bee7;
+}
+
+/* =========================
+   PAGINATOR ALIGNMENT
+========================= */
+mat-paginator {
+  margin-top: 12px;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
 .empty-state {
   margin-top: 24px;
   text-align: center;
   color: #777;
+}
+
+.empty-state .material-icons {
+  font-size: 40px;
+  color: #c7a4d8;
 }

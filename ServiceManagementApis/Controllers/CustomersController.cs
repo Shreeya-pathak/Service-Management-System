@@ -19,9 +19,7 @@ public class CustomersController : ControllerBase
         _userRepository = userRepository;
     }
 
-    // ---------------------------
-    // GET: My Profile
-    // ---------------------------
+    
     [HttpGet("me")]
     public async Task<IActionResult> GetMyProfile()
     {
@@ -45,9 +43,7 @@ public class CustomersController : ControllerBase
         return Ok(dto);
     }
 
-    // ---------------------------
-    // UPDATE: My Profile
-    // ---------------------------
+    
     [HttpPut("me")]
     public async Task<IActionResult> UpdateMyProfile(UpdateMyProfileDto dto)
     {
@@ -66,9 +62,7 @@ public class CustomersController : ControllerBase
 
         return Ok(new { message = "Profile updated successfully" });
     }
-    // ---------------------------
-    // DELETE (Deactivate): My Account
-    // ---------------------------
+    
     [HttpDelete("me")]
     public async Task<IActionResult> DeactivateMyAccount()
     {

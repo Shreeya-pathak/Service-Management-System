@@ -24,7 +24,7 @@ export class ServicesComponent implements OnInit {
   categories: any[] = [];
   searchCategory = '';
 
-  serviceForm!: FormGroup;     // ✅ MATCHES HTML
+  serviceForm!: FormGroup;     
   editingId: number | null = null;
   isEditMode = false;
 
@@ -73,7 +73,7 @@ export class ServicesComponent implements OnInit {
     if (this.editingId) {
       this.serviceService.update(this.editingId, data).subscribe({
         next: () => {
-          this.loadServices();   // ✅ AFTER API SUCCESS
+          this.loadServices();   
           this.resetForm();
           this.cdr.detectChanges(); 
         }
@@ -81,7 +81,7 @@ export class ServicesComponent implements OnInit {
     } else {
       this.serviceService.create(data).subscribe({
         next: () => {
-          this.loadServices();   // ✅ AFTER API SUCCESS
+          this.loadServices();   
           this.resetForm();
           this.cdr.detectChanges(); 
         }

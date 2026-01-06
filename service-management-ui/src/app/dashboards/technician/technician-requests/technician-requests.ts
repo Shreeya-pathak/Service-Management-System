@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
+import { UpdateStatusDialogComponent } from '../update-status-dialog/update-status-dialog';
 import { TechnicianService } from '../../../core/services/technician/technician.service';
 
 @Component({
@@ -15,7 +16,6 @@ import { TechnicianService } from '../../../core/services/technician/technician.
     CommonModule,
     FormsModule,
     MatTableModule,
-    MatRadioModule,
     MatSnackBarModule,
     MatPaginatorModule
   ],
@@ -29,20 +29,19 @@ export class TechnicianRequestsComponent implements OnInit {
     'service',
     'category',
     'customer',
+    'issueDescription',
     'date',
     'status',
-    'updateStatus',
+    'update',
     'completedDate'
   ];
 
   data: any[] = [];
   filteredData: any[] = [];
 
-  // filters
   statusFilter = '';
   searchText = '';
 
-  // pagination
   pageSize = 5;
   pageIndex = 0;
 
@@ -51,7 +50,8 @@ export class TechnicianRequestsComponent implements OnInit {
   constructor(
     readonly techService: TechnicianService,
     readonly snack: MatSnackBar,
-    readonly cdr: ChangeDetectorRef
+    readonly cdr: ChangeDetectorRef,
+    readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +61,7 @@ export class TechnicianRequestsComponent implements OnInit {
   load() {
     this.techService.getAssignedRequests().subscribe(res => {
       this.data = [...res];
+      console.log(this.data);
       this.applyFilters();
       this.cdr.detectChanges();
     });
@@ -89,28 +90,40 @@ export class TechnicianRequestsComponent implements OnInit {
     this.pageSize = event.pageSize;
   }
 
-  updateStatus(row: any, newStatus: 'In-Progress' | 'Completed') {
-    if (row.status === newStatus) return;
+  // ✅ SINGLE SOURCE OF TRUTH FOR STATUS UPDATE
+  openUpdateDialog(row: any) {
+    const dialogRef = this.dialog.open(UpdateStatusDialogComponent, {
+      width: '400px',
+      data: {
+        status: row.status,
+        remarks: row.remarks
+      }
+    });
 
-    this.techService
-      .updateRequestStatus(row.serviceRequestId, newStatus)
-      .subscribe({
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+
+      // Call API ONLY if status actually changed OR remarks changed
+      this.techService.updateRequestStatus(
+        row.serviceRequestId,
+        result.status,
+        result.remarks
+      ).subscribe({
         next: () => {
-          row.status = newStatus;
+          row.status = result.status;
+          row.remarks = result.remarks;
 
-          if (newStatus === 'Completed') {
+          if (result.status === 'Completed') {
             row.completedDate = new Date().toISOString().split('T')[0];
           }
 
           this.cdr.detectChanges();
         },
         error: () => {
-          this.snack.open(
-            'Failed to update status',
-            'Close',
-            { duration: 3000 }
-          );
+          this.snack.open('Failed to update request', 'Close', { duration: 3000 });
         }
       });
+    });
+
   }
 }

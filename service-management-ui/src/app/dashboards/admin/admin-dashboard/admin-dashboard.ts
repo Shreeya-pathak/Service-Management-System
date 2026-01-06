@@ -1,16 +1,17 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router,NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminService } from '../../../core/services/admin/admin.service';
-import { UserManagementService } from '../../../core/services/admin/user-management.service';
-import { ChartData, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { AdminReportsService } from '../../../core/services/admin/admin-reports.service';
-import { AdminPaymentService } from '../../../core/services/admin/admin-payment.service';
+import { ChartData, ChartOptions } from 'chart.js';
+
+import { UserManagementService } from '../../../core/services/admin/user-management.service';
+
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
@@ -26,141 +27,99 @@ import { AdminPaymentService } from '../../../core/services/admin/admin-payment.
 })
 export class AdminDashboardComponent implements OnInit {
 
+  
   totalUsers = 0;
   activeUsers = 0;
   disabledUsers = 0;
-  pendingCount = 0;
+  pendingApprovals = 0;
 
-  // KPIs
-  avgResolutionDays = 0;
-  pendingPayments = 0;
-
-  // Charts
-  // Charts
-  statusChartType = 'doughnut' as const;
-  categoryChartType = 'doughnut' as const;
-
-
-
-  statusChartData!: ChartData<'doughnut'>;
-  categoryChartData!: ChartData<'doughnut'>;
-  chartOptions: ChartOptions<'doughnut'> = {
-    cutout: '70%',
+  
+  customers = 0;
+  technicians = 0;
+  serviceManagers = 0;
+  
+  
+  roleChartData!: ChartData<'bar'>;
+  roleChartOptions: ChartOptions<'bar'> = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          padding: 18,
-          boxWidth: 14,
-          font: {
-            size: 13
-          }
-        }
+      legend: { display: false }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#6a1b9a' }
+      },
+      y: {
+        beginAtZero: true,
+        ticks: { color: '#6a1b9a' }
       }
     }
   };
 
-
-
   constructor(
     readonly userService: UserManagementService,
-    readonly reportsService: AdminReportsService, 
     readonly router: Router,
-    readonly adminService: AdminService,
-    readonly cdr:ChangeDetectorRef,
-    readonly paymentService: AdminPaymentService
+    readonly cdr: ChangeDetectorRef,
+    readonly adminService: AdminService
   ) {
     this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe(() => {
-      this.loadStats();
-    });
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe(() => this.loadStats());
   }
 
   ngOnInit(): void {
     this.loadStats();
-    this.loadAnalytics();
-
   }
 
-  loadStats() {
-    this.userService.getAll().subscribe(res => {
-
-      const users = [...res];
+  loadStats(): void {
+    this.userService.getAll().subscribe(users => {
 
       this.totalUsers = users.length;
       this.activeUsers = users.filter(u => u.isActive).length;
       this.disabledUsers = users.filter(u => !u.isActive).length;
 
+      this.customers = 0;
+      this.technicians = 0;
+      this.serviceManagers = 0;
+      
+
+      users.forEach(u => {
+        switch (u.roleName) {
+          case 'Customer': this.customers++; break;
+          case 'Technician': this.technicians++; break;
+          case 'ServiceManager': this.serviceManagers++; break;
+          
+        }
+      });
+
+      this.roleChartData = {
+        labels: ['Customers', 'Technicians', 'Service Managers'],
+        datasets: [{
+          data: [
+            this.customers,
+            this.technicians,
+            this.serviceManagers,
+            
+          ],
+          backgroundColor: [
+            '#7b1fa2',
+            '#8e24aa',
+            '#ab47bc'
+          ],
+          borderRadius: 8
+        }]
+      };
+
       this.cdr.detectChanges();
     });
-
-    
     this.adminService.getPendingUsers().subscribe(res => {
-      this.pendingCount = res.length;
+      this.pendingApprovals = res.length;
       this.cdr.detectChanges();
     });
   }
-  loadAnalytics() {
 
-  // Avg resolution time
-  this.reportsService.getAverageResolutionTime().subscribe(res => {
-    this.avgResolutionDays = res.averageDays;
-    this.cdr.detectChanges();
-  });
-
-  // Requests by status
-   this.reportsService.getRequestsByStatus().subscribe(res => {
-  this.statusChartData = {
-    labels: res.map(x => x.status),
-    datasets: [{
-      data: res.map(x => x.count),
-      backgroundColor: [
-        '#7b1fa2', // Requested
-        '#ec407a', // Assigned
-        '#ba68c8', // In Progress
-        '#66bb6a', // Completed
-        '#ef5350'  // Closed
-      ],
-      borderWidth: 0
-    }]
-  };
-  this.cdr.detectChanges();
-});
-
-
-  // Requests by category
-  this.reportsService.getRequestsByCategory().subscribe(res => {
-  this.categoryChartData = {
-    labels: res.map(x => x.categoryName),
-    datasets: [{
-      data: res.map(x => x.count),
-      backgroundColor: [
-        '#7b1fa2',
-        '#ec407a',
-        '#ba68c8',
-        '#ffa726',
-        '#66bb6a',
-        '#ef5350'
-      ],
-      borderWidth: 0
-    }]
-  };
-  this.cdr.detectChanges();
-});
-
-
-  // Pending payments
-  this.paymentService.getPendingPaymentApprovals().subscribe(res => {
-    this.pendingPayments = res.length;
-    this.cdr.detectChanges();
-  });
-}
-
-
-
-
-  goTo(path: string) {
+  goTo(path: string): void {
     this.router.navigate([path]);
   }
 }

@@ -4,7 +4,7 @@ using ServiceManagementApis.DTOs;
 using ServiceManagementApis.Repositories.PaymentRepositories;
 using ServiceManagementApis.Services;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,ServiceManager")]
 [ApiController]
 [Route("api/payments")]
 public class PaymentHistoryController : ControllerBase

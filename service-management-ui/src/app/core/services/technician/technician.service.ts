@@ -17,10 +17,10 @@ export class TechnicianService {
     return this.http.get<any[]>(`${this.baseUrl}/requests`);
   }
 
-  updateRequestStatus(id: number, status: string) {
+  updateRequestStatus(id: number, status: string, remarks: string) {
     return this.http.put(
       `${this.baseUrl}/requests/${id}/status`,
-      { status }
+      { status,remarks}
     );
   }
 

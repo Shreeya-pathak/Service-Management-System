@@ -26,6 +26,7 @@ public class ReportsController : ControllerBase
         var report = await _service.GetMonthlyRevenueAsync(year, month);
         return Ok(report);
     }
+
     [Authorize(Roles = "Admin,ServiceManager")]
     [HttpGet("technician-workload")]
     public IActionResult GetTechnicianWorkload()

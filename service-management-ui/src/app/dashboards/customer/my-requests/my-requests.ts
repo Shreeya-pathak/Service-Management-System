@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { CustomerRequestService } from '../../../core/services/customer/customer-request.service';
 import { RequestDetailsDialogComponent } from '../request-details.dialog';
@@ -14,7 +15,7 @@ import { RequestDetailsDialogComponent } from '../request-details.dialog';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,   // ✅ REQUIRED
+    ReactiveFormsModule,   
     MatDialogModule,
     MatCardModule,
     MatChipsModule
@@ -26,7 +27,7 @@ export class MyRequestsComponent implements OnInit {
 
   requests: any[] = [];
   groupedRequests: any[] = [];
-
+  dataSource = new MatTableDataSource<any>([]);
   constructor(
     readonly requestService: CustomerRequestService,
     readonly dialog: MatDialog,
@@ -39,35 +40,36 @@ export class MyRequestsComponent implements OnInit {
 
   loadRequests() {
     this.requestService.getMyRequests().subscribe(res => {
-      console.log('API RESPONSE:', res);
-      this.requests = res;
+      
+      this.requests = [...res];
       this.groupByCategory();
       this.cdr.detectChanges();
     });
   }
 
-  groupByCategory() {
-    const map = new Map<string, any[]>();
+groupByCategory() {
+  const map = new Map<string, any>();
 
-    this.requests.forEach(r => {
-      const category = r.categoryName || 'Other';
+  
+  this.requests.forEach(r => {
+    const category = r.categoryName || 'Other';
 
-      if (!map.has(category)) {
-        map.set(category, []);
-      }
-
-      map.get(category)!.push(r);
-    });
-
-    this.groupedRequests = Array.from(map.entries()).map(
-      ([categoryName, requests]) => ({
-        categoryName,
-        requests,
+    
+    if (!map.has(category)) {
+      map.set(category, {
+        categoryName: category,
+        requests: [],
         expanded: true
-      })
-    );
-  }
+      });
+    }
 
+    // Push requests in backend order (already newest → oldest)
+    map.get(category).requests.push(r);
+  });
+
+  // Preserve insertion order (Map keeps order of first appearance)
+  this.groupedRequests = Array.from(map.values());
+}
 
 
   toggle(group: any) {
@@ -89,6 +91,19 @@ export class MyRequestsComponent implements OnInit {
     this.dialog.open(InvoiceDialogComponent, {
       width: '600px',
       data: { serviceRequestId: request.serviceRequestId }
+    }).afterClosed().subscribe(paid => {
+      if (paid) {
+        
+        this.requests = this.requests.map(r =>
+          r.serviceRequestId === request.serviceRequestId
+            ? { ...r, status: 'Closed' }
+            : r
+        );
+      }
     });
   }
+
+
 }
+
+

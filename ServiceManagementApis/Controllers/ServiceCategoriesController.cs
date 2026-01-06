@@ -18,9 +18,7 @@ public class ServiceCategoriesController : ControllerBase
         _categoryRepository = categoryRepository;
     }
 
-    // --------------------------------------------------
-    // GET: All Categories
-    // --------------------------------------------------
+    
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -51,9 +49,7 @@ public class ServiceCategoriesController : ControllerBase
     }
 
 
-    // --------------------------------------------------
-    // POST: Create Category
-    // --------------------------------------------------
+    
     [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateServiceCategoryDto dto)
@@ -68,9 +64,7 @@ public class ServiceCategoriesController : ControllerBase
 
     }
 
-    // --------------------------------------------------
-    // PUT: Update Category
-    // --------------------------------------------------
+    
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UpdateServiceCategoryDto dto)

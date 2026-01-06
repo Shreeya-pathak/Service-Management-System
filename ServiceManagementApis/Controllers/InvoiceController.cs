@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceManagementApis.DTOs.InvoiceAndPayment;
 using ServiceManagementApis.Models;
-using ServiceManagementApis.Repositories;
 using ServiceManagementApis.Repositories.Interfaces;
 using ServiceManagementApis.Services;
-
 
 namespace ServiceManagementApis.Controllers
 {
@@ -13,85 +11,70 @@ namespace ServiceManagementApis.Controllers
     [Route("api/invoices")]
     public class InvoiceController : ControllerBase
     {
-        private readonly IInvoiceService _service;
         private readonly IInvoiceService _invoiceService;
         private readonly INotificationRepository _notificationRepo;
         private readonly IUserRepository _userRepository;
-        public InvoiceController(IInvoiceService service, IInvoiceService invoiceService, INotificationRepository notificationRepo, IUserRepository userRepository)
+        private readonly IInvoiceService _service;
+
+        public InvoiceController(
+            IInvoiceService invoiceService,
+            INotificationRepository notificationRepo,
+            IUserRepository userRepository,
+            IInvoiceService service)
         {
-            _service = service;
             _invoiceService = invoiceService;
             _notificationRepo = notificationRepo;
             _userRepository = userRepository;
+            _service = service;
         }
 
-        // CUSTOMER + ADMIN VIEW
+        
         [HttpGet("by-service-request/{serviceRequestId}")]
-        [Authorize(Roles = "Customer,Admin")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Get(int serviceRequestId)
-            => Ok(await _service.GetInvoiceAsync(serviceRequestId));
+        {
+            var invoice = await _invoiceService.GetInvoiceAsync(serviceRequestId);
+            return Ok(invoice);
+        }
 
-        // CUSTOMER ACTION
+        
         [HttpPut("make-payment/{invoiceId}")]
         [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> MakePayment(int invoiceId)
-        {
-            await _service.CustomerMakePaymentAsync(invoiceId);
-            // 🔔 Notify Admin(s): New payment request
-            var adminIds = await _userRepository.GetUserIdsByRoleAsync("Admin");
-
-            foreach (var adminId in adminIds)
-            {
-                await _notificationRepo.AddAsync(new Notification
-                {
-                    UserId = adminId,
-                    Title = "New Payment Request",
-                    Message = "A customer has made a payment request that requires approval."
-                });
-            }
-
-            await _notificationRepo.SaveAsync();
-            return Ok(new { message = "Waiting for admin approval" });
-        }
-
-        // ADMIN ACTION
-        [HttpPut("approve-payment/{invoiceId}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ApprovePayment(
+        public async Task<IActionResult> MakePayment(
             int invoiceId,
-            [FromBody] AdminApprovePaymentDto dto)
+            [FromBody] CustomerMakePaymentDto dto)
         {
-            var customerId = await _invoiceService
-                .GetCustomerIdByInvoiceIdAsync(invoiceId);
+            // 1️⃣ Perform payment
+            await _invoiceService.CustomerMakePaymentAsync(
+                invoiceId,
+                dto.PaymentMethod
+            );
 
-            var serviceName = await _invoiceService
-                .GetServiceNameByInvoiceIdAsync(invoiceId);
-            await _invoiceService.AdminApprovePaymentAsync(invoiceId, dto.PaymentMethod);
+            // 2️⃣ Notify Admin(s) — INFO ONLY
+            
+
+            // 3️⃣ Notify Customer
+            var customerId =
+                await _invoiceService.GetCustomerIdByInvoiceIdAsync(invoiceId);
+
+            var serviceName =
+                await _invoiceService.GetServiceNameByInvoiceIdAsync(invoiceId);
+
             if (customerId != null)
             {
                 await _notificationRepo.AddAsync(new Notification
                 {
                     UserId = customerId.Value,
-                    Title = "Service Request Closed",
+                    Title = "Payment Successful",
                     Message = serviceName != null
-                        ? $"Your service request for '{serviceName}' has been closed after successful payment."
-                        : "Your service request has been closed after successful payment."
+                        ? $"Payment for '{serviceName}' was successful. Your service request is now closed."
+                        : "Your payment was successful. Your service request is now closed."
                 });
-
-                await _notificationRepo.SaveAsync();
             }
-            return Ok(new { message = "Payment approved" });
 
-        }
-        [Authorize(Roles = "Admin")]
-        [HttpGet("pending-approvals")]
-        public async Task<IActionResult> PendingApprovals()
-        {
-            var data = await _invoiceService.GetPendingPaymentApprovalsAsync();
-            return Ok(data);
-        }
+            await _notificationRepo.SaveAsync();
 
+            return Ok(new { message = "Payment successful" });
+        }
     }
-
-
 }

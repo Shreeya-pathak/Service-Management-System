@@ -1,21 +1,22 @@
-/* GLOBAL SPACING */
+/* ================= GLOBAL ================= */
 section {
   margin-bottom: 40px;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero {
   background: linear-gradient(135deg, #8e24aa, #6a1b9a);
   color: white;
   padding: 32px;
-  border-radius: 20px;
+  border-radius: 22px;
+  box-shadow: 0 14px 35px rgba(106, 27, 154, 0.25);
 }
 
 .hero h1 {
   margin: 0 0 6px;
 }
 
-/* STATS */
+/* ================= STATS ================= */
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -24,44 +25,65 @@ section {
 
 .stat-card {
   padding: 22px;
-  border-radius: 16px;
+  border-radius: 18px;
   text-align: center;
+  background: linear-gradient(135deg, #ffffff, #faf5ff);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
 .stat-card span {
   display: block;
   margin-top: 10px;
   color: #555;
+  font-weight: 500;
 }
 
 .stat-card strong {
   display: block;
-  font-size: 26px;
-  margin-top: 4px;
+  font-size: 28px;
+  margin-top: 6px;
+  font-weight: 700;
+  color: #333;
 }
 
-/* STAT ICON */
+/* ================= STAT ICON ================= */
 .stat-icon {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   margin: 0 auto;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.2);
 }
 
 .stat-icon mat-icon {
-  font-size: 22px;
+  font-size: 24px;
   color: white;
 }
 
-.purple { background: #8e24aa; }
-.blue { background: #1976d2; }
-.green { background: #2e7d32; }
-.red { background: #c62828; }
+/* Gradient icon backgrounds */
+.purple {
+  background: linear-gradient(135deg, #8e24aa, #6a1b9a);
+}
+.blue {
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+}
+.green {
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
+}
+.red {
+  background: linear-gradient(135deg, #c62828, #8e0000);
+}
 
-/* GUIDANCE */
+/* ================= GUIDANCE ================= */
 .guidance {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -69,18 +91,26 @@ section {
 }
 
 .guidance mat-card {
-  padding: 20px;
+  padding: 22px;
   display: flex;
   gap: 16px;
   align-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff, #f7ecfb);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease;
+}
+
+.guidance mat-card:hover {
+  transform: translateY(-3px);
 }
 
 .guidance mat-icon {
   color: #8e24aa;
-  font-size: 28px;
+  font-size: 30px;
 }
 
-/* SERVICES */
+/* ================= SERVICES ================= */
 .services h2 {
   margin-bottom: 16px;
   color: #6a1b9a;
@@ -93,24 +123,36 @@ section {
 }
 
 .service-grid mat-card {
-  padding: 22px;
+  padding: 24px;
   text-align: center;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff, #f4eff9);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-grid mat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
 .service-grid mat-icon {
-  font-size: 36px;
+  font-size: 38px;
   color: #8e24aa;
+  margin-bottom: 8px;
 }
 
-/* TRUST */
+/* ================= TRUST ================= */
 .trust {
-  background: #faf4fb;
-  padding: 28px;
-  border-radius: 18px;
+  background: linear-gradient(135deg, #faf4fb, #f3e5f5);
+  padding: 30px;
+  border-radius: 22px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
 .trust h2 {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  color: #6a1b9a;
 }
 
 .trust ul {
@@ -118,5 +160,6 @@ section {
 }
 
 .trust li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-weight: 500;
 }

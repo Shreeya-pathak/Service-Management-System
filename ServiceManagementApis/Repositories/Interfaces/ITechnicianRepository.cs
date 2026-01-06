@@ -10,6 +10,13 @@ public interface ITechnicianRepository
     Task<int?> GetCustomerIdByRequestIdAsync(int serviceRequestId);
     Task<string?> GetServiceNameByRequestIdAsync(int serviceRequestId);
 
-    Task<bool> UpdateRequestStatusAsync(int serviceRequestId, string status, DateOnly? completedDate);
+    Task<bool> UpdateRequestStatusAsync(
+        int serviceRequestId,
+        
+        string status,
+        DateOnly? completedDate,
+        string? remarks      
+    );
+
     Task<bool> UpdateAvailabilityAsync(int technicianId, string availabilityStatus);
 }

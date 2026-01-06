@@ -1,84 +1,80 @@
 <h1 class="dashboard-title">
   <mat-icon class="title-icon">insights</mat-icon>
-  Admin Analytics Dashboard
+  Admin Dashboard
 </h1>
 
 <!-- ================= KPI CARDS ================= -->
 <div class="kpi-grid">
 
-  <!-- TOTAL USERS -->
   <mat-card class="kpi-card violet">
-    <div class="kpi-icon">
-      <mat-icon>group</mat-icon>
-    </div>
+    <div class="kpi-icon"><mat-icon>group</mat-icon></div>
     <div class="kpi-content">
       <span class="kpi-label">Total Users</span>
       <span class="kpi-value">{{ totalUsers }}</span>
     </div>
   </mat-card>
 
-  <!-- PENDING APPROVALS -->
-  <mat-card class="kpi-card pink">
+  <mat-card class="kpi-card green">
+    <div class="kpi-icon"><mat-icon>check_circle</mat-icon></div>
+    <div class="kpi-content">
+      <span class="kpi-label">Active Users</span>
+      <span class="kpi-value">{{ activeUsers }}</span>
+    </div>
+  </mat-card>
+  <mat-card class="kpi-card purple">
     <div class="kpi-icon">
       <mat-icon>pending_actions</mat-icon>
     </div>
     <div class="kpi-content">
-      <span class="kpi-label">Pending Approvals</span>
-      <span class="kpi-value">{{ pendingCount }}</span>
+      <span class="kpi-label">Pending User Approvals</span>
+      <span class="kpi-value">{{ pendingApprovals }}</span>
     </div>
   </mat-card>
 
-  <!-- PENDING PAYMENTS -->
+
   <mat-card class="kpi-card orange">
-    <div class="kpi-icon">
-      <mat-icon>payments</mat-icon>
-    </div>
+    <div class="kpi-icon"><mat-icon>block</mat-icon></div>
     <div class="kpi-content">
-      <span class="kpi-label">Pending Payments</span>
-      <span class="kpi-value">{{ pendingPayments }}</span>
-    </div>
-  </mat-card>
-
-  <!-- AVG RESOLUTION -->
-  <mat-card class="kpi-card green">
-    <div class="kpi-icon">
-      <mat-icon>timer</mat-icon>
-    </div>
-    <div class="kpi-content">
-      <span class="kpi-label">Avg Resolution</span>
-      <span class="kpi-value">{{ avgResolutionDays }} days</span>
+      <span class="kpi-label">Disabled Users</span>
+      <span class="kpi-value">{{ disabledUsers }}</span>
     </div>
   </mat-card>
 
 </div>
 
-<!-- ================= ANALYTICS CHARTS ================= -->
-<div class="chart-grid">
+<!-- ================= QUICK ACTIONS ================= -->
+<mat-card class="section-card actions-card">
+  <h3 class="section-title">Quick Actions</h3>
 
-  <!-- STATUS DISTRIBUTION -->
-  <mat-card>
-    <h3>Service Requests by Status</h3>
+  <div class="quick-actions">
+    <button mat-raised-button color="primary" (click)="goTo('/admin/manage-users')">
+      <mat-icon>group</mat-icon>
+      Manage Users
+    </button>
+
+    <button mat-raised-button color="accent" (click)="goTo('/admin/services')">
+      <mat-icon>build</mat-icon>
+      Manage Services
+    </button>
+
+    <button mat-raised-button color="primary" (click)="goTo('/admin/service-categories')">
+      <mat-icon>category</mat-icon>
+      Manage Categories
+    </button>
+  </div>
+</mat-card>
+
+<!-- ================= USERS BY ROLE (SMALL BAR CHART) ================= -->
+<mat-card class="section-card chart-card">
+  <h3 class="section-title">Users by Role</h3>
+
+  <div class="chart-wrapper">
     <canvas
-      *ngIf="statusChartData"
+      *ngIf="roleChartData"
       baseChart
-      [data]="statusChartData"
-      [type]="statusChartType"
-      [options]="chartOptions">
+      [data]="roleChartData"
+      [options]="roleChartOptions"
+      type="bar">
     </canvas>
-  </mat-card>
-
-  <!-- CATEGORY DISTRIBUTION -->
-  <mat-card>
-    <h3>Service Requests by Category</h3>
-    <canvas
-      *ngIf="categoryChartData"
-      baseChart
-      [data]="categoryChartData"
-      [type]="categoryChartType"
-      [options]="chartOptions">
-    </canvas>
-  </mat-card>
-
-</div>
-
-
+  </div>
+</mat-card>

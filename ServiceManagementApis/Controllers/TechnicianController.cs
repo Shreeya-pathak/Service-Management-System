@@ -23,26 +23,34 @@ public class TechnicianController : ControllerBase
     private int TechnicianId =>
         int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-    // ---------------- DASHBOARD ----------------
+    
     [HttpGet("dashboard")]
     public async Task<IActionResult> Dashboard()
     {
         return Ok(await _repo.GetDashboardAsync(TechnicianId));
     }
 
-    // ---------------- ASSIGNED REQUESTS ----------------
+    
     [HttpGet("requests")]
     public async Task<IActionResult> AssignedRequests()
     {
         return Ok(await _repo.GetAssignedRequestsAsync(TechnicianId));
     }
 
-    // ---------------- UPDATE REQUEST STATUS ----------------
+    
     [HttpPut("requests/{id}/status")]
     public async Task<IActionResult> UpdateStatus(int id, UpdateRequestStatusDto dto)
     {
-        var success = await _repo.UpdateRequestStatusAsync(id, dto.Status, dto.CompletedDate);
+        var success = await _repo.UpdateRequestStatusAsync(
+            id,
+            
+            dto.Status,
+            dto.CompletedDate,
+            dto.Remarks     
+        );
+
         if (!success) return NotFound("Service request not found");
+
         var customerId = await _repo.GetCustomerIdByRequestIdAsync(id);
         var serviceName = await _repo.GetServiceNameByRequestIdAsync(id);
 
@@ -59,16 +67,23 @@ public class TechnicianController : ControllerBase
 
             await _notificationRepo.SaveAsync();
         }
+
         return Ok(new { message = "Status updated successfully" });
     }
-
-    // ---------------- UPDATE AVAILABILITY ----------------
+    
     [HttpPut("availability")]
     public async Task<IActionResult> UpdateAvailability(UpdateAvailabilityDto dto)
     {
-        var success = await _repo.UpdateAvailabilityAsync(TechnicianId, dto.AvailabilityStatus);
-        if (!success) return NotFound();
+        var success = await _repo.UpdateAvailabilityAsync(
+            TechnicianId,
+            dto.AvailabilityStatus
+        );
 
-        return Ok(new { message = "Availability updated" });
+        if (!success)
+            return NotFound("Technician not found");
+
+        return Ok(new { message = "Availability updated successfully" });
     }
+
+
 }

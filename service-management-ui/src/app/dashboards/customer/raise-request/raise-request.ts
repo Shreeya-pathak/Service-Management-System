@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -41,7 +41,7 @@ export class RaiseRequestComponent implements OnInit {
   constructor(
     readonly fb: FormBuilder,
     readonly requestService: CustomerRequestService,
-    readonly snackBar: MatSnackBar
+    readonly snackBar: MatSnackBar,readonly router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class RaiseRequestComponent implements OnInit {
     });
   }
 
-  // ✅ ACTIVE CATEGORIES ONLY
+  
   loadCategories() {
     this.requestService.getActiveCategories().subscribe({
       next: res => {
@@ -67,7 +67,7 @@ export class RaiseRequestComponent implements OnInit {
     });
   }
 
-  // ✅ ACTIVE SERVICES ONLY
+  
   onCategoryChange(categoryId: number) {
     this.services = [];
     this.form.patchValue({ serviceId: '' });
@@ -82,51 +82,54 @@ export class RaiseRequestComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid || this.isSubmitting) return;
+  if (this.form.invalid || this.isSubmitting) return;
 
-    this.isSubmitting = true;
+  this.isSubmitting = true;
 
-    const payload = {
-      serviceId: this.form.value.serviceId,
-      issueDescription: this.form.value.issueDescription,
-      priority: this.form.value.priority,
-      requestedDate: this.getTodayDate()
-    };
+  const payload = {
+    serviceId: this.form.value.serviceId,
+    issueDescription: this.form.value.issueDescription,
+    priority: this.form.value.priority,
+    requestedDate: this.getTodayDate()
+  };
 
-    this.requestService.createRequest(payload).subscribe({
-      next: () => {
-        this.form.reset({ priority: 'General' });
-        this.services = [];
-        this.isSubmitting = false;
-        this.snackBar.open(
-          'Service request submitted successfully',
-          'View',
-          {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            panelClass: ['success-snackbar']
-          }
-        );
+  this.requestService.createRequest(payload).subscribe({
+    next: () => {
+      this.form.reset({ priority: 'General' });
+      this.services = [];
+      this.isSubmitting = false;
 
-      },
-      error: () => {
-        this.isSubmitting = false;
-        this.snackBar.open(
-          'Selected service is no longer available',
-          'Dismiss',
-          {
-            duration: 3500,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            panelClass: ['error-snackbar']
-          }
-        );
+      this.snackBar.open(
+        'Service request submitted successfully',
+        'View',
+        {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['success-snackbar']
+        }
+      );
 
+      
+      this.router.navigate(['/customer/my-requests']);
+    },
+    error: () => {
+      this.isSubmitting = false;
 
-      }
-    });
-  }
+      this.snackBar.open(
+        'Selected service is no longer available',
+        'Dismiss',
+        {
+          duration: 3500,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: ['error-snackbar']
+        }
+      );
+    }
+  });
+}
+
 
   private getTodayDate(): string {
     return new Date().toISOString().split('T')[0]; // yyyy-MM-dd

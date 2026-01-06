@@ -28,16 +28,14 @@ export class CustomerRequestService {
     );
   }
 
-  // ✅ Customer booking (ACTIVE ONLY)
+  
   getActiveServicesByCategory(categoryId: number): Observable<any[]> {
     return this.http.get<any[]>(
       `${this.baseUrl}/services/by-category/${categoryId}/active`
     );
   }
 
-  // =====================================================
-  // 🔹 SERVICE REQUESTS
-  // =====================================================
+  
 
   createRequest(payload: any): Observable<any> {
     return this.http.post(
@@ -80,10 +78,13 @@ export class CustomerRequestService {
     );
   }
 
-  makePayment(invoiceId: number): Observable<any> {
+  makePayment(invoiceId: number, paymentMethod: string): Observable<any> {
     return this.http.put(
       `${this.baseUrl}/invoices/make-payment/${invoiceId}`,
-      {}
+      {
+        paymentMethod: paymentMethod
+      }
     );
   }
+
 }

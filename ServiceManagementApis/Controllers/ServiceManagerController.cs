@@ -21,21 +21,21 @@ public class ServiceManagerController : ControllerBase
         _notificationRepo = notificationRepo;
     }
 
-    // ---------------- DASHBOARD ----------------
+    
     [HttpGet("dashboard")]
     public async Task<IActionResult> Dashboard()
     {
         return Ok(await _repo.GetDashboardAsync());
     }
 
-    // ---------------- ASSIGNABLE REQUESTS ----------------
+    
     [HttpGet("requests")]
     public async Task<IActionResult> AssignableRequests()
     {
         return Ok(await _repo.GetAssignableRequestsAsync());
     }
 
-    // ---------------- AVAILABLE TECHNICIANS ----------------
+    
     [HttpGet("technicians")]
     public async Task<IActionResult> AvailableTechnicians()
     {
@@ -43,7 +43,7 @@ public class ServiceManagerController : ControllerBase
     }
 
     
-    // ---------------- ASSIGN TECHNICIAN ----------------
+    
     [HttpPut("requests/{id}/assign")]
     public async Task<IActionResult> AssignTechnician(
         int id,
@@ -60,7 +60,7 @@ public class ServiceManagerController : ControllerBase
             Message = $"Technician '{result.TechnicianName}' has been assigned to your service request '{result.ServiceName}'."
         });
 
-        // 🔔 TECHNICIAN notification (OPTIONAL but good)
+        
         await _notificationRepo.AddAsync(new Notification
         {
             UserId = dto.TechnicianId,
@@ -68,12 +68,12 @@ public class ServiceManagerController : ControllerBase
             Message = $"You have been assigned a new service request for '{result.ServiceName}'."
         });
         await _notificationRepo.SaveAsync();
-        // ✅ return updated request card data
+        
         return Ok(result);
     }
 
 
-    // ---------------- MONITOR REQUESTS ----------------
+    
     [HttpGet("monitor-requests")]
     public async Task<IActionResult> MonitorRequests()
     {

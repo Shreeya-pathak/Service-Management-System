@@ -29,7 +29,7 @@ namespace ServiceManagementApis.Repositories
                 .Include(sr => sr.TechnicianAssignments)
                     .ThenInclude(ta => ta.Technician)
                 .Where(sr => sr.CustomerId == customerId)
-                .OrderByDescending(sr => sr.CreatedAt)
+                .OrderByDescending(sr => sr.ServiceRequestId)
                 .ToListAsync();
 
         }
@@ -37,6 +37,7 @@ namespace ServiceManagementApis.Repositories
         public async Task<ServiceRequest?> GetByIdAsync(int id)
         {
             return await _context.ServiceRequests
+                .OrderByDescending(sr => sr.CreatedAt)
                 .FirstOrDefaultAsync(sr => sr.ServiceRequestId == id);
         }
         public async Task<List<ServiceRequest>> GetAllAsync()

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaymentHistory } from './payment-history';
+import { AdminPaymentHistoryComponent} from './payment-history';
 
 describe('PaymentHistory', () => {
-  let component: PaymentHistory;
-  let fixture: ComponentFixture<PaymentHistory>;
+  let component: AdminPaymentHistoryComponent;
+  let fixture: ComponentFixture<AdminPaymentHistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PaymentHistory]
+      imports: [AdminPaymentHistoryComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PaymentHistory);
+    fixture = TestBed.createComponent(AdminPaymentHistoryComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

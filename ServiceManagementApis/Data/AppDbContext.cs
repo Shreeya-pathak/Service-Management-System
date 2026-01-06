@@ -26,67 +26,51 @@ public class AppDbContext : DbContext
     public DbSet<Notification> Notifications { get; set; }
 
 
-    // =====================
-    // Fluent API + Seeding
-    // =====================
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        // -------------------------------------------------
-        // PRIMARY KEYS
-        // -------------------------------------------------
+        
         modelBuilder.Entity<TechnicianAssignment>()
             .HasKey(t => t.AssignmentId);
 
-        // -------------------------------------------------
-        // USER ↔ ROLE (ACTIVE ROLE)
-        // -------------------------------------------------
+        
         modelBuilder.Entity<User>()
             .HasOne(u => u.Role)
             .WithMany(r => r.Users)
             .HasForeignKey(u => u.RoleId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // -------------------------------------------------
-        // USER ↔ REQUESTED ROLE (APPROVAL FLOW)
-        // -------------------------------------------------
+        
         modelBuilder.Entity<User>()
             .HasOne(u => u.RequestedRole)
             .WithMany()
             .HasForeignKey(u => u.RequestedRoleId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // -------------------------------------------------
-        // SERVICE CATEGORY ↔ SERVICE
-        // -------------------------------------------------
+        
         modelBuilder.Entity<Service>()
             .HasOne(s => s.ServiceCategory)
             .WithMany(c => c.Services)
             .HasForeignKey(s => s.ServiceCategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // -------------------------------------------------
-        // CUSTOMER ↔ SERVICE REQUEST
-        // -------------------------------------------------
+       
         modelBuilder.Entity<ServiceRequest>()
             .HasOne(sr => sr.Customer)
             .WithMany()
             .HasForeignKey(sr => sr.CustomerId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // -------------------------------------------------
-        // SERVICE ↔ SERVICE REQUEST
-        // -------------------------------------------------
+        
         modelBuilder.Entity<ServiceRequest>()
             .HasOne(sr => sr.Service)
             .WithMany()
             .HasForeignKey(sr => sr.ServiceId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // -------------------------------------------------
-        // SERVICE REQUEST ↔ TECHNICIAN ASSIGNMENT
-        // -------------------------------------------------
+        
         modelBuilder.Entity<TechnicianAssignment>()
             .HasOne(ta => ta.ServiceRequest)
             .WithMany()
@@ -99,18 +83,14 @@ public class AppDbContext : DbContext
         .OnDelete(DeleteBehavior.Restrict);
     
 
-    // -------------------------------------------------
-    // TECHNICIAN ↔ TECHNICIAN ASSIGNMENT
-    // -------------------------------------------------
+    
     modelBuilder.Entity<TechnicianAssignment>()
             .HasOne(ta => ta.Technician)
             .WithMany()
             .HasForeignKey(ta => ta.TechnicianId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // -------------------------------------------------
-        // SERVICE REQUEST ↔ INVOICE (1–1)
-        // -------------------------------------------------
+        
         modelBuilder.Entity<Invoice>()
             .HasOne(i => i.ServiceRequest)
             .WithOne()
@@ -126,18 +106,13 @@ public class AppDbContext : DbContext
 
 
 
-        // -------------------------------------------------
-        // INVOICE ↔ PAYMENT
-        // -------------------------------------------------
+        
         modelBuilder.Entity<Payment>()
             .HasOne(p => p.Invoice)
             .WithMany()
             .HasForeignKey(p => p.InvoiceId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // -------------------------------------------------
-        // DECIMAL PRECISION
-        // -------------------------------------------------
         modelBuilder.Entity<Service>()
             .Property(s => s.Price)
             .HasPrecision(18, 2);
@@ -150,16 +125,12 @@ public class AppDbContext : DbContext
             .Property(p => p.AmountPaid)
             .HasPrecision(18, 2);
 
-        // -------------------------------------------------
-        // UNIQUE EMAIL
-        // -------------------------------------------------
+        
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Email)
             .IsUnique();
 
-        // -------------------------------------------------
-        // ROLE SEEDING (FINAL)
-        // -------------------------------------------------
+        
         modelBuilder.Entity<Role>().HasData(
             new Role { RoleId = 1, RoleName = "Admin" },
             new Role { RoleId = 2, RoleName = "Customer" },
@@ -168,9 +139,7 @@ public class AppDbContext : DbContext
             new Role { RoleId = 5, RoleName = "Pending" } 
         );
 
-        // -------------------------------------------------
-        // SYSTEM ADMIN SEEDING
-        // -------------------------------------------------
+        
         modelBuilder.Entity<User>().HasData(
             new User
             {

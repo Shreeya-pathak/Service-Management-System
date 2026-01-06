@@ -81,6 +81,7 @@ import { CustomerRequestService } from '../../core/services/customer/customer-re
   <div class="description">
     <label>Description</label>
     <p class="box">{{ data.issueDescription }}</p>
+    <p class="box">{{ data.remarks }}</p>
   </div>
 
   <!-- ACTIONS -->

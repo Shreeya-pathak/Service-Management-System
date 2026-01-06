@@ -39,19 +39,7 @@ export const routes: Routes = [
 
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'user-approvals', component: ApprovalPendingComponent },
-      {
-        path: 'payment-approvals',
-        loadComponent: () =>
-          import('./dashboards/admin/payment-approvals/payment-approvals')
-            .then(m => m.PaymentApprovalsComponent)
-      },
-
-      {
-        path: 'reports',
-        loadComponent: () =>
-          import('./dashboards/admin/admin-reports/admin-reports')
-            .then(m => m.AdminReportsComponent)
-      },
+      
       {
         path: 'service-history',
         loadComponent: () =>
@@ -127,7 +115,7 @@ export const routes: Routes = [
   },
 
 
-  // ✅ TECHNICIAN
+  
   {
   path: 'technician',
     component: TechnicianComponent,
@@ -150,7 +138,7 @@ export const routes: Routes = [
     ]
   },
 
-  // ✅ SERVICE MANAGER
+  
   {
     path: 'service-manager',
     component: ServiceManagerComponent,
@@ -166,6 +154,12 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./dashboards/service-manager/manager-reports/manager-reports')
             .then(m => m.ManagerReportsComponent)
+      },
+      {
+        path: 'payment-history',
+        loadComponent: () =>
+          import('./dashboards/service-manager/payment-history/payment-history')
+            .then(m => m.AdminPaymentHistoryComponent)
       }
     ]
   }

@@ -29,9 +29,7 @@ public class ServiceRequestsController : ControllerBase
         _userRepository = userRepository;
     }
 
-    // --------------------------------------------------
-    // CREATE SERVICE REQUEST
-    // --------------------------------------------------
+    
     [HttpPost]
     public async Task<IActionResult> Create(CreateServiceRequestDto dto)
     {
@@ -56,7 +54,6 @@ public class ServiceRequestsController : ControllerBase
 
         await _requestRepository.AddAsync(request);
 
-        // 🔔 Notification: Service Request Created
         await _notificationRepository.AddAsync(new Notification
         {
             UserId = customerId,
@@ -81,9 +78,7 @@ public class ServiceRequestsController : ControllerBase
         return Ok(new { message = "Service request created successfully" });
     }
 
-    // --------------------------------------------------
-    // GET MY SERVICE REQUESTS
-    // --------------------------------------------------
+    
     [HttpGet("my")]
     public async Task<IActionResult> GetMyRequests()
     {
@@ -114,9 +109,9 @@ public class ServiceRequestsController : ControllerBase
                 Priority = sr.Priority,
                 Status = sr.Status,
                 CreatedAt = sr.CreatedAt,
-
-          
-                TechnicianName = technicianAssignment?.Technician.FullName
+                
+                TechnicianName = technicianAssignment?.Technician.FullName,
+                Remarks = technicianAssignment?.Remarks
             };
         });
 
@@ -124,9 +119,7 @@ public class ServiceRequestsController : ControllerBase
         return Ok(result);
     }
 
-    // --------------------------------------------------
-    // CANCEL SERVICE REQUEST
-    // --------------------------------------------------
+    
     [HttpPut("{id}/cancel")]
     public async Task<IActionResult> Cancel(int id)
     {
@@ -141,7 +134,7 @@ public class ServiceRequestsController : ControllerBase
         request.Status = "Cancelled";
         await _requestRepository.SaveAsync();
 
-        // 🔔 Notification
+        
         await _notificationRepository.AddAsync(new Notification
         {
             UserId = customerId,
@@ -154,9 +147,7 @@ public class ServiceRequestsController : ControllerBase
         return Ok(new { message = "Service request cancelled" });
     }
 
-    // --------------------------------------------------
-    // UPDATE REQUESTED DATE
-    // --------------------------------------------------
+    
     [HttpPut("{id}/update-requested-date")]
     public async Task<IActionResult> UpdateRequestedDate(
         int id,
@@ -177,7 +168,7 @@ public class ServiceRequestsController : ControllerBase
         request.Status = "Pending";
         await _requestRepository.SaveAsync();
 
-        // 🔔 Notification
+        
         await _notificationRepository.AddAsync(new Notification
         {
             UserId = customerId,
@@ -190,9 +181,7 @@ public class ServiceRequestsController : ControllerBase
         return Ok(new { message = "Requested date updated" });
     }
 
-    // --------------------------------------------------
-    // UPDATE ISSUE DESCRIPTION
-    // --------------------------------------------------
+    
     [HttpPut("{id}/update-issue")]
     public async Task<IActionResult> UpdateIssue(int id, UpdateIssueDescriptionDto dto)
     {

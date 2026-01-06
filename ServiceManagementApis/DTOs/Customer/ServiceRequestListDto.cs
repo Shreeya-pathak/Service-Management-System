@@ -12,6 +12,7 @@
         public string Status { get; set; } = null!;
         public DateOnly CreatedAt { get; set; }
         public string? TechnicianName { get; set; }
+        public string? Remarks { get; set; }
     }
 
 }

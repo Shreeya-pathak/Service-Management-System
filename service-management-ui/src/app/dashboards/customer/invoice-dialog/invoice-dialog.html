@@ -63,14 +63,25 @@
     <mat-icon
       [ngClass]="{
         pending: invoice.paymentStatus === 'Pending',
-        waiting: invoice.paymentStatus === 'WaitingForAdminApproval',
         paid: invoice.paymentStatus === 'Paid'
-      }"
-    >
+      }">
       {{ invoice.paymentStatus === 'Paid' ? 'check_circle' : 'hourglass_top' }}
     </mat-icon>
 
     <span>{{ invoice.paymentStatus }}</span>
+  </div>
+
+  <!-- PAYMENT METHOD (ONLY IF PENDING) -->
+  <div class="section" *ngIf="invoice.paymentStatus === 'Pending'">
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Payment Method</mat-label>
+      <mat-select [(ngModel)]="paymentMethod">
+        <mat-option value="UPI">UPI</mat-option>
+        <mat-option value="Card">Card</mat-option>
+        <mat-option value="NetBanking">Net Banking</mat-option>
+        <mat-option value="Cash">Cash</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <!-- ACTIONS -->
@@ -84,8 +95,8 @@
       Make Payment
     </button>
 
-    <p *ngIf="invoice.paymentStatus === 'WaitingForAdminApproval'" class="waiting-text">
-      Payment submitted. Waiting for admin approval.
+    <p *ngIf="invoice.paymentStatus === 'Paid'" class="paid-text">
+      Payment completed successfully.
     </p>
   </div>
 

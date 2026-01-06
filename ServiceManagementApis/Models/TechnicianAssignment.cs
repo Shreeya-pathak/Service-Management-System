@@ -2,7 +2,7 @@
 
 public class TechnicianAssignment
 {
-    
+
     public int AssignmentId { get; set; }        // PK
 
     public int ServiceRequestId { get; set; }    // FK → ServiceRequest
@@ -13,4 +13,6 @@ public class TechnicianAssignment
 
     public DateOnly AssignedDate { get; set; }
     public string Status { get; set; } = null!;
+
+    public string? Remarks { get; set; }
 }

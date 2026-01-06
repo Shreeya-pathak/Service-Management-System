@@ -56,15 +56,13 @@ export class ServiceManagerAssignmentsComponent implements OnInit {
     this.loadData();
   }
 
-  // ==========================
-  // LOAD DATA
-  // ==========================
+  
   loadData() {
     this.service.getRequests().subscribe(reqs => {
       // ONLY Pending requests
       this.requests = reqs.filter(r => r.status === 'Pending');
 
-      // 🔥 CRITICAL
+      
       this.buildForms(this.requests);
 
       this.cdr.detectChanges();
@@ -75,9 +73,7 @@ export class ServiceManagerAssignmentsComponent implements OnInit {
     });
   }
 
-  // ==========================
-  // BUILD FORMS
-  // ==========================
+  
   buildForms(reqs: any[]) {
     this.forms.clear();
 
@@ -92,9 +88,7 @@ export class ServiceManagerAssignmentsComponent implements OnInit {
     });
   }
 
-  // ==========================
-  // ASSIGN TECHNICIAN
-  // ==========================
+  
   assign(requestId: number) {
     const form = this.forms.get(requestId);
     if (!form || form.invalid) return;
@@ -131,9 +125,7 @@ export class ServiceManagerAssignmentsComponent implements OnInit {
     });
   }
 
-  // ==========================
-  // DATE FORMATTER
-  // ==========================
+  
   formatDateOnly(date: Date): string {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, '0');

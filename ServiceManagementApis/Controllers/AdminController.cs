@@ -23,9 +23,6 @@ public class AdminController : ControllerBase
     }
 
 
-    // --------------------------------------------------
-    // 1️⃣ VIEW ALL PENDING USERS
-    // --------------------------------------------------
     [HttpGet("users")]
     public async Task<IActionResult> GetAllUsers()
     {
@@ -63,9 +60,7 @@ public class AdminController : ControllerBase
         return Ok(pendingUsers);
     }
 
-    // --------------------------------------------------
-    // 2️⃣ APPROVE USER
-    // --------------------------------------------------
+    
     [HttpPost("approve")]
     public async Task<IActionResult> ApproveUser(ApproveUserDto dto)
     {
@@ -78,7 +73,7 @@ public class AdminController : ControllerBase
         if (user.RequestedRoleId == null)
             return BadRequest("No pending role request");
 
-        // 🔥 CORE FIX
+        
         user.RoleId = user.RequestedRoleId.Value;
         user.RequestedRoleId = null;
 
@@ -89,9 +84,7 @@ public class AdminController : ControllerBase
     }
 
 
-    // --------------------------------------------------
-    // 3️⃣ REJECT USER
-    // --------------------------------------------------
+    
     [HttpPost("reject")]
     public async Task<IActionResult> RejectUser(ApproveUserDto dto)
     {
